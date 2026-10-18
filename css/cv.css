@@ -1,0 +1,71 @@
+/* Страница резюме (cv.html): те же колонки и отступы, что у страниц кейсов (.case) */
+.cv-head { display:flex; flex-wrap:wrap; justify-content:space-between; align-items:flex-start; gap:16px 32px; margin-bottom:8px; }
+.cv-links { display:flex; flex-wrap:wrap; gap:8px 24px; font-size:16px; padding-top:8px; }
+.cv-links a { color:var(--text); text-decoration:underline; text-decoration-color:#c4c7cf; text-decoration-thickness:1px; text-underline-offset:3px; transition:color .2s, text-decoration-color .2s; }
+.cv-links a:hover { color:var(--orange); text-decoration-color:currentColor; }
+.cv-role { font-size:19px; color:var(--text-2); line-height:1.6; margin-bottom:24px; }
+.cv-summary { font-size:19px; color:var(--text-2); line-height:1.6; margin-bottom:8px; }
+.cv-job { margin-top:48px; }
+.cv-job__title { font-size:26px; font-weight:700; letter-spacing:-0.01em; margin-bottom:8px; }
+.cv-job__meta { font-size:17px; color:var(--text-2); margin-bottom:16px; }
+.cv-job ul { margin:0; padding-left:22px; display:grid; gap:8px; font-size:17px; line-height:1.6; }
+.cv-job ul a { color:var(--text); text-decoration:underline; text-underline-offset:3px; text-decoration-color:#c4c7cf; }
+.cv-job ul a:hover { color:var(--orange); }
+.cv-cols { display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:32px; margin-top:72px; }
+.cv-col h2 { font-size:22px; font-weight:700; letter-spacing:-0.01em; margin-bottom:16px; }
+.cv-col p { font-size:16px; line-height:1.6; color:var(--text-2); margin-bottom:16px; }
+.cv-col p b { color:var(--text); font-weight:600; display:block; }
+.cv-download { margin-top:56px; padding-bottom:16px; }
+.cv-download .project-btn { margin-top:0; }
+@media (max-width:900px){ .cv-cols { grid-template-columns:1fr; gap:32px; margin-top:56px; } .cv-job__title { font-size:22px; } }
+
+/* ── Списки Work / Projects (как на pedromarques.me): узкая колонка, как «Обо мне» ── */
+.cv-lists { max-width:720px; margin:56px 0 0; }
+.cv-list + .cv-list { margin-top:64px; }
+.cv-list__title { font-size:19px; font-weight:500; color:var(--text-2); margin-bottom:24px; }
+.cv-list ul { list-style:none; margin:0; padding:0; display:grid; gap:20px; }
+.cv-row { display:flex; align-items:center; gap:16px; font-size:19px; line-height:1.4; }
+.cv-row__ico { flex:none; width:36px; height:36px; border-radius:9px; background:#f1f1f4; box-shadow:inset 0 0 0 1px rgba(0,0,0,.06); display:grid; place-items:center; overflow:hidden; font-size:15px; font-weight:700; color:var(--text); }
+.cv-row__ico img { width:100%; height:100%; object-fit:cover; display:block; }
+.cv-row__main { flex:1; min-width:0; }
+.cv-row__name { color:var(--text); font-weight:500; margin-right:.4em; }
+a.cv-row__name { text-decoration:underline; text-decoration-color:#c4c7cf; text-decoration-thickness:1px; text-underline-offset:4px; transition:color .2s, text-decoration-color .2s; }
+a.cv-row__name:hover { color:var(--orange); text-decoration-color:currentColor; }
+.cv-row__text { color:var(--text-2); }
+.cv-row__date { flex:none; color:var(--text-2); font-variant-numeric:tabular-nums; }
+.cv-jobs-title { margin-top:72px; }
+@media (max-width:640px){ .cv-row { align-items:flex-start; font-size:17px; } .cv-row__main { display:block; } .cv-row__date { font-size:15px; padding-top:2px; } }
+
+/* ── Всё резюме — в одной колонке 720px по центру (как текст «Обо мне») ── */
+.cv-page { max-width:720px; margin:0 auto; }
+.cv-lists { max-width:none; }
+@media (max-width:900px){ .cv-cols { gap:32px; } }
+
+.cv-cols { grid-template-columns:1fr 1fr; }
+.cv-cols .cv-col:first-child { grid-column:1 / -1; }
+@media (max-width:640px){ .cv-cols { grid-template-columns:1fr; } }
+
+/* ── Work: место работы + описание сразу под ним ── */
+.cv-work { gap:36px; }
+.cv-desc { list-style:disc; margin:12px 0 0; padding-left:calc(36px + 16px + 20px); display:grid; gap:8px; font-size:17px; line-height:1.6; color:var(--text); }
+.cv-desc a { color:var(--text); text-decoration:underline; text-underline-offset:3px; text-decoration-color:#c4c7cf; }
+.cv-desc a:hover { color:var(--orange); }
+.cv-row__date { white-space:nowrap; }
+/* Outside of Work / Education / Skills — одна за другой, в том же стиле, что Work и Projects */
+.cv-lists--after { margin-top:64px; }
+.cv-lists--after .cv-list + .cv-list { margin-top:48px; }
+.cv-text p { font-size:17px; line-height:1.6; color:var(--text-2); margin-bottom:14px; }
+.cv-text p:last-child { margin-bottom:0; }
+.cv-text p b { color:var(--text); font-weight:600; display:block; }
+@media (max-width:640px){ .cv-row { flex-wrap:wrap; } .cv-row__date { padding-left:52px; width:100%; } .cv-desc { padding-left:20px; } }
+
+/* перебиваем общее правило «.cv-list ul» для описаний работы (маркеры, отступ слева, плотнее) */
+.cv-list .cv-desc { list-style:disc; padding-left:calc(36px + 16px + 18px); gap:6px; margin:10px 0 0; }
+.cv-list .cv-work { gap:40px; }
+@media (max-width:640px){ .cv-list .cv-desc { padding-left:20px; } }
+
+/* на странице резюме — без линии под шапкой (полоска прогресса чтения) */
+.header__progress { display:none !important; }
+
+/* логотипы проектов — без серой подложки и рамки */
+.cv-row__ico--logo { background:none; box-shadow:none; }

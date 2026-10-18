@@ -19,7 +19,7 @@ const HEADER = `
     <span class="header__timer" id="header-timer">00:00:00</span>
   </div>
   <nav class="header__right">
-    <a href="https://drive.google.com/file/d/1JAGUVZWX4atVuVTPfo0bgTz7MwJiiZeX/view?usp=sharing" target="_blank" rel="noopener noreferrer"><span data-i18n-en>CV</span><span data-i18n-ru>Резюме</span></a>
+    <a href="cv.html"><span data-i18n-en>CV</span><span data-i18n-ru>Резюме</span></a>
     <a href="https://www.linkedin.com/in/heorhi-strechan-09a1552a1/" target="_blank" rel="noopener noreferrer">Linkedin</a>
     <a href="https://dribbble.com/HeorhiStrechan" target="_blank" rel="noopener noreferrer">Dribbble</a>
     <button type="button" class="lang-toggle" data-lang-toggle>RU</button>

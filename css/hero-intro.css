@@ -1,0 +1,18 @@
+/* Короткая сцена появления hero (~1,3 с): аватар -> статус -> строки заголовка -> кнопка.
+   Только CSS, fill-mode: backwards (после конца элемент возвращается к обычным стилям,
+   hover не ломается). Без JS контент виден всегда. Откат: убрать <link> в index.html. */
+.hero__title .hi-l { display: block; }
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hi-grow { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
+  @keyframes hi-fade { from { opacity: 0; } to { opacity: 1; } }
+  @keyframes hi-rise { from { opacity: .01; transform: translateY(12px); filter: blur(3px); } to { opacity: 1; transform: none; filter: none; } }
+  @keyframes hi-pop  { from { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+
+  .hero__avatar { animation: hi-grow .55s cubic-bezier(.2,.9,.3,1.2) backwards; }
+  .hero__status { animation: hi-fade .35s .35s backwards; }
+  .hero__title .hi-l { animation: hi-rise .55s calc(.45s + var(--i, 0) * .1s) backwards; }
+  .hero__title .hi-l .accent { animation: hi-fade .45s .75s backwards; }
+  .hero__title .hi-l.accent { animation: hi-rise .55s calc(.45s + var(--i, 0) * .1s) backwards; }
+  .hero__cta { animation: hi-pop .45s .85s cubic-bezier(.2,.9,.3,1.3) backwards; }
+}

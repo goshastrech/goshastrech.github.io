@@ -1240,7 +1240,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .case__tagline {
-  font-size: 16px;
+  font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
   margin-bottom: 24px;
@@ -1338,7 +1338,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   display: flex;
   gap: 8px;
   align-items: baseline;
-  font-size: 13px;
+  font-size: 16px;
   margin-bottom: 40px;
 }
 
@@ -1365,6 +1365,16 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   width: 100%;
   display: block;
 }
+/* видео вместо картинки в самом начале кейса (пропорции берёт сам ролик) */
+.case__hero--video {
+  height: auto;
+  background: none;
+}
+.case__hero--video video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
 
 /* challenge + results */
 .case__overview {
@@ -1385,7 +1395,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .overview__text {
-  font-size: 16px;
+  font-size: 19px;
   color: var(--text-2);
   line-height: 1.7;
 }
@@ -1407,7 +1417,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .overview__results-item {
-  font-size: 16px;
+  font-size: 19px;
   color: var(--text-2);
 }
 
@@ -1474,7 +1484,16 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .case-section:last-of-type {
-  padding-bottom: 80px;
+  padding-bottom: 32px;
+}
+
+/* меньше воздуха между последним блоком кейса и футером (было 80 + 80 + 48 px) */
+/* резервируем место под шапку до того, как js вставит её (иначе страница «подпрыгивает» на 79px) */
+#header-root { min-height: 79px; }
+@media (max-width: 640px) { #header-root { min-height: 110px; } }
+
+.case + .footer {
+  margin-top: 0;
 }
 
 .case-section__label {
@@ -1487,27 +1506,21 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .case-section__title {
-  font-size: 22px;
+  font-size: 26px;
   font-weight: 700;
   letter-spacing: -0.01em;
   margin-bottom: 20px;
 }
 
-.case-section__intro {
-  font-size: 20px;
-  color: var(--text-2);
-  line-height: 1.7;
-  margin-bottom: 32px;
-}
-
-/* компактное описание под заголовком секции (используется вместо intro,
-   когда не нужен крупный вводный текст) */
+/* Текст под заголовком секции — ОДИН стиль для intro и desc на всех страницах кейсов.
+   Отрицательный margin-top подтягивает текст к заголовку: 20px (у заголовка) − 12px = 8px */
+.case-section__intro,
 .case-section__desc {
-  font-size: 15px;
+  font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
-  max-width: 640px;
-  margin-bottom: 24px;
+  max-width: none;
+  margin: -12px 0 28px;
 }
 
 /* полноширинная картинка-иллюстрация внутри секции кейса (без рамки — уже есть в самом файле) */
@@ -2471,6 +2484,10 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .shot:hover { transform: scale(1.015); }
 
 .shot img { display: block; width: 100%; height: auto; }
+
+/* рамка для картинки без клика (тот же вид, что у .shot, но без zoom-in и hover) */
+.shot-frame { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.shot-frame img { display: block; width: 100%; height: auto; }
 
 .shot-item__name {
   margin-top: var(--space-sm);

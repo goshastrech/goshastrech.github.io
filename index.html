@@ -7,7 +7,21 @@
   <meta name="description" content="UX/UI & Graphic Designer creating modern digital products for Web3 projects and startups." />
 
   <!-- Шрифт Inter от Google -->
-  <link rel="icon" href="data:," />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Heorhi Strechan" />
+  <meta property="og:title" content="Heorhi Strechan — UX/UI &amp; Graphic Designer" />
+  <meta property="og:description" content="UX/UI &amp; Graphic Designer creating modern digital products for Web3 projects and startups." />
+  <meta property="og:url" content="https://goshastrech.github.io/" />
+  <meta property="og:image" content="https://goshastrech.github.io/img/og-image.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Heorhi Strechan — UX/UI &amp; Graphic Designer" />
+  <meta name="twitter:description" content="UX/UI &amp; Graphic Designer creating modern digital products for Web3 projects and startups." />
+  <meta name="twitter:image" content="https://goshastrech.github.io/img/og-image.jpg" />
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png" />
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -17,8 +31,10 @@
   <!-- Небо первого экрана (стили лежат отдельно, styles.css не тронут) -->
   <link rel="stylesheet" href="css/sky-hero.css" />
   <link rel="stylesheet" href="css/hero-plain.css" />
+  <link rel="stylesheet" href="css/hero-intro.css" />
   <link rel="stylesheet" href="css/header-transparent.css" />
   <link rel="stylesheet" href="css/about-reveal.css" />
+  <link rel="stylesheet" href="css/about-links.css" />
   <link rel="stylesheet" href="css/posters-fan.css" />
   <link rel="stylesheet" href="css/big-board.css" />
   <link rel="stylesheet" href="css/project-strip.css" />
@@ -33,7 +49,7 @@
        ==================================================== -->
   <div class="sky-hero" id="sky-hero">
 
-    <section class="hero fade-in">
+    <section class="hero">
 
       <img class="hero__avatar" src="img/avatar-photo.webp" alt="Heorhi Strechan" width="122" height="122" fetchpriority="high" decoding="async" />
 
@@ -45,15 +61,15 @@
 
       <h1 class="hero__title">
         <span data-i18n-en>
-          Heorhi Strechan, product & visual designer,<br />
-          creating modern digital products by combining <br />
-           UX analysis and visual design. <span class="accent"> Web3, Crypto,<br />
-           Fintech, Social Products </span>
+          <span class="hi-l" style="--i:0">Heorhi Strechan, product & visual designer,</span>
+          <span class="hi-l" style="--i:1">creating modern digital products by combining</span>
+          <span class="hi-l" style="--i:2">UX analysis and visual design. <span class="accent"> Web3, Crypto,<br />
+           Fintech, Social Products </span></span>
         </span>
         <span data-i18n-ru>
-          Стречень Георгий, продуктовый дизайнер,<br />
-          создаю современные цифровые продукты, объединяя UX-анализ и визуальный дизайн.<br />
-            <span class="accent"> Web3, Crypto, Fintech, Social Products </span>
+          <span class="hi-l" style="--i:0">Стречень Георгий, продуктовый дизайнер,</span>
+          <span class="hi-l" style="--i:1">создаю современные цифровые продукты, объединяя UX-анализ и визуальный дизайн.</span>
+          <span class="hi-l accent" style="--i:2"> Web3, Crypto, Fintech, Social Products </span>
         </span>
       </h1>
 
@@ -75,8 +91,8 @@
         <span data-i18n-ru><span class="g">Я</span> <span class="k">продуктовый и визуальный дизайнер</span> <span class="nb"><span class="g">работаю</span></span> <span class="g">в</span> <span class="k">Web3, крипто и финтехе.</span> <span class="g">Проектирую</span> <span class="pill">весь</span> <span class="k">путь</span> <span class="g">продукта,</span> <span class="nb"><span class="k">от</span></span> <span class="k">исследования и UX</span> <span class="g">до</span> <span class="nb"><span class="k">интерфейсов</span></span> <span class="k">для веба и iOS.</span></span>
       </p>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">My work ranges from</span> <span class="k">trading terminals</span> <span class="g">and</span> <span class="k">prediction-market aggregators</span> <span class="g">to</span> <span class="k">NFT platforms,</span> <span class="g">networking products and</span> <span class="k">brand identities.</span> <span class="g">Dense data, mixed audiences and complex flows are the kind of problems I like to</span> <span class="pill">untangle.</span> </span>
-        <span data-i18n-ru><span class="g">Мои работы — от</span> <span class="k">торговых терминалов</span> <span class="g">и</span> <span class="k">агрегаторов рынков предсказаний</span> <span class="g">до</span> <span class="k">NFT-платформ,</span> <span class="g">нетворкинг-продуктов и</span> <span class="k">брендинга.</span> <span class="g">Больше всего мне нравится</span> <span class="pill">распутывать</span> <span class="g">плотные данные, смешанную аудиторию и сложные флоу.</span> </span>
+        <span data-i18n-en><span class="g">My work ranges from</span> <span class="k">trading terminals</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="trady.html"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a><span class="g">)</span></span> <span class="g">and</span> <span class="k">prediction-market aggregators</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="polyranger.html"><img class="about-sticker" src="img/about/plain/polyranger.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Polyranger</a><span class="g">)</span></span> <span class="g">to</span> <span class="k">NFT platforms</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="ftlb.html"><img class="about-sticker" src="img/about/plain/ftlb.svg" alt="" width="20" height="20" loading="lazy" decoding="async">FTLB</a><span class="g">),</span></span> <span class="k">an NFT collection</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="index.html#project-big-board"><img class="about-sticker" src="img/about/big-board.webp" alt="" width="20" height="20" loading="lazy" decoding="async">Big Board</a><span class="g">),</span></span> <span class="g">networking products</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="c3tch.html"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a><span class="g">)</span></span> <span class="g">and</span> <span class="k">brand identities</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="shiro.html"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a><span class="g">,</span></span> <span class="nbk"><a class="about-link" href="cryptorsy.html"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a><span class="g">).</span></span> <span class="g">Dense data, mixed audiences and complex flows are the kind of problems I like to</span> <span class="pill">untangle.</span> </span>
+        <span data-i18n-ru><span class="g">Мои работы — от</span> <span class="k">торговых терминалов</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="trady.html"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a><span class="g">)</span></span> <span class="g">и</span> <span class="k">агрегаторов рынков предсказаний</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="polyranger.html"><img class="about-sticker" src="img/about/plain/polyranger.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Polyranger</a><span class="g">)</span></span> <span class="g">до</span> <span class="k">NFT-платформ</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="ftlb.html"><img class="about-sticker" src="img/about/plain/ftlb.svg" alt="" width="20" height="20" loading="lazy" decoding="async">FTLB</a><span class="g">),</span></span> <span class="k">NFT-коллекции</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="index.html#project-big-board"><img class="about-sticker" src="img/about/big-board.webp" alt="" width="20" height="20" loading="lazy" decoding="async">Big Board</a><span class="g">),</span></span> <span class="g">нетворкинг-продуктов</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="c3tch.html"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a><span class="g">)</span></span> <span class="g">и</span> <span class="k">брендинга</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="shiro.html"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a><span class="g">,</span></span> <span class="nbk"><a class="about-link" href="cryptorsy.html"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a><span class="g">).</span></span> <span class="g">Больше всего мне нравится</span> <span class="pill">распутывать</span> <span class="g">плотные данные, смешанную аудиторию и сложные флоу.</span> </span>
       </p>
       <p class="about-me__big">
         <span data-i18n-en><span class="g">I merge existing</span> <span class="nb"><span class="k">design</span></span> <span class="k">systems</span> <span class="g">into one final system and then build it in code with</span> <span class="nb"><span class="k">AI.</span></span> <span class="g">This lets me</span> <span class="k">generate quality mockups</span> <span class="pill">quickly</span> <span class="g">and hand them to</span> <span class="nb"><span class="g">developers</span></span> <span class="g">without losing details, which speeds up the whole process.</span></span>
@@ -91,9 +107,14 @@
         <span data-i18n-ru><span class="g">Я тесно работаю с</span> <span class="nb"><span class="k">фаундерами</span></span> <span class="g">и</span> <span class="k">разработчиками:</span> <span class="g">люблю</span> <span class="k">короткие циклы обратной связи,</span> <span class="g">понятную передачу в разработку и решения, опирающиеся на то, как реальные люди пользуются продуктом.</span> </span>
       </p>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">My daily stack:</span> <span class="nb"><span class="k">Figma</span></span> <span class="g">and</span> <span class="k">Adobe CS</span> <span class="g">for interface and visual design,</span> <span class="k">Midjourney, NanoBanana, KlingAI and Veo</span> <span class="g">for image and video generation,</span> <span class="k">Claude, Claude Code, Grok, Gemini and ChatGPT</span> <span class="g">for research, UI and screen generation and motion testing, and</span> <span class="k">VS Code</span> <span class="g">as the editor, with Claude's home base in it.</span> </span>
-        <span data-i18n-ru><span class="g">Мой рабочий стек:</span> <span class="nb"><span class="k">Figma</span></span> <span class="g">и</span> <span class="k">Adobe CS</span> <span class="g">для интерфейсов и визуала,</span> <span class="k">Midjourney, NanoBanana, KlingAI и Veo</span> <span class="g">для генерации изображений и видео,</span> <span class="k">Claude, Claude Code, Grok, Gemini и ChatGPT</span> <span class="g">для исследований, генерации UI и экранов и тестов motion, а</span> <span class="k">VS Code</span> <span class="g">как редактор, где живёт Claude.</span> </span>
+        <span data-i18n-en><span class="g">My daily stack:</span> <span class="nb"><svg class="about-badge" viewBox="0 0 38 57" width="13" height="20" aria-hidden="true" focusable="false"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/></svg><span class="k">Figma</span></span> <span class="g">and</span> <span class="nbk"><svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5" fill="#FA0F00"/><path fill="#fff" d="M13.6 4.6h4.2L22 19.4h-3.9zM10.4 4.6H6.2L2 19.4h3.9zM12 11.2l2.7 8.2h-3.2l-.9-2.4h-2z"/></svg><span class="k">Adobe</span></span> <span class="k">CS</span> <span class="g">for interface and visual design,</span> <span class="k">Midjourney, NanoBanana, KlingAI and Veo</span> <span class="g">for image and video generation,</span> <svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><g stroke="#D97757" stroke-width="2.3" stroke-linecap="round"><path d="M12 12V1.6M12 12l3.4-9.2M12 12l7.4-7.4M12 12l9.2-3.4M12 12h10.4M12 12l9.2 3.4M12 12l5.4 9.4M12 12l-1.9 10.4M12 12l-5.4 9.4M12 12l-9.6 3.2M12 12H1.6M12 12L3.2 7.6M12 12L6.4 3.4"/></g></svg><span class="k">Claude, Claude Code, Grok, Gemini and ChatGPT</span> <span class="g">for research, UI and screen generation and motion testing, and</span> <span class="k">VS Code</span> <span class="g">as the editor, with Claude's home base in it.</span> </span>
+        <span data-i18n-ru><span class="g">Мой рабочий стек:</span> <span class="nb"><svg class="about-badge" viewBox="0 0 38 57" width="13" height="20" aria-hidden="true" focusable="false"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/></svg><span class="k">Figma</span></span> <span class="g">и</span> <span class="nbk"><svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5" fill="#FA0F00"/><path fill="#fff" d="M13.6 4.6h4.2L22 19.4h-3.9zM10.4 4.6H6.2L2 19.4h3.9zM12 11.2l2.7 8.2h-3.2l-.9-2.4h-2z"/></svg><span class="k">Adobe</span></span> <span class="k">CS</span> <span class="g">для интерфейсов и визуала,</span> <span class="k">Midjourney, NanoBanana, KlingAI и Veo</span> <span class="g">для генерации изображений и видео,</span> <svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><g stroke="#D97757" stroke-width="2.3" stroke-linecap="round"><path d="M12 12V1.6M12 12l3.4-9.2M12 12l7.4-7.4M12 12l9.2-3.4M12 12h10.4M12 12l9.2 3.4M12 12l5.4 9.4M12 12l-1.9 10.4M12 12l-5.4 9.4M12 12l-9.6 3.2M12 12H1.6M12 12L3.2 7.6M12 12L6.4 3.4"/></g></svg><span class="k">Claude, Claude Code, Grok, Gemini и ChatGPT</span> <span class="g">для исследований, генерации UI и экранов и тестов motion, а</span> <span class="k">VS Code</span> <span class="g">как редактор, где живёт Claude.</span> </span>
       </p>
+      <div class="about-links">
+        <a class="about-link" href="https://www.linkedin.com/in/heorhi-strechan-09a1552a1/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="1.7" y="1.7" width="12.6" height="12.6" rx="2.5"/><path d="M5.2 7v4M5.2 4.9v.1M8 11V7m0 2.2c0-1.4.9-2.2 2-2.2s1.8.8 1.8 2.2V11"/></svg><span data-i18n-en>Linkedin</span><span data-i18n-ru>Linkedin</span></a>
+        <a class="about-link" href="https://dribbble.com/HeorhiStrechan" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M3 3.6c3 .9 6.2 3.6 8 8.6M1.7 7.7c3.3.4 7.3-.3 11.3-2M6.2 1.8c2.3 2.2 4.4 5.7 5.2 10"/></svg><span data-i18n-en>Dribbble</span><span data-i18n-ru>Dribbble</span></a>
+        <a class="about-link" href="cv.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.6 1.7h5.6l3.2 3.2v8.2a1.2 1.2 0 0 1-1.2 1.2H3.6a1.2 1.2 0 0 1-1.2-1.2V2.9a1.2 1.2 0 0 1 1.2-1.2z"/><path d="M9 1.9v3.2h3.2M5 8.4h5.6M5 11h5.6"/></svg><span data-i18n-en>CV</span><span data-i18n-ru>Резюме</span></a>
+      </div>
     </div>
   </section>
 
@@ -105,11 +126,6 @@
         <span class="project-strip__thumb"><img src="img/strip/trady.webp" alt="" loading="lazy" draggable="false" /></span>
         <span class="project-strip__name">Trady</span>
         <span class="project-strip__meta"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="#project-trady-landing" draggable="false">
-        <span class="project-strip__thumb"><img src="img/strip/trady-landing.webp" alt="" loading="lazy" draggable="false" /></span>
-        <span class="project-strip__name">Trady Landing</span>
-        <span class="project-strip__meta"><span data-i18n-en>Landing page</span><span data-i18n-ru>Лендинг</span></span>
       </a></li>
       <li><a class="project-strip__card" href="#project-polyranger" draggable="false">
         <span class="project-strip__thumb"><img src="img/strip/polyranger.webp" alt="" loading="lazy" draggable="false" /></span>
@@ -146,11 +162,6 @@
         <span class="project-strip__name">Posters design</span>
         <span class="project-strip__meta"><span data-i18n-en>Poster series</span><span data-i18n-ru>Серия постеров</span></span>
       </a></li>
-      <li><a class="project-strip__card" href="#more-works" draggable="false">
-        <span class="project-strip__thumb"><img src="img/strip/more-works.webp" alt="" loading="lazy" draggable="false" /></span>
-        <span class="project-strip__name">More works</span>
-        <span class="project-strip__meta"><span data-i18n-en>Brand identity</span><span data-i18n-ru>Айдентика</span></span>
-      </a></li>
       </ul>
     </nav>
   </section>
@@ -181,30 +192,6 @@
     <div class="card card--polyranger card--trady fade-in">
       <div class="card__image">
         <video src="img/trady_home_loop_2026-10-05_17-16.mp4" poster="img/posters-video/trady-home-loop.webp" data-autoplay loop muted playsinline preload="none"></video>
-      </div>
-    </div>
-
-    <div id="project-trady-landing" class="project-heading project-heading--tight fade-in">
-      <h2 class="project-heading__title">Trady Landing</h2>
-      <p class="project-heading__subtitle">
-        <span data-i18n-en>Landing page for the Trady terminal: animated sky hero, <br /> product video and key features</span>
-        <span data-i18n-ru>Лендинг терминала Trady: анимированный hero с небом, <br /> видео продукта и ключевые возможности</span>
-      </p>
-
-      <!-- ССЫЛКА НА ЛЕНДИНГ: сейчас ведёт на копию внутри портфолио. Когда лендинг опубликуют, замени ТОЛЬКО href ниже на боевой адрес. -->
-      <a href="trady-landing/index.html" target="_blank" rel="noopener" class="project-btn">
-          <span data-i18n-en>View site</span>
-          <span data-i18n-ru>Смотреть сайт</span>
-
-          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
-              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
-          </svg>
-      </a>
-    </div>
-
-    <div class="card card--polyranger card--trady fade-in">
-      <div class="card__image">
-        <video src="img/trady_landing_scroll.mp4" poster="img/posters-video/trady-landing-scroll.webp" data-autoplay loop muted playsinline preload="none"></video>
       </div>
     </div>
 
@@ -416,22 +403,6 @@
       </p>
     </section>
 
-    <section id="more-works" class="gwork fade-in" aria-labelledby="gwork-title">
-      <h2 class="gwork__title" id="gwork-title"><span data-i18n-en>More works</span><span data-i18n-ru>Другие работы</span></h2>
-      <div class="gwork__grid">
-        <a href="gg-hub.html" class="gwork__item">
-          <div class="gwork__img"><img src="img/GG Hub cover.jpg" alt="Genius Growth Hub" width="944" height="514" loading="lazy" decoding="async" /></div>
-          <div class="gwork__name">Genius Growth Hub</div>
-          <div class="gwork__meta"><span data-i18n-en>Brand identity, 2025</span><span data-i18n-ru>Айдентика, 2025</span></div>
-        </a>
-        <a href="hollt-club.html" class="gwork__item">
-          <div class="gwork__img"><img src="img/Hollt Club cover.jpg" alt="Hollt Club" width="944" height="514" loading="lazy" decoding="async" /></div>
-          <div class="gwork__name">Hollt Club</div>
-          <div class="gwork__meta"><span data-i18n-en>Brand identity for a tennis club, 2024</span><span data-i18n-ru>Айдентика теннисного клуба, 2024</span></div>
-        </a>
-      </div>
-    </section>
-
     <div class="poster-lightbox" id="poster-lightbox" role="dialog" aria-modal="true" aria-label="Poster preview" hidden>
       <button type="button" class="poster-lightbox__close" aria-label="Close">✕</button>
       <button type="button" class="poster-lightbox__nav poster-lightbox__nav--prev" aria-label="Previous poster"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
@@ -458,10 +429,6 @@
         <a class="all-work__tile" href="trady.html">
           <div class="all-work__img"><span class="all-work__mark all-work__mark--logo-wide"><img src="img/Trady Logo.svg" alt="" loading="lazy" /></span></div>
           <div class="all-work__meta"><div class="all-work__name">Trady</div><div class="all-work__cat"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></div></div>
-        </a>
-        <a class="all-work__tile" href="#project-trady-landing">
-          <div class="all-work__img"><span class="all-work__mark all-work__mark--icon"><svg class="aw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3"/><path d="M2.5 9h19M6 6.5h.01M8.5 6.5h.01M6 13h8M6 16h5"/></svg></span></div>
-          <div class="all-work__meta"><div class="all-work__name">Trady Landing</div><div class="all-work__cat"><span data-i18n-en>Landing page</span><span data-i18n-ru>Лендинг</span></div></div>
         </a>
         <a class="all-work__tile" href="polyranger.html">
           <div class="all-work__img"><span class="all-work__mark all-work__mark--icon"><svg class="aw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z"/></svg></span></div>
@@ -490,14 +457,6 @@
         <a class="all-work__tile" href="#posters">
           <div class="all-work__img"><span class="all-work__mark all-work__fan"><img src="img/posters/thumbs/american-psycho.webp" alt="" loading="lazy" /><img src="img/posters/thumbs/cherry.webp" alt="" loading="lazy" /><img src="img/posters/thumbs/dunkirk.webp" alt="" loading="lazy" /></span></div>
           <div class="all-work__meta"><div class="all-work__name">Posters design</div><div class="all-work__cat"><span data-i18n-en>Poster series</span><span data-i18n-ru>Серия постеров</span></div></div>
-        </a>
-        <a class="all-work__tile" href="gg-hub.html">
-          <div class="all-work__img"><span class="all-work__mark all-work__mark--gg"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="24" r="14" fill="none" stroke="#ee4d23" stroke-width="12"/><path d="M8 62 L32 38 L82 54 L96 38 M60 54 V96" fill="none" stroke="#ee4d23" stroke-width="12" stroke-linejoin="miter"/></svg></span></div>
-          <div class="all-work__meta"><div class="all-work__name">Genius Growth Hub</div><div class="all-work__cat"><span data-i18n-en>Brand identity</span><span data-i18n-ru>Айдентика</span></div></div>
-        </a>
-        <a class="all-work__tile" href="hollt-club.html">
-          <div class="all-work__img"><span class="all-work__mark all-work__mark--ball"></span></div>
-          <div class="all-work__meta"><div class="all-work__name">Hollt Club</div><div class="all-work__cat"><span data-i18n-en>Brand identity</span><span data-i18n-ru>Айдентика</span></div></div>
         </a>
       </div>
     </div>

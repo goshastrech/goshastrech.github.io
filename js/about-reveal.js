@@ -23,18 +23,25 @@
       });
       node.parentNode.replaceChild(frag, node);
     } else if (node.nodeType === 1) {
-      if (node.classList.contains('about-ico')) { node.classList.add('w'); words.push(node); return; }
+      // ссылки, картинки и svg-значки не режем на слова: целиком проявляются как одно «слово»
+      var tag = node.tagName.toLowerCase();
+      if (tag === 'a' || tag === 'img' || tag === 'svg' || node.classList.contains('about-ico')) {
+        node.classList.add('w'); words.push(node); return;
+      }
       Array.prototype.slice.call(node.childNodes).forEach(wrapText);
     }
   }
   texts.forEach(wrapText);
+  // нижний ряд ссылок проявляется как последняя «строка» после абзацев (без JS он просто виден)
+  var linksRow = document.querySelector('.about-me .about-links');
+  if (linksRow) { linksRow.classList.add('w'); words.push(linksRow); }
 
   // 2. группировка видимых слов по строкам (скрытые display:none дают пустой rect — пропускаем)
   var lines = [];
   function buildLines() {
     var rows = [];
     words.forEach(function (w) {
-      if (!w.offsetParent) return; // display:none у неактивного языка
+      if (!w.getClientRects().length) return; // display:none у неактивного языка (у svg нет offsetParent, поэтому проверяем rects)
       var r = w.getBoundingClientRect();
       if (!r.height) return;
       var y = Math.round(r.top + r.height / 2 + window.scrollY);
@@ -56,7 +63,13 @@
       var fresh = line.words.filter(function (w) { return !w.classList.contains('in'); });
       if (!fresh.length) return;
       var delay = queue++ * 110;
-      fresh.forEach(function (w) { w.style.transitionDelay = delay + 'ms'; w.classList.add('in'); });
+      // внутри строки слова/ссылки/скобки/значки идут друг за другом (шаг 35 мс) в порядке чтения
+      fresh.forEach(function (w, i) {
+        var d = delay + i * 35;
+        w.style.transitionDelay = d + 'ms'; w.classList.add('in');
+        // после проявления задержку убираем, чтобы hover у ссылок срабатывал сразу
+        setTimeout(function () { w.style.transitionDelay = ''; }, d + 800);
+      });
     });
   }
   function schedule() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
