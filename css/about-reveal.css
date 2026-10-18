@@ -1,0 +1,58 @@
+/* ============================================================
+   Блок «Обо мне»: белый фон, колонка 720px, весь текст крупной жирной
+   гротескной подачей (серые проходные слова, чёрные ключевые, жёлтые «таблетки»,
+   иконки), строки проявляются при прокрутке как в Big Board.
+   Класс js-reveal-about на <html> ставит js/about-reveal.js — без JS и при
+   prefers-reduced-motion всё видно сразу.
+   ============================================================ */
+
+/* ---- Секция и фон ---- */
+.about-me {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  padding: 240px 24px 170px;
+  overflow-x: clip;
+}
+
+/* ---- Колонка и типографика ---- */
+.about-me__body {
+  width: 100%;
+  max-width: 720px;           /* ширина колонки текста */
+  margin: 0 auto;
+  text-align: left;
+}
+.about-me__big {
+  margin: 0 0 44px;
+  font-family: "Helvetica Neue", Helvetica, Inter, Arial, sans-serif;
+  font-size: clamp(20px, 2.3vw, 26px);   /* размер шрифта */
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -.03em;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.about-me__big:last-child { margin-bottom: 0; }
+
+/* серый ритм: проходные слова серые, ключевые чёрные */
+.about-me__big .g { color: #747b8c; }
+.about-me__big .k { color: var(--text); }
+
+/* акцентные слова (бывшие жёлтые «таблетки»): без плашки, просто чёрный текст как у ключевых слов */
+.about-me__big .pill .w {
+  color: var(--text);
+}
+
+/* ---- Иконки: стеклянные плитки (радиус 22%) + объёмная папка + рукописные закорючки ---- */
+
+/* ---- Построчное проявление: opacity .55s (слова, таблетки и иконки; цвета не меняются) ---- */
+.js-reveal-about .about-me .w { opacity: 0; transition: opacity .55s ease; }
+.js-reveal-about .about-me .w.in { opacity: 1; }
+
+@media (max-width: 640px) {
+  .about-me { padding: 160px 24px 120px; }
+  .about-me__big { margin-bottom: 32px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal-about .about-me .w { opacity: 1; transition: none; transform: none; }
+}

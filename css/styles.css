@@ -1,0 +1,2621 @@
+/* ↓ содержимое css/tokens.css вставлено сюда (раньше было @import — лишний запрос, который тормозил отрисовку; сам css/tokens.css оставлен файлом для ideas/) */
+/* ============================================================
+   DESIGN SYSTEM — единственное место где хранятся все токены.
+   Меняй здесь — изменится на всём сайте.
+   ============================================================ */
+
+:root {
+
+  /* ── Цвета ─────────────────────────────────────────── */
+  --bg:       #ffffff;   /* фон страницы                  */
+  --surface:  #f5f5f5;   /* фон карточек и тегов          */
+  --border:   #e8e8e8;   /* линии разделителей            */
+
+  --text:     #0a0a0a;   /* основной текст                */
+  --text-2:   #888888;   /* второстепенный текст          */
+  --text-3:   #bbbbbb;   /* приглушённый (категории)      */
+
+  --green:    #22c55e;   /* статус "Available"            */
+  --orange:   #f97316;   /* акцент "Web3"                 */
+  --blue:     #4f7eff;   /* кнопка Contact                */
+  --badge:    #c8f135;   /* угловой бейдж (не используется) */
+
+  /* ── Типографика ────────────────────────────────────── */
+  --font:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --text-xs:     12px;
+  --text-sm:     13px;
+  --text-base:   14px;
+  --text-md:     18px;
+  --text-lg:     32px;
+  --text-hero:   clamp(20px, 3.2vw, 36px);
+  --text-case:   clamp(28px, 4vw, 52px);
+
+  /* ── Отступы ────────────────────────────────────────── */
+  --space-xs:    8px;
+  --space-sm:    16px;
+  --space-md:    24px;
+  --space-lg:    40px;
+  --space-xl:    64px;
+  --space-2xl:   80px;
+
+  /* ── Радиусы ────────────────────────────────────────── */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-full: 9999px;
+
+}
+
+
+/* ============================================================
+   RESET — убираем браузерные стили по умолчанию
+   ============================================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  scrollbar-gutter: stable; /* место под полосу прокрутки резервируется всегда — страница не дёргается при блокировке скролла */
+  background: var(--bg);
+  color: var(--text);
+  scroll-behavior: smooth;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 20px 24px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 100;
+  overflow: visible;
+  transition: background 0.3s ease;
+}
+
+.header--scrolled {
+  background: rgba(255, 255, 255, 0.55);
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+}
+
+/* градиентный блюр на нижнем крае хедера */
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: -28px;
+  left: 0;
+  right: 0;
+  height: 28px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* прогресс-бар скролла внизу хедера */
+.header__progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #e9e9e9;
+  transform: scaleX(0);
+  transform-origin: left;
+  z-index: 101;
+  pointer-events: none;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header__name {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+.header__name:hover { color: var(--text-2); }
+
+.badge-version {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 10px 5px 12px;
+  background: #E9FFE6;
+  border-radius: 9999px;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.badge-version__text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #18E663;
+}
+
+.badge-version__tooltip {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-4px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(28, 26, 23, 0.7);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 8px 12px;
+  border-radius: 6px;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 200;
+}
+
+.badge-version:hover .badge-version__tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.badge-version__tooltip-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #e8e6e3;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.badge-version__tooltip-line::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.header__center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__timer {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-3);
+  font-variant-numeric: tabular-nums;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 24px;
+}
+
+.header__right a {
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.2s;
+}
+
+.header__right a:hover { color: var(--text-2); }
+
+.lang-toggle {
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1;
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--orange);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.lang-toggle:hover { color: #d15c0a; }
+
+/* ── i18n — переключение RU/EN текста ────────────────────── */
+/* по умолчанию (до применения JS) показан английский — язык, в котором сайт написан */
+
+[data-i18n-ru] { display: none; }
+html[data-lang="ru"] [data-i18n-ru] { display: inline; }
+html[data-lang="ru"] [data-i18n-en] { display: none; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 80px 40px 16px;
+  max-width: 920px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.hero__avatar {
+  width: 122px;
+  height: 122px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--surface);
+  margin-bottom: 4px;
+}
+
+.hero__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* серый кружок пока нет фото */
+.hero__avatar--placeholder {
+  background: linear-gradient(135deg, #d8d8d8 0%, #e8e8e8 100%);
+}
+
+.hero__status {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.hero__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+.hero__title {
+  font-size: clamp(20px, 3.2vw, 36px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -2px;
+  color: var(--text);
+  max-width: 860px;
+}
+
+.hero__title .accent { color: var(--text-2); }
+
+.hero__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  background: linear-gradient(180deg, #5ec1ff 0%, #3497ff 100%);
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: 0 2px 12px rgba(43, 158, 255, 0.45);
+  transition: opacity 0.2s ease;
+}
+
+.hero__cta:hover { opacity: 0.9; }
+
+.hero__cta svg { flex-shrink: 0; }
+
+/* ── Tab switch (About / Projects / Concepts) ─────────────── */
+
+.tab-switch {
+  display: inline-flex;
+  margin-top: 12px;
+  padding: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+}
+
+.tab-switch__btn {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.tab-switch__btn:hover {
+  color: var(--text);
+}
+
+.tab-switch__btn--active,
+.tab-switch__btn--active:hover {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel--active {
+  display: block;
+}
+
+#tab-panel-concepts.tab-panel--active {
+  min-height: 400px;
+}
+
+/* ============================================================
+   MY STACK (карточка в стиле кода / терминала)
+   ============================================================ */
+
+.stack-code {
+  display: flex;
+  justify-content: center;
+  padding: 136px 40px 50px;
+}
+
+.about-code {
+  display: flex;
+  justify-content: center;
+  padding: 56px 40px 80px;
+}
+
+.about-explorer {
+  display: flex;
+  align-items: flex-start;
+  gap: 48px;
+  width: 100%;
+  max-width: 920px;
+}
+
+.about-explorer__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 0 0 168px;
+  position: sticky;
+  top: 110px;
+}
+
+.about-explorer__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-3);
+  padding: 0 10px;
+  margin-bottom: 8px;
+}
+
+.about-explorer__file {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  text-align: left;
+  cursor: pointer;
+  appearance: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.about-explorer__file:hover {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.about-explorer__file--active {
+  background: var(--surface);
+  color: var(--text);
+}
+
+.about-explorer__file-icon {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  background: var(--text-3);
+}
+
+.about-explorer__file--active .about-explorer__file-icon {
+  background: var(--blue);
+}
+
+.about-explorer__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.about-explorer__content .code-card {
+  max-width: none;
+}
+
+.about-file {
+  display: none;
+}
+
+.about-file--active {
+  display: block;
+}
+
+.code-card {
+  width: 100%;
+  max-width: 920px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.code-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 22px 8px;
+}
+
+.code-card__title {
+  color: var(--text);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.code-card__body {
+  padding: 4px 0 22px;
+}
+
+.code-card__body--grouped .code-block {
+  margin-bottom: 28px;
+}
+
+.code-card__body--grouped .code-block:last-child {
+  margin-bottom: 0;
+}
+
+.code-line {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  column-gap: 18px;
+  align-items: baseline;
+  padding: 5px 22px;
+  font-size: 15px;
+  line-height: 1.7;
+  transition: background 0.15s ease;
+}
+
+.code-line:hover {
+  background: rgba(0, 0, 0, 0.035);
+}
+
+.code-line__num {
+  color: var(--text-3);
+  -webkit-user-select: none;
+  user-select: none;
+  text-align: right;
+}
+
+.code-line__content {
+  white-space: normal;
+  word-break: break-word;
+}
+
+.code-line__punct { color: #8a857c; }
+.code-line__keyword { color: var(--orange); }
+.code-line__key { color: #0f8a7a; }
+.code-line__string { color: #9c6b1f; }
+.code-line__comment { color: var(--text-3); margin-left: 14px; }
+
+/* символы для эффекта печати — скрыты до появления карточки в вьюпорте */
+.ch {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.05s linear;
+}
+
+.ch.visible {
+  opacity: 1;
+}
+
+.cursor-blink {
+  display: inline-block;
+  width: 7px;
+  height: 16px;
+  background: var(--orange);
+  margin-left: 4px;
+  animation: code-cursor-blink 1s step-end infinite;
+  vertical-align: middle;
+}
+
+@keyframes code-cursor-blink {
+  50% { opacity: 0; }
+}
+
+/* ============================================================
+   PROJECT HEADING (заголовок над карточкой PolyRanger)
+   ============================================================ */
+
+.project-heading {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  margin: 102px auto 56px;
+  padding: 0 40px;
+  text-align: center;
+  scroll-margin-top: 110px;
+}
+
+/* второй (и последующие) блок внутри .projects уже получает 300px
+   от flex gap, поэтому margin-bottom компенсируется до реальных 56px */
+.project-heading--tight {
+  margin-top: 0;
+  margin-bottom: -244px;
+}
+
+.project-heading__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+
+.project-heading__logo {
+  display: block;
+  width: 122px;
+  height: auto;
+  margin: 0 auto 16px;
+}
+
+.project-heading__logo--55 {
+  width: 55px;
+}
+
+.project-heading__subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--text-2);
+}
+
+.project-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  margin-top: 24px;
+  padding: 0 22px;
+  background: #0D0D0F;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: default;
+}
+
+/* бейдж-ссылка (Trady → страница кейса): тот же вид, но кликабельный, с таким же наведением, как у .project-btn */
+.project-badge--link {
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.project-badge--link:hover {
+  opacity: 0.9;
+  transform: translateY(-3px);
+}
+
+.project-badge--link:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.project-heading__team {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 28px 40px;
+  margin-top: 32px;
+  text-align: left;
+}
+
+.project-heading__role {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 20px;
+  font-size: 13px;
+}
+
+.project-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 48px;
+  padding: 12px 22px;
+  background: #0D0D0F;
+  border-radius: 9999px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 500;
+  box-shadow: 0 2px 12px rgba(13, 13, 15, 0.45);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.project-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-3px);
+}
+
+.project-heading .project-btn {
+  margin-top: 20px;
+}
+
+.project-btn__icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.metrics-badge {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 18px;
+  color: var(--orange);
+  cursor: default;
+  white-space: nowrap;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.metrics-badge:hover {
+  background: rgba(217, 119, 87, 0.12);
+  color: #c05f3f;
+}
+
+.metrics-badge__panel {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(-6px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 230px;
+  background: rgba(28, 26, 23, 0.7);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 14px 16px;
+  text-align: left;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 50;
+}
+
+.metrics-badge:hover .metrics-badge__panel {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.metrics-badge__line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: #e8e6e3;
+  white-space: nowrap;
+}
+
+.metrics-badge__line::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green);
+  flex-shrink: 0;
+}
+
+.metrics-badge__line--blue::before { background: var(--blue); }
+.metrics-badge__line--orange::before { background: var(--orange); }
+
+.metrics-badge__line--live {
+  color: var(--green);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.metrics-badge__line--live::before {
+  content: none;
+}
+
+.metrics-badge__line--live:hover {
+  text-decoration: underline;
+}
+
+/* ============================================================
+   PROJECT RAIL — навигация по проектам сбоку
+   ============================================================ */
+
+.project-rail {
+  position: fixed;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+
+.project-rail::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+  transform: translateX(-50%);
+  z-index: -1;
+}
+
+.project-rail__dot {
+  position: relative;
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.project-rail__dot:hover {
+  background: var(--text-3);
+  transform: scale(1.3);
+}
+
+.project-rail__dot--active {
+  background: var(--text);
+  transform: scale(1.4);
+}
+
+.project-rail__label {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  white-space: nowrap;
+  padding: 4px 9px;
+  border-radius: 6px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.project-rail__dot:hover .project-rail__label {
+  opacity: 1;
+}
+
+@media (max-width: 1300px) {
+  .project-rail {
+    display: none;
+  }
+}
+
+/* ============================================================
+   PROJECT CARDS
+   ============================================================ */
+
+.projects {
+  display: flex;
+  flex-direction: column;
+  gap: 300px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* flex-айтемы по умолчанию не сжимаются уже своего min-content (min-width: auto),
+   из-за чего строки без переноса (метрики, теги, роли команды) распирают страницу
+   по горизонтали на узких экранах */
+.projects > * {
+  min-width: 0;
+}
+
+.card {
+  display: block;
+  border-radius: 16px;
+  cursor: pointer;
+}
+
+/* область изображения */
+.card__image {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.card__image img {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.card__image img.is-loaded {
+  opacity: 1;
+}
+
+.card__image.is-loading {
+  min-height: 400px;
+}
+
+.card__image.is-loading::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #ececec 25%, #e0e0e0 37%, #ececec 63%);
+  background-size: 400% 100%;
+  animation: skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+/* вне экрана бесконечные анимации стоят (класс ставит js/main.js) */
+.cursor-blink.is-offscreen,
+.card__image.is-loading.is-offscreen::before { animation-play-state: paused; }
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0 50%; }
+}
+
+.card__image img,
+.card__image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card__image .case-img__placeholder {
+  width: 100%;
+  height: 100%;
+}
+
+/* первая карточка — увеличенная высота + кнопка под фото */
+.card--polyranger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: default;
+}
+
+.card--polyranger .card__image {
+  width: 940px;
+  max-width: 100%;
+  height: auto;
+}
+
+.card--polyranger .card__image img {
+  width: 100%;
+  height: auto;
+  object-fit: unset;
+}
+
+/* видео в карточке проекта: блочный элемент с пропорцией 16:9, чтобы низ не обрезался */
+.card--polyranger:not(.card--trio) .card__image video {
+  display: block;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+.card--trady .card__image {
+  width: 940px;
+  max-width: 100%;
+}
+
+.card--trady .card__image video {
+  display: block;
+  height: auto;
+  aspect-ratio: 2880 / 1644;
+}
+
+.card--c3tch .card__image {
+  width: 1020px;
+  max-width: 100%;
+}
+
+/* три видео рядом (SHIRO) — вертикальные клипы 9:16, крой без обрезки высоты */
+.card--trio .card__row {
+  display: flex;
+  gap: 16px;
+  width: 1020px;
+  max-width: 100%;
+}
+
+.card--trio .card__image {
+  width: auto;
+  height: auto;
+  aspect-ratio: 9 / 16;
+  flex: 1 1 0;
+}
+
+/* ============================================================
+   STACK DEMO (карточки-веер при наведении)
+   ============================================================ */
+
+.stack-demo {
+  display: flex;
+  justify-content: center;
+  padding: 80px 0;
+}
+
+.stack {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  cursor: pointer;
+}
+
+.stack__card {
+  position: absolute;
+  inset: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
+}
+
+.stack__card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.stack__card--main {
+  z-index: 4;
+}
+
+.stack__card--back-1 {
+  z-index: 3;
+  transform: translate(0, 0) rotate(0deg) scale(0.96);
+  opacity: 0.9;
+}
+
+.stack__card--back-2 {
+  z-index: 2;
+  transform: translate(0, 0) rotate(0deg) scale(0.92);
+  opacity: 0.8;
+}
+
+.stack__card--back-3 {
+  z-index: 1;
+  transform: translate(0, 0) rotate(0deg) scale(0.88);
+  opacity: 0.7;
+}
+
+.stack:hover .stack__card--main {
+  transform: translate(0, 12px) rotate(0deg);
+}
+
+.stack:hover .stack__card--back-1 {
+  transform: translate(0, -70px) rotate(0deg) scale(1);
+  opacity: 1;
+}
+
+.stack:hover .stack__card--back-2 {
+  transform: translate(-90px, -50px) rotate(-10deg) scale(1);
+  opacity: 1;
+}
+
+.stack:hover .stack__card--back-3 {
+  transform: translate(90px, -50px) rotate(10deg) scale(1);
+  opacity: 1;
+}
+
+/* угловой бейдж — rotated ribbon */
+.card__badge {
+  position: absolute;
+  top: 18px;
+  right: -28px;
+  background: var(--badge);
+  color: #000;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 5px 40px;
+  transform: rotate(45deg);
+  white-space: nowrap;
+}
+
+/* нижняя строка карточки */
+.card__info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  gap: 16px;
+}
+
+.card__title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 2px;
+  letter-spacing: -0.01em;
+}
+
+.card__sub {
+  font-size: 18px;
+  color: var(--text-2);
+}
+
+.card__year {
+  font-size: 12px;
+  color: var(--text-3);
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   CONTACT — форма внизу каждой страницы
+   ============================================================ */
+
+.contact {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 250px 40px 140px;
+}
+
+.contact__label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-3);
+  margin-bottom: 20px;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 48px 40px;
+  margin-top: 80px;
+  width: 100%;
+  background: var(--bg);
+}
+
+.footer__prompt {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.footer__prompt-muted {
+  color: var(--text-3);
+}
+
+.footer__copy {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  color: var(--text-3);
+}
+
+/* ============================================================
+   CASE STUDY PAGES
+   ============================================================ */
+
+.case {
+  max-width: 1110px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.case__back {
+  display: inline-block;
+  margin: 40px 0 48px;
+  font-size: 13px;
+  color: var(--text-2);
+  transition: color 0.2s;
+}
+
+.case__back:hover { color: var(--text); }
+
+.case__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.case__year {
+  font-size: 12px;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.case__tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--orange);
+  white-space: nowrap;
+  font-variant-ligatures: none;
+  font-feature-settings: "liga" 0, "calt" 0;
+}
+
+.case__title {
+  font-size: clamp(28px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 16px;
+}
+
+/* модификатор — заголовок и тэглайн объединены в один текст */
+.case__title--regular {
+  font-size: clamp(22px, 3vw, 38px);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.3;
+  margin-bottom: 24px;
+}
+
+.case__tagline {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* простая текстовая ссылка на живой проект — без фона/пилюли */
+.case__live-link {
+  display: inline-block;
+  margin-right: 16px;
+  font-size: 14px;
+  color: var(--green);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.case__live-link:hover {
+  text-decoration-color: currentColor;
+}
+
+.case header .project-btn {
+  margin-top: 0;
+}
+
+.case__pitch {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  color: var(--text-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 9999px;
+  transition: background 0.2s, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.case__pitch__icon {
+  flex-shrink: 0;
+}
+
+.case__pitch:hover {
+  background: #ffffff;
+  color: var(--text);
+  border-color: #d8d8d8;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* team credit block — состав команды + роль автора */
+.case__team {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 28px;
+  margin-bottom: 28px;
+}
+
+.team__group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 12px;
+}
+
+.team__avatars {
+  display: flex;
+}
+
+.team__avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dcdcdc 0%, #ececec 100%);
+  border: 2px solid var(--bg);
+  margin-left: -14px;
+}
+
+.team__avatar:first-child { margin-left: 0; }
+
+.team__role {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.team__count {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.case__role {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  font-size: 13px;
+  margin-bottom: 40px;
+}
+
+.case__role-label { color: var(--text-2); }
+.case__role-value { color: var(--text); font-weight: 600; }
+
+/* hero image кейса */
+.case__hero {
+  margin: 48px 0 56px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  height: 460px;
+  background: linear-gradient(135deg, #e0e0e0 0%, #ebebeb 100%);
+}
+
+/* модификатор для кейсов с реальным hero-скрином вместо плейсхолдера */
+.case__hero--image {
+  height: auto;
+  background: none;
+}
+
+.case__hero--image img {
+  width: 100%;
+  display: block;
+}
+
+/* challenge + results */
+.case__overview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  padding: 40px 0;
+  margin-bottom: 72px;
+}
+
+.overview__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.overview__text {
+  font-size: 16px;
+  color: var(--text-2);
+  line-height: 1.7;
+}
+
+/* крупный regular-заголовок вместо мелкого eyebrow-лейбла */
+.overview__title {
+  font-size: clamp(26px, 3vw, 38px);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--text);
+  margin-bottom: 16px;
+}
+
+/* список метрик под "Результаты" — значение оранжевым, подпись серым */
+.overview__results {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.overview__results-item {
+  font-size: 16px;
+  color: var(--text-2);
+}
+
+.overview__results-value {
+  color: var(--orange);
+  font-weight: 700;
+}
+
+/* сетки контента внутри кейсов */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.grid-3 + .grid-3 {
+  margin-top: 16px;
+}
+
+.case-img {
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+}
+
+.case-img--portrait {
+  aspect-ratio: 9 / 16;
+}
+
+.case-img--portrait img,
+.case-img--portrait video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.case-img__placeholder {
+  background: linear-gradient(135deg, #e0e0e0 0%, #ebebeb 100%);
+}
+
+.case-img__placeholder--md  { height: 240px; }
+.case-img__placeholder--sm  { height: 180px; }
+.case-img__placeholder--lg  { height: 380px; }
+
+.case-img__caption {
+  font-size: 12px;
+  color: var(--text-2);
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+/* ── Case sections (eyebrow + title, stacked blocks) ─────── */
+
+.case-section {
+  padding: 56px 0;
+}
+
+.case-section:last-of-type {
+  padding-bottom: 80px;
+}
+
+.case-section__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.case-section__title {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 20px;
+}
+
+.case-section__intro {
+  font-size: 20px;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+/* компактное описание под заголовком секции (используется вместо intro,
+   когда не нужен крупный вводный текст) */
+.case-section__desc {
+  font-size: 15px;
+  color: var(--text-2);
+  line-height: 1.6;
+  max-width: 640px;
+  margin-bottom: 24px;
+}
+
+/* полноширинная картинка-иллюстрация внутри секции кейса (без рамки — уже есть в самом файле) */
+.case-section__image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case-section__image + .case-section__image {
+  margin-top: 16px;
+}
+
+/* ── Screenshot placeholder (ширина = как реальный десктоп-скрин) ── */
+
+.case-shot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1.66 / 1;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, #e0e0e0 0%, #ebebeb 100%);
+  padding: 24px;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.case-shot--diagram {
+  aspect-ratio: 3 / 1;
+}
+
+.case-shot--diagram + .case-shot--diagram {
+  margin-top: 32px;
+}
+
+.case-shot__note {
+  max-width: 420px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text-2);
+}
+
+.case-shot__caption {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.7;
+  margin-bottom: 56px;
+}
+
+.case-shot__caption strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ── Flow diagram — реальная схема, не плейсхолдер под скрин ── */
+
+.flow-diagram {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  padding: 8px 0 0;
+  margin-bottom: 16px;
+}
+
+.flow-diagram + .flow-diagram {
+  margin-top: 40px;
+}
+
+.flow-step {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  padding-top: 4px;
+}
+
+/* пунктирная линия-таймлайн, проходящая "сквозь" кружки */
+.flow-step::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-image: repeating-linear-gradient(to right, var(--border) 0 6px, transparent 6px 13px);
+}
+
+.flow-step:first-child::before { left: 50%; }
+.flow-step:last-child::before { right: 50%; }
+
+.flow-step__index {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-2);
+  box-shadow: 0 2px 8px rgba(10, 10, 10, 0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.flow-step:hover .flow-step__index {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(10, 10, 10, 0.1);
+}
+
+.flow-step--accent .flow-step__index {
+  border-color: var(--orange);
+  color: var(--orange);
+  box-shadow: 0 2px 10px rgba(249, 115, 22, 0.22);
+}
+
+.flow-step--done .flow-step__index {
+  background: var(--green);
+  border-color: var(--green);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(34, 197, 94, 0.28);
+}
+
+.flow-step__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.flow-step__desc {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text-2);
+  min-height: 18px;
+  max-width: 85%;
+}
+
+.flow-diagram__note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-top: -4px;
+  margin-bottom: 16px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ── Us vs them comparison pairs ──────────────────────────── */
+
+.compare-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.compare-pair .case-shot {
+  margin-bottom: 0;
+}
+
+.compare-pair__tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.06);
+  color: var(--text-2);
+}
+
+.compare-pair__tag--mine {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.compare-caption {
+  font-size: 13px;
+  color: var(--text-2);
+  line-height: 1.7;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 56px;
+}
+
+.compare-caption strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* ── Persona cards ────────────────────────────────────────── */
+
+.persona-card {
+  padding: 28px 0;
+}
+
+.persona-card__header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.persona-card__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dcdcdc 0%, #ececec 100%);
+  flex-shrink: 0;
+}
+
+.persona-card__name {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.persona-card__role {
+  font-size: 12px;
+  color: var(--text-2);
+}
+
+.persona-card__list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.persona-card__list li {
+  position: relative;
+  padding-left: 15px;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.persona-card__list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 7px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--text-3);
+}
+
+/* ── Team + Role ───────────────────────────────────────────── */
+
+.case__summary-team {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 32px 0 48px;
+}
+
+.case__summary-team .case__team,
+.case__summary-team .case__role {
+  margin-bottom: 0;
+}
+
+/* модификатор — команда крупнее в 2.5 раза */
+.case__summary-team--lg {
+  gap: 36px;
+}
+
+.case__summary-team--lg .case__team {
+  gap: 64px;
+}
+
+.case__summary-team--lg .team__group {
+  gap: 16px;
+}
+
+.case__summary-team--lg .team__avatar {
+  width: 60px;
+  height: 60px;
+  margin-left: -18px;
+}
+
+.case__summary-team--lg .team__avatar:first-child {
+  margin-left: 0;
+}
+
+.case__summary-team--lg .team__role {
+  font-size: 16px;
+}
+
+.case__summary-team--lg .team__count {
+  font-size: 16px;
+}
+
+.case__summary-team--lg .case__role {
+  gap: 8px;
+  font-size: 16px;
+}
+
+/* ============================================================
+   SCROLL ANIMATION
+   ============================================================ */
+
+.fade-in {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================================
+   CONCEPTS — интерактивные UI-демки
+   ============================================================ */
+
+.concepts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  max-width: 560px;
+  margin: 0 auto;
+  padding: 56px 40px 80px;
+}
+
+/* ── Contact form ──────────────────────────────────────── */
+
+.concept-form__tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  margin-bottom: 20px;
+  background: var(--surface);
+  border-radius: 9999px;
+}
+
+.concept-form__tab {
+  padding: 6px 16px;
+  border: none;
+  border-radius: 9999px;
+  background: transparent;
+  color: var(--text-2);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  appearance: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.concept-form__tab:hover {
+  color: var(--text);
+}
+
+.concept-form__tab--active {
+  background: var(--text);
+  color: var(--bg);
+}
+
+.concept-form__stack {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.concept-form__panel {
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+}
+
+.concept-form__label {
+  font-size: 13px;
+  color: var(--text-2);
+  margin-bottom: 8px;
+}
+
+.concept-form__name,
+.concept-form__email,
+.concept-form__message {
+  display: block;
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  font-family: var(--font);
+  color: var(--text);
+  appearance: none;
+  resize: none;
+}
+
+.concept-form__name:focus,
+.concept-form__email:focus,
+.concept-form__message:focus {
+  outline: none;
+}
+
+.concept-form__name {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.concept-form__name::placeholder {
+  color: var(--text-3);
+}
+
+.concept-form__divider {
+  height: 1px;
+  margin: 12px 0;
+  background: var(--border);
+}
+
+.concept-form__email {
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+.concept-form__email::placeholder {
+  color: var(--text-3);
+}
+
+.concept-form__message {
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 90px;
+}
+
+.concept-form__message::placeholder {
+  color: var(--text-3);
+}
+
+.concept-form__meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+.concept-form__count {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.concept-form__seam {
+  align-self: center;
+  z-index: 1;
+  margin: -16px 0;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 3px solid var(--bg);
+  box-shadow: 0 0 0 1px var(--border);
+  color: var(--text-2);
+  pointer-events: none;
+}
+
+.concept-form__seam svg {
+  width: 16px;
+  height: 16px;
+}
+
+.concept-form__btn {
+  width: 100%;
+  margin-top: 16px;
+  padding: 16px;
+  border: none;
+  border-radius: 9999px;
+  background: var(--text);
+  color: var(--bg);
+  font-family: var(--font);
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  appearance: none;
+  transition: opacity 0.15s ease;
+}
+
+.concept-form__btn--sent {
+  background: var(--green);
+}
+
+.concept-form__field--error {
+  box-shadow: inset 0 0 0 1px #ff5c5c;
+  border-radius: var(--radius-md);
+}
+
+.concept-form__note {
+  margin-top: 16px;
+  text-align: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--text-3);
+}
+
+/* ============================================================
+   RESPONSIVE — мобильный
+   ============================================================ */
+
+@media (max-width: 640px) {
+  .header {
+    grid-template-columns: 1fr;
+    grid-template-areas: "left" "right";
+    row-gap: 10px;
+    padding: 16px 20px;
+  }
+
+  .header__left { grid-area: left; justify-content: center; }
+  .header__right { grid-area: right; justify-content: center; gap: 16px; }
+  .header__center { display: none; }
+
+  /* центрированные тултипы (бейдж версии, метрики) на узком экране могут
+     краем вылезать за viewport — сужаем их и даём тексту переноситься */
+  .badge-version__tooltip {
+    max-width: min(180px, calc(100vw - 24px));
+  }
+  .badge-version__tooltip-line {
+    white-space: normal;
+  }
+
+  .metrics-badge__panel {
+    min-width: 0;
+    max-width: min(230px, calc(100vw - 24px));
+  }
+  .metrics-badge__line {
+    white-space: normal;
+  }
+
+  .hero { padding: 48px 20px 48px; }
+
+  .card--trio .card__row { flex-direction: column; width: 100%; }
+  .card--trio .card__image { aspect-ratio: unset; height: 360px; }
+
+  .about-explorer {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .about-explorer__sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+    position: static;
+    gap: 6px;
+  }
+
+  .about-explorer__label {
+    display: none;
+  }
+
+  .projects { padding: 0 20px; }
+
+  .case { padding: 0 20px; }
+
+  .case__overview { grid-template-columns: 1fr; gap: 28px; }
+
+  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+
+  .case__hero { height: 220px; }
+
+  .compare-pair { grid-template-columns: 1fr; }
+
+  .footer { padding: 24px 20px; margin-top: 64px; }
+}
+
+/* ============================================================
+   POSTERS (сетка постеров + оверлей по клику)
+   ============================================================ */
+
+.posters {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.posters__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+.posters__text {
+  max-width: 640px;
+  margin: 0 auto var(--space-lg);
+  font-size: var(--text-md);
+  color: var(--text-2);
+  text-align: center;
+}
+
+.posters__grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--space-xs);
+}
+
+.poster {
+  display: block;
+  padding: 0;
+  border: 0;
+  aspect-ratio: 5 / 7;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  overflow: hidden;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.poster:hover { transform: scale(1.03); }
+
+.poster:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.poster__ph,
+.poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.poster__ph { background: var(--surface); }
+.poster img { object-fit: cover; }
+
+.poster-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-md);
+  background: rgba(0, 0, 0, 0);
+  transition: background-color 0.25s ease;
+  --poster-h: min(calc(86vh - 44px), 856px);
+  --poster-w: min(calc(var(--poster-h) * 0.7066), calc(100vw - 48px)); /* ширина постера = высота × пропорция файла */
+}
+
+.poster-lightbox[hidden] { display: none; }
+.poster-lightbox.is-open { background: rgba(0, 0, 0, 0.78); }
+
+.poster-lightbox__title {
+  margin: 0 0 var(--space-sm);
+  color: #fff;
+  font-size: var(--text-md);
+  font-weight: 600;
+  text-align: center;
+}
+
+.poster-lightbox__frame {
+  height: min(calc(86vh - 44px), 856px);
+  aspect-ratio: 5 / 7;
+  max-width: 100%;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  overflow: hidden;
+  opacity: 0;
+  transform: scale(0.94);
+}
+
+.poster-lightbox.is-open .poster-lightbox__frame { opacity: 1; transform: scale(1); }
+
+.poster-lightbox__frame img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 48px);
+  max-height: min(calc(86vh - 44px), 856px);
+}
+
+/* миниатюра в просмотре растягивается до размера полного постера (пропорция файла 1199×1697), потом подменяется на полный файл */
+#poster-lightbox .poster-lightbox__img {
+  display: block;
+  width: var(--poster-w);
+  height: auto;
+  aspect-ratio: 1199 / 1697;
+  max-width: calc(100vw - 48px);
+  max-height: none;
+}
+
+/* когда внутри настоящая картинка — рамка берёт её точный размер, без серой подложки по краям */
+.poster-lightbox__frame:has(img) {
+  height: auto;
+  aspect-ratio: auto;
+  background: none;
+}
+
+.poster-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  margin-top: -22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.55);
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+/* стрелки стоят рядом с постером: отступ от его края = половина ширины постера + зазор */
+.poster-lightbox__nav--prev { left: max(var(--space-xs), calc(50% - var(--poster-w) / 2 - 44px - var(--space-md))); }
+.poster-lightbox__nav--next { right: max(var(--space-xs), calc(50% - var(--poster-w) / 2 - 44px - var(--space-md))); }
+
+.poster-lightbox__nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.poster-lightbox__nav:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+/* смена постера стрелкой — короткое затухание, потом новый постер проявляется */
+.poster-lightbox__frame { transition: transform 0.25s ease, opacity 0.25s ease; }
+
+.poster-lightbox.is-open.is-swapping .poster-lightbox__frame {
+  opacity: 0;
+  transition-duration: 0.15s;
+}
+
+.poster-lightbox__close {
+  position: absolute;
+  top: var(--space-md);
+  right: var(--space-md);
+  width: 40px;
+  height: 40px;
+  border: 0;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.poster-lightbox__close:hover { background: rgba(255, 255, 255, 0.28); }
+
+.poster-lightbox__close:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@media (max-width: 900px) {
+  .posters { padding: 0 var(--space-sm); }
+  .posters__grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .posters__grid { grid-template-columns: repeat(3, 1fr); }
+  .poster-lightbox__nav { width: 36px; height: 36px; margin-top: -18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .poster, .poster-lightbox, .poster-lightbox__frame { transition: none; }
+}
+
+/* ============================================================
+   GRAPHIC WORK (доп. работы: карточки с обложкой и подписью)
+   ============================================================ */
+
+.gwork {
+  width: 100%;
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.gwork__title {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--text);
+  text-align: center;
+  margin-bottom: var(--space-lg);
+}
+
+.gwork__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md) var(--space-sm);
+}
+
+.gwork__item {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.gwork__img {
+  aspect-ratio: 944 / 514;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.gwork__img img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.gwork__item:hover .gwork__img img { transform: scale(1.03); }
+
+.gwork__item:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 4px;
+  border-radius: var(--radius-lg);
+}
+
+.gwork__name {
+  margin-top: var(--space-sm);
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.gwork__meta {
+  margin-top: 2px;
+  font-size: var(--text-base);
+  color: var(--text-2);
+}
+
+@media (max-width: 640px) {
+  .gwork { padding: 0 var(--space-sm); }
+  .gwork__grid { grid-template-columns: 1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gwork__img img { transition: none; }
+}
+
+/* ============================================================
+   CASE: сетка из 4 колонок, скриншоты внутри case-img, ряд тегов
+   ============================================================ */
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.case-img--shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.case__tags-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* слайды питч-дека — «пилюли», чтобы не сливались в одну строку */
+.case__tags-row .case__tag {
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--text-base);
+}
+
+@media (max-width: 900px) {
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ============================================================
+   iPhone: скриншот внутри корпуса телефона, название — обычным текстом под ним
+   ============================================================ */
+
+.grid-4--phones { gap: 32px 24px; }
+
+.iphone-item { margin: 0; text-align: center; }
+
+.iphone {
+  position: relative;
+  padding: 7px;
+  background: var(--text);
+  border-radius: 18% / 8.3%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.iphone img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16.5% / 7.6%;
+}
+
+/* «островок» камеры; текст и иконки статус-бара на скриншотах его не перекрывают */
+.iphone::after {
+  content: "";
+  position: absolute;
+  top: calc(7px + 1.5%);
+  left: 50%;
+  width: 26%;
+  height: 1.9%;
+  transform: translateX(-50%);
+  border-radius: var(--radius-full);
+  background: #000;
+}
+
+.iphone-item__name {
+  margin-top: var(--space-sm);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* ============================================================
+   Экраны кейса: кликабельный скриншот + подпись обычным текстом
+   ============================================================ */
+
+.grid-2--shots { gap: 32px 16px; }
+
+.shot-item { margin: 0; text-align: center; }
+
+.shot {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: none;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+.shot:hover { transform: scale(1.015); }
+
+.shot img { display: block; width: 100%; height: auto; }
+
+.shot-item__name {
+  margin-top: var(--space-sm);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* iPhone стал кнопкой (клик открывает экран крупно) */
+button.iphone {
+  display: block;
+  width: 100%;
+  border: 0;
+  cursor: zoom-in;
+  transition: transform 0.2s ease;
+}
+
+button.iphone:hover { transform: scale(1.03); }
+
+.shot:focus-visible,
+button.iphone:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shot, button.iphone { transition: none; }
+}
+
+/* ============================================================
+   Polyranger: блоки экранов внутри секций кейса
+   ============================================================ */
+
+.case-shots { margin: 0 0 24px; }
+.case-shots .shot-item { margin: 0; }
+.case-shots.grid-2 { margin-top: 24px; }
+
+.shots-heading {
+  margin: 56px 0 24px;
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.shots-heading:first-of-type { margin-top: 32px; }
+
+/* Конкурентный анализ: показываем только сторону PolyRanger (скриншоты конкурентов не добавляем) */
+.compare-pair--single { grid-template-columns: 1fr; }
+.shot-tagged { position: relative; }
+.shot-tagged .compare-pair__tag { z-index: 1; }
+
+/* Hero кейса: два экрана рядом (светлая и тёмная тема) */
+.case__hero-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 48px 0 56px;
+}
+
+.case__hero-pair .shot-item { margin: 0; }
+
+/* Просмотр экрана телефона: тот же корпус iPhone, что в сетке, только крупнее */
+.poster-lightbox__frame.is-phone {
+  position: relative;
+  padding: 10px;
+  background: var(--text);
+  border-radius: 18% / 8.3%;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.poster-lightbox__frame.is-phone img {
+  max-height: min(calc(86vh - 64px), 836px);
+  border-radius: 16.5% / 7.6%;
+}
+
+.poster-lightbox__frame.is-phone::after {
+  content: "";
+  position: absolute;
+  top: calc(10px + 1.5%);
+  left: 50%;
+  width: 26%;
+  height: 1.9%;
+  transform: translateX(-50%);
+  border-radius: var(--radius-full);
+  background: #000;
+}
+
+/* Экраны без статус-бара (скриншоты сайта): сверху добавляем полосу цвета экрана под «островок» */
+.iphone--notch::before,
+.poster-lightbox__frame.iphone--notch::before {
+  content: "";
+  display: block;
+  width: 100%;
+  aspect-ratio: 100 / 8.5;
+  border-radius: 16.5% 16.5% 0 0 / 76% 76% 0 0;
+}
+
+.iphone--notch.iphone--light::before,
+.poster-lightbox__frame.iphone--light.iphone--notch::before { background: #fff; }
+
+.iphone--notch.iphone--dark::before,
+.poster-lightbox__frame.iphone--dark.iphone--notch::before { background: #080808; }
+
+.iphone--notch img,
+.poster-lightbox__frame.iphone--notch img {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.poster-lightbox__frame.is-phone.iphone--notch img {
+  max-height: min(calc(86vh - 120px), 780px);
+}
+
+/* ============================================================
+   iPhone с «островком»: экран — один слой (цвет + обрезка по внутреннему радиусу корпуса)
+   Как в Figma: рамка = фрейм со скруглением, экран внутри = Clip content с радиусом (внешний − толщина рамки).
+   Полоса под островок остаётся пустым отступом, а цвет экрана рисует сам корпус.
+   ============================================================ */
+
+.iphone--notch::before,
+.poster-lightbox__frame.iphone--notch::before {
+  background: none;
+  border-radius: 0;
+}
+
+.iphone--notch.iphone--light,
+.poster-lightbox__frame.iphone--notch.iphone--light {
+  background: linear-gradient(#fff, #fff) content-box, var(--text);
+}
+
+.iphone--notch.iphone--dark,
+.poster-lightbox__frame.iphone--notch.iphone--dark {
+  background: linear-gradient(#080808, #080808) content-box, var(--text);
+}
+
+@supports (overflow-clip-margin: content-box) {
+  .iphone--notch,
+  .poster-lightbox__frame.iphone--notch {
+    overflow: clip;
+    overflow-clip-margin: content-box;
+  }
+
+  .iphone--notch img,
+  .poster-lightbox__frame.iphone--notch img,
+  .poster-lightbox__frame.is-phone.iphone--notch img {
+    border-radius: 0;
+  }
+}

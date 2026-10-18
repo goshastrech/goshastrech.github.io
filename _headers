@@ -1,0 +1,14 @@
+# HTML всегда проверяется заново, чтобы правки появлялись сразу
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Картинки, стили и скрипты кэшируются на 7 дней
+# (в именах файлов нет «хэшей», поэтому долгий кэш рискован: после правки старая версия может жить у посетителей)
+/img/*
+  Cache-Control: public, max-age=604800
+/css/*
+  Cache-Control: public, max-age=604800
+/js/*
+  Cache-Control: public, max-age=604800

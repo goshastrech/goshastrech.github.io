@@ -1,0 +1,29 @@
+/* Первый экран БЕЗ неба и облаков: чистый белый фон, тёмный текст (облачный вариант временно отключён).
+   Слои неба убраны из index.html, этот файл возвращает hero обычный вид поверх стилей sky-hero.css. */
+.sky-hero {
+  margin-top: 0;
+  padding-top: 0;
+  padding-bottom: 6vh;
+  min-height: calc(100vh - 79px);   /* первый экран на всю высоту окна, содержимое по центру */
+  min-height: calc(100svh - 79px);
+  overflow: visible;
+  isolation: auto;
+}
+
+.sky-hero .hero__avatar { box-shadow: none; }
+
+.sky-hero .hero__status {
+  color: var(--text-2);
+  text-shadow: none;
+}
+
+.sky-hero .hero__title {
+  color: var(--text);
+  text-shadow: none;
+}
+
+.sky-hero .hero__title .accent { color: var(--text-2); }
+
+@media (max-width: 640px) {
+  .sky-hero { padding-bottom: 4vh; }
+}

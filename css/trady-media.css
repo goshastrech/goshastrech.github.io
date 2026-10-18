@@ -1,0 +1,63 @@
+/* Видео на странице Trady: рамка как у скриншотов (12px, border), подпись чёрным под видео */
+.media-row { display: flex; align-items: flex-start; gap: 16px; }
+.media-row + .media-row,
+.media-row + .media-ph { margin-top: 32px; }
+
+/* flex-grow = пропорции ролика => у вертикальных видео в ряду одинаковая высота */
+.media-item { margin: 0; text-align: center; min-width: 0; flex: 1 1 0; }
+.media-item--wide { flex: 1 1 100%; }
+.media-item--ar-34 { flex-grow: 0.75; }
+.media-item--ar-45 { flex-grow: 0.8; }
+.media-item--ar-phone { flex-grow: 0.46; }
+
+.media-frame {
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  background: transparent;
+}
+.media-frame video { display: block; width: 100%; height: auto; }
+.media-frame--wide { aspect-ratio: 2880 / 1644; }
+.media-frame--ar-34 { aspect-ratio: 3 / 4; }
+.media-frame--ar-45 { aspect-ratio: 4 / 5; }
+.media-frame--phone { aspect-ratio: 804 / 1748; }
+
+.media-ph { margin: 0; text-align: center; }
+.media-ph .case-img { margin: 0; }
+
+@media (max-width: 720px) {
+  .media-row { flex-direction: column; gap: 32px; }
+  .media-row .media-item { flex: none; width: 100%; }
+  .media-row .media-item--ar-phone { width: 55%; margin-inline: auto; }
+}
+
+/* iOS: группы экранов с подзаголовками; телефоны в группах той же ширины (4 колонки), выровнены влево */
+.case-section .shots-heading + .grid-4--phones { margin-top: 0; }
+
+/* iOS-экран с видео (Onboarding — Welcome): выглядит так же, как скриншот-картинка в корпусе iPhone */
+.iphone video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 16.5% / 7.6%;
+}
+.poster-lightbox__frame video {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: calc(100vw - 48px);
+  max-height: min(calc(86vh - 44px), 856px);
+}
+.poster-lightbox__frame:has(video) {
+  height: auto;
+  aspect-ratio: auto;
+  background: none;
+}
+.poster-lightbox__frame.is-phone video {
+  max-height: min(calc(86vh - 64px), 836px);
+  border-radius: 16.5% / 7.6%;
+}
+
+/* Web terminal: подзаголовки подразделов (Search / Trackers / Header / Themes) */
+.case-section .shots-heading + .case-section__desc { margin: -8px 0 24px; }
+.case-section .shots-heading + .grid-2--shots { margin-top: 0; }

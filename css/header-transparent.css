@@ -1,0 +1,70 @@
+/* ============================================================
+   Прозрачная шапка на главной — везде как в самом начале (стиль air.inc)
+   Подключён только в index.html.
+   Сама шапка всегда прозрачная; под ней ОДИН слой блюра (::before) с градиентом, тающим книзу.
+   (Раньше было ещё синеватое «небо» ::after и класс body.is-over-sky — убраны, на странице нет JS, который их включал:
+   три слоя backdrop-filter заставляли браузер лишний раз размывать картинку под шапкой при каждой прокрутке.)
+   ============================================================ */
+
+/* 1. Шапка: никакой плашки, фона, границы и тени — при любой прокрутке */
+body .header,
+body .header.header--scrolled {
+  background: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  border: 0;
+  box-shadow: none;
+}
+
+/* 2. Слой градиентного блюра под шапкой.
+   ::after выключен совсем: иначе вернулась бы полоска из styles.css */
+body .header.header::after { display: none; }
+
+body .header.header::before {
+  content: "";
+  display: block;
+  position: absolute;
+  inset: 0 0 -36px 0;
+  height: auto;
+  bottom: -36px;
+  z-index: -1;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 45%, transparent 100%);
+  transition: opacity 0.3s ease;
+}
+
+/* белёсый слой.
+   Параметры: прозрачность градиента (0.78 / 0.4) и blur (12px) */
+body .header.header::before {
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.78) 0%, rgba(255, 255, 255, 0.4) 55%, rgba(255, 255, 255, 0) 100%);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  opacity: 1;
+}
+
+/* 3. Плавная смена цвета текста при переходе небо -> белое */
+body .header__name,
+body .header__right a,
+body .lang-toggle,
+body .header__timer,
+body .header__progress {
+  transition: color 0.3s ease, background-color 0.3s ease, opacity 0.3s ease;
+}
+
+/* Над белым: тёмный текст (над небом остаётся белый из sky-hero.css) */
+body:not(.is-over-sky) .header__name,
+body:not(.is-over-sky) .header__right a,
+body:not(.is-over-sky) .lang-toggle { color: var(--text); }
+body:not(.is-over-sky) .header__timer { color: var(--text-3); }
+
+/* Линия прогресса: над небом белая (sky-hero.css), над белым — тёмная */
+body:not(.is-over-sky) .header__progress { background: rgba(10, 10, 10, 0.08); }
+
+/* Линия прогресса скролла под шапкой на главной убрана совсем */
+body .header__progress { display: none !important; }
+
+/* Ссылки шапки (CV, Linkedin, Dribbble, EN) и имя: при наведении оранжевые — и над небом, и над белым фоном */
+body .header__right a:hover,
+body .lang-toggle:hover,
+body .header__name:hover { color: var(--orange); }

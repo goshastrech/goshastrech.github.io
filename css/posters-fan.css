@@ -1,0 +1,72 @@
+/* Posters design: «колода-веер».
+   Без JS (нет класса js-fan на <html>) карточки остаются обычной сеткой из styles.css.
+   Веер рисуется трансформами самих кнопок .poster; углы и смещения считает js/posters-fan.js.
+   Подкрутка: углы/размер/смещения — в начале js/posters-fan.js (объект CFG),
+   пружина — переменные --fan-spring и --fan-dur ниже. */
+
+.posters {
+  --fan-spring: cubic-bezier(0.34, 1.56, 0.64, 1);   /* пружина с лёгким перелётом */
+  --fan-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --fan-dur: 0.65s;
+  --enter-dur: 0.55s;                                 /* длительность появления одной карточки */
+  --enter-ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+  --enter-shift: -24px;                               /* с какого смещения слева выезжает карточка */
+}
+
+.posters__hint {
+  margin: var(--space-xs, 8px) auto 0;
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--text-3, var(--text-2));
+}
+
+/* ---------- Режим веера (включается скриптом) ---------- */
+html.js-fan .posters .posters__grid {
+  position: relative;
+  display: block;
+  height: var(--fan-h, 440px);
+  pointer-events: none;            /* реагируют только сами карточки */
+  -webkit-tap-highlight-color: transparent;
+}
+html.js-fan .posters .posters__text { margin-bottom: 0; }   /* отступ до веера задаёт gapTop в js */
+
+html.js-fan .posters .posters__grid .poster {
+  position: absolute;
+  left: 50%;
+  bottom: var(--fan-pad, 60px);
+  width: var(--cw, 150px);
+  margin-left: calc(var(--cw, 150px) / -2);
+  aspect-ratio: 1199 / 1697;
+  transform-origin: 50% 100%;
+  pointer-events: auto;
+  touch-action: pan-y;
+  cursor: zoom-in;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.14), 0 1px 3px rgba(0, 0, 0, 0.12);
+  /* transform — пружина веера (без задержки); opacity и translate — появление слева направо со своей задержкой --d */
+  transition: transform var(--fan-dur) var(--fan-spring), box-shadow 0.35s,
+    opacity var(--enter-dur) var(--enter-ease) var(--d, 0s),
+    translate var(--enter-dur) var(--enter-ease) var(--d, 0s);
+}
+
+/* слой-подсказка для браузера только пока курсор над веером (или идёт появление), а не у всех 14 карточек всегда */
+html.js-fan .posters .posters__grid:hover .poster,
+html.js-fan .posters .posters__grid.is-stack .poster { will-change: transform; }
+
+/* До появления: карточки невидимы и чуть левее (отдельное свойство translate, веерный transform не трогаем) */
+html.js-fan .posters .posters__grid.is-stack .poster { opacity: 0; translate: var(--enter-shift) 0; }
+
+.fan__label {
+  position: absolute;
+  left: 0; right: 0; bottom: 2px;
+  text-align: center;
+  font-weight: 500;
+  font-size: var(--text-base);
+  color: var(--text);
+  min-height: 1.5em;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.js-fan .posters .posters__grid .poster { transition-duration: 0.01ms !important; transition-delay: 0s !important; }
+}

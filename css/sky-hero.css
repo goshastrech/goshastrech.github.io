@@ -1,0 +1,140 @@
+/* ============================================================
+   SKY HERO — небо на первом экране главной страницы.
+   Всё, что связано с небом, лежит здесь; css/styles.css не изменён —
+   его стили переопределяются более специфичными селекторами.
+   Фигма-аналогия: это отдельный фрейм «Небо» под фреймом с текстом hero.
+   ============================================================ */
+
+/* ---- Обёртка первого экрана ---- */
+.sky-hero {
+  /* высота шапки (sticky-шапка занимает место в потоке); точное значение пишет js/sky-hero.js */
+  --sky-header-h: 79px;
+  position: relative;
+  isolation: isolate;               /* свой слой: небо z-index:-1 остаётся внутри обёртки */
+  overflow-x: clip;                 /* облака не вылезают по бокам, нет горизонтального скролла */
+  overflow-y: visible;              /* небо может заходить вниз, под «Обо мне» (см. --sky-extend) */
+  --sky-extend: 140px;              /* на сколько небо уходит ниже hero: больше = градиент в белое ниже */
+  margin-top: calc(-1 * var(--sky-header-h)); /* небо заезжает под прозрачную шапку */
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-top: var(--sky-header-h);
+  padding-bottom: 30vh;             /* зона растворения в белое (нижние ~35% hero) — без текста */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sky-hero > .hero {
+  position: relative;
+  z-index: 2;
+  padding-top: 24px;
+  padding-bottom: 0;
+}
+
+/* ---- Тексты hero на небе: белые ---- */
+.sky-hero .hero__avatar {
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.55), 0 12px 32px rgba(8, 48, 130, 0.28);
+}
+
+.sky-hero .hero__status {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(8, 48, 130, 0.25), 0 1px 14px rgba(8, 48, 130, 0.4);
+}
+
+.sky-hero .hero__title {
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(8, 48, 130, 0.18), 0 2px 28px rgba(8, 48, 130, 0.38);
+}
+
+.sky-hero .hero__title .accent {
+  color: rgba(255, 255, 255, 0.93);
+}
+
+/* Кнопка Contact me: яркая голубая «объёмная», белый текст, мягкое белое свечение изнутри, без обводки. */
+.sky-hero .hero__cta {
+  position: relative;
+  background: linear-gradient(180deg, #38b6ff 0%, #0f94ff 50%, #0a78f2 100%);
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 60, 150, 0.35);
+  box-shadow:
+    inset 0 0 16px rgba(255, 255, 255, 0.34),          /* белое свечение изнутри */
+    inset 0 3px 5px rgba(255, 255, 255, 0.25),         /* мягкий блик сверху внутри */
+    inset 0 -4px 7px rgba(0, 72, 214, 0.5),            /* синяя кромка снизу: выпуклость */
+    0 2px 3px rgba(0, 60, 150, 0.18),                  /* контактная тень */
+    0 12px 24px -7px rgba(0, 110, 240, 0.6);           /* голубая тень под кнопкой */
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.sky-hero .hero__cta svg path { fill: currentColor; }
+
+@media (hover: hover) {
+  .sky-hero .hero__cta:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+    filter: brightness(1.06);
+    box-shadow:
+      inset 0 0 22px rgba(255, 255, 255, 0.45),
+      inset 0 3px 5px rgba(255, 255, 255, 0.3),
+      inset 0 -4px 7px rgba(0, 72, 214, 0.5),
+      0 3px 4px rgba(0, 60, 150, 0.18),
+      0 16px 28px -7px rgba(0, 110, 240, 0.68);
+  }
+}
+
+.sky-hero .hero__cta:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 0 14px rgba(255, 255, 255, 0.28),
+    inset 0 3px 7px rgba(0, 72, 214, 0.38),
+    0 1px 2px rgba(0, 60, 150, 0.2),
+    0 5px 10px -4px rgba(0, 110, 240, 0.5);
+}
+
+.sky-hero .hero__cta:focus-visible {
+  outline: 2px solid #0a78f2;
+  outline-offset: 3px;
+}
+
+/* ---- Шапка: плавная смена фона/цвета (правила для body.is-over-sky убраны — этот класс на странице никто не ставит) ---- */
+.header { transition: background 0.3s ease, color 0.3s ease; }
+
+.project-rail__dot,
+.project-rail::before { transition: background 0.3s ease, transform 0.2s ease; }
+
+/* ---- Мобильный ---- */
+@media (max-width: 640px) {
+  .sky-hero { padding-bottom: 26vh; }
+  .sky-hero > .hero { padding-left: 20px; padding-right: 20px; padding-top: 12px; }
+}
+
+/* ---- Оттяжка страницы вверх (резиновый скролл macOS): отключена, чтобы над небом не появлялась белая полоса.
+   Подложку страницы НЕ красим: блоки ниже неба прозрачные и просвечивали бы её. ---- */
+html { overscroll-behavior-y: none; }
+
+/* ---- Блок «Обо мне» перед My stack: колонка 520px по центру ---- */
+.about-me {
+  display: flex;
+  justify-content: center;
+  padding: 96px 24px 0;
+}
+
+.about-me__inner {
+  width: 100%;
+  max-width: 520px;
+}
+
+.about-me__text {
+  margin: 0 0 20px;
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--text);
+}
+
+.about-me__text:last-child { margin-bottom: 0; }
+
+/* «Обо мне» лежит поверх нижней части неба (там уже чисто белый фон) */
+.about-me { position: relative; z-index: 1; }
+
+@media (max-width: 640px) {
+  .sky-hero { --sky-extend: 100px; }
+}

@@ -1,0 +1,14 @@
+/* BIG BOARD: неактивная кнопка «Coming soon» (пока нет страницы кейса) */
+.project-btn.project-btn--soon {
+  background: var(--surface, #f0f0f0);
+  color: var(--text-2, #6b6b73);
+  box-shadow: none;
+  cursor: default;
+  user-select: none;
+  pointer-events: none;
+}
+
+.project-btn.project-btn--soon:hover {
+  opacity: 1;
+  transform: none;
+}

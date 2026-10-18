@@ -1,0 +1,113 @@
+/* FTLB: телефоны с прокручиваемыми экранами.
+   Корпус — как .iphone на странице Trady (тёмная рамка 7px, тонкая светлая окантовка).
+   «Остров» и статус-бар нарисованы самим макетом, поэтому отдельного островка нет. */
+
+.phones {
+  --phones-gap: 32px 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;   /* все группы выровнены влево, размер телефонов одинаковый */
+  gap: var(--phones-gap);
+  margin-bottom: 24px;
+}
+
+.phone-item {
+  flex: 0 0 calc((100% - 3 * 24px) / 4);   /* 4 в ряд; группа из 3 занимает первые три колонки */
+  min-width: 0;
+  margin: 0;
+  text-align: center;
+  container-type: inline-size;   /* cqw = ширина телефона; от неё считается радиус экрана */
+  --pad: 7px;
+  --screen-r: calc((100cqw - 2 * var(--pad)) * 0.1344);  /* радиус углов макета: 120 / 893 */
+}
+
+/* Корпус */
+.phone {
+  box-sizing: border-box;
+  width: 100%;
+  padding: var(--pad);
+  background: var(--text);
+  border-radius: calc(var(--screen-r) + var(--pad));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+/* Экран: пропорция макета меню (893 x 1976) = один экран без пустой прокрутки */
+.phone__screen {
+  aspect-ratio: 893 / 1976;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior: contain;
+  border-radius: var(--screen-r);
+  background: var(--text);   /* прозрачные уголки макета сливаются с корпусом */
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  user-select: none;
+  -webkit-user-select: none;
+  outline: none;
+}
+.phone__screen::-webkit-scrollbar { display: none; }
+.phone__screen:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: 3px;
+}
+
+.phone__screen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Неподвижная шапка: верх макета (статус-бар 9:41 + остров), не уезжает при прокрутке.
+   Высота — доля ширины экрана: --bar-h (в макете остров кончается на 121/893, карточка с лого начинается на ~181/893).
+   Нижние --bar-fade мягко растворяются, чтобы контент уходил под шапку без резкого края. */
+.phone__screen { --bar-h: 0.19; --bar-fade: 0.03; }   /* 170/893 и 27/893 ширины экрана */
+.phone__bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: calc((100cqw - 2 * var(--pad)) * var(--bar-h));
+  margin-bottom: calc(-1 * (100cqw - 2 * var(--pad)) * var(--bar-h));   /* не сдвигает картинку вниз */
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: 100% auto;
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(#000 calc(100% - (100cqw - 2 * var(--pad)) * var(--bar-fade)), transparent);
+  mask-image: linear-gradient(#000 calc(100% - (100cqw - 2 * var(--pad)) * var(--bar-fade)), transparent);
+}
+
+/* Запасной вариант, если файл не найден */
+.phone__ph {
+  min-height: 100%;
+  background: #1a1a1a;
+}
+
+.phone-item__caption {
+  margin-top: var(--space-sm);
+  font-size: var(--text-base);
+  font-weight: 500;
+  color: var(--text);
+}
+
+/* Планшет: 2 в ряд */
+@media (max-width: 900px) {
+  .phone-item { flex-basis: calc((100% - 24px) / 2); }
+}
+
+/* Мобильный: ряд внутри блока с горизонтальным snap-скроллом; страница не ширится */
+@media (max-width: 640px) {
+  .phones {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-xs);
+    scrollbar-width: none;
+  }
+  .phones::-webkit-scrollbar { display: none; }
+  .phone-item {
+    flex: 0 0 min(260px, 72vw);
+    scroll-snap-align: center;
+  }
+}

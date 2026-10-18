@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heorhi Strechan — UX/UI & Graphic Designer</title>
+  <meta name="description" content="UX/UI & Graphic Designer creating modern digital products for Web3 projects and startups." />
+
+  <!-- Шрифт Inter от Google -->
+  <link rel="icon" href="data:," />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Наши стили -->
+  <link rel="stylesheet" href="css/styles.css" />
+  <!-- Небо первого экрана (стили лежат отдельно, styles.css не тронут) -->
+  <link rel="stylesheet" href="css/sky-hero.css" />
+  <link rel="stylesheet" href="css/hero-plain.css" />
+  <link rel="stylesheet" href="css/header-transparent.css" />
+  <link rel="stylesheet" href="css/about-reveal.css" />
+  <link rel="stylesheet" href="css/posters-fan.css" />
+  <link rel="stylesheet" href="css/big-board.css" />
+  <link rel="stylesheet" href="css/project-strip.css" />
+  <link rel="stylesheet" href="css/all-work.css" />
+</head>
+<body>
+
+  <div id="header-root"></div>
+
+  <!-- ====================================================
+       HERO
+       ==================================================== -->
+  <div class="sky-hero" id="sky-hero">
+
+    <section class="hero fade-in">
+
+      <img class="hero__avatar" src="img/avatar-photo.webp" alt="Heorhi Strechan" width="122" height="122" fetchpriority="high" decoding="async" />
+
+      <div class="hero__status">
+        <span class="hero__dot"></span>
+        <span data-i18n-en>Available for work</span>
+        <span data-i18n-ru>Открыт для работы</span>
+      </div>
+
+      <h1 class="hero__title">
+        <span data-i18n-en>
+          Heorhi Strechan, product & visual designer,<br />
+          creating modern digital products by combining <br />
+           UX analysis and visual design. <span class="accent"> Web3, Crypto,<br />
+           Fintech, Social Products </span>
+        </span>
+        <span data-i18n-ru>
+          Стречень Георгий, продуктовый дизайнер,<br />
+          создаю современные цифровые продукты, объединяя UX-анализ и визуальный дизайн.<br />
+            <span class="accent"> Web3, Crypto, Fintech, Social Products </span>
+        </span>
+      </h1>
+
+      <a href="https://t.me/goshast11" target="_blank" class="hero__cta">
+        <span data-i18n-en>Contact me</span>
+        <span data-i18n-ru>Связаться</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20.483 2.98596C20.12 2.89696 19.7074 2.91097 19.2018 3.04798C16.2726 3.84198 4.62866 7.62596 3.67046 8.04996C2.62616 8.51196 2.02356 9.32596 2.01426 10.394C2.00186 11.822 3.15286 12.943 4.51426 12.895C4.55806 12.894 6.24256 12.917 7.20176 12.927C7.20176 12.927 8.05796 17.208 8.07866 17.259C8.32856 17.873 8.91476 18.056 9.42046 17.835L12.2643 16.584C12.5862 16.901 14.7506 18.992 14.983 19.179C15.6756 19.735 16.2741 19.91 17.0143 19.929C18.206 19.96 19.247 19.259 19.7955 18.116C20.1398 17.399 21.7445 7.35798 21.8893 6.36197C22.1192 4.78097 22.0672 4.15997 21.4205 3.51697C21.1606 3.25897 20.8461 3.07396 20.483 2.98596ZM20.0142 4.92496C20.0142 4.92496 20.0628 5.10196 19.9205 6.07996C19.4114 9.58196 18.2049 16.747 17.9518 17.334C17.7789 17.736 17.4324 17.939 17.0455 17.928C16.705 17.919 16.5355 17.859 16.233 17.616C16.0774 17.491 15.3773 16.826 14.3893 15.865C14.3769 15.853 12.4187 13.942 12.4187 13.942C12.2278 13.752 12.0484 13.639 11.6725 13.635C11.4539 13.635 11.1654 13.801 11.1654 13.801L9.66156 15.074L9.13926 12.52L15.4205 9.83198C15.9279 9.61398 16.17 9.02596 15.9518 8.51896C15.7337 8.01096 15.1467 7.76898 14.6393 7.98698L7.82676 10.926C7.43886 10.924 4.54836 10.891 4.45176 10.895C4.22926 10.902 4.01176 10.684 4.01426 10.394C4.01626 10.162 4.11856 10.024 4.48296 9.86299C5.32756 9.48898 16.8309 5.75796 19.6701 4.98896C19.9379 4.91596 20.0142 4.92496 20.0142 4.92496Z" fill="white"/>
+        </svg>
+      </a>
+
+    </section>
+  </div>
+
+  <section class="about-me" aria-label="About me">
+    <div class="about-me__body">
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">I'm a</span> <span class="k">product and visual designer</span> <span class="nb"><span class="g">working</span></span> <span class="g">in</span> <span class="k">Web3, crypto and fintech.</span> <span class="g">I design the</span> <span class="pill">whole</span> <span class="k">path</span> <span class="g">of a product,</span> <span class="nb"><span class="k">from</span></span> <span class="k">research and UX</span> <span class="g">to</span> <span class="nb"><span class="k">interfaces</span></span> <span class="k">for web and iOS.</span></span>
+        <span data-i18n-ru><span class="g">Я</span> <span class="k">продуктовый и визуальный дизайнер</span> <span class="nb"><span class="g">работаю</span></span> <span class="g">в</span> <span class="k">Web3, крипто и финтехе.</span> <span class="g">Проектирую</span> <span class="pill">весь</span> <span class="k">путь</span> <span class="g">продукта,</span> <span class="nb"><span class="k">от</span></span> <span class="k">исследования и UX</span> <span class="g">до</span> <span class="nb"><span class="k">интерфейсов</span></span> <span class="k">для веба и iOS.</span></span>
+      </p>
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">My work ranges from</span> <span class="k">trading terminals</span> <span class="g">and</span> <span class="k">prediction-market aggregators</span> <span class="g">to</span> <span class="k">NFT platforms,</span> <span class="g">networking products and</span> <span class="k">brand identities.</span> <span class="g">Dense data, mixed audiences and complex flows are the kind of problems I like to</span> <span class="pill">untangle.</span> </span>
+        <span data-i18n-ru><span class="g">Мои работы — от</span> <span class="k">торговых терминалов</span> <span class="g">и</span> <span class="k">агрегаторов рынков предсказаний</span> <span class="g">до</span> <span class="k">NFT-платформ,</span> <span class="g">нетворкинг-продуктов и</span> <span class="k">брендинга.</span> <span class="g">Больше всего мне нравится</span> <span class="pill">распутывать</span> <span class="g">плотные данные, смешанную аудиторию и сложные флоу.</span> </span>
+      </p>
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">I merge existing</span> <span class="nb"><span class="k">design</span></span> <span class="k">systems</span> <span class="g">into one final system and then build it in code with</span> <span class="nb"><span class="k">AI.</span></span> <span class="g">This lets me</span> <span class="k">generate quality mockups</span> <span class="pill">quickly</span> <span class="g">and hand them to</span> <span class="nb"><span class="g">developers</span></span> <span class="g">without losing details, which speeds up the whole process.</span></span>
+        <span data-i18n-ru><span class="g">Я собираю несколько существующих</span> <span class="nb"><span class="k">дизайн-систем</span></span> <span class="g">в одну финальную и затем воссоздаю её в коде с помощью</span> <span class="nb"><span class="k">AI.</span></span> <span class="g">Так я</span> <span class="k">быстро делаю качественные макеты</span> <span class="g">и передаю их</span> <span class="nb"><span class="g">разработчикам</span></span> <span class="g">без потери деталей, а весь процесс идёт</span> <span class="pill">быстрее.</span></span>
+      </p>
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">Beyond interfaces, I make</span> <span class="nb"><span class="k">graphics</span></span> <span class="g">and</span> <span class="nb"><span class="k">video</span></span> <span class="g">for social media,</span> <span class="nb"><span class="k">pitch</span></span> <span class="k">decks</span> <span class="g">for investors and</span> <span class="k">AI-generated visuals,</span> <span class="g">so a product looks</span> <span class="pill">consistent</span> <span class="g">from the first screen to the first post.</span></span>
+        <span data-i18n-ru><span class="g">Помимо интерфейсов, я делаю</span> <span class="nb"><span class="k">графику</span></span> <span class="g">и</span> <span class="nb"><span class="k">видео</span></span> <span class="g">для соцсетей,</span> <span class="nb"><span class="k">питч-деки</span></span> <span class="g">для инвесторов и</span> <span class="k">визуалы с помощью AI,</span> <span class="g">чтобы продукт выглядел</span> <span class="pill">цельно</span> <span class="g">от первого экрана до первого поста.</span></span>
+      </p>
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">I work closely with</span> <span class="nb"><span class="k">founders</span></span> <span class="g">and</span> <span class="k">developers:</span> <span class="g">I prefer</span> <span class="k">short feedback loops,</span> <span class="g">clear handoff and decisions backed by how real people use the product.</span> </span>
+        <span data-i18n-ru><span class="g">Я тесно работаю с</span> <span class="nb"><span class="k">фаундерами</span></span> <span class="g">и</span> <span class="k">разработчиками:</span> <span class="g">люблю</span> <span class="k">короткие циклы обратной связи,</span> <span class="g">понятную передачу в разработку и решения, опирающиеся на то, как реальные люди пользуются продуктом.</span> </span>
+      </p>
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">My daily stack:</span> <span class="nb"><span class="k">Figma</span></span> <span class="g">and</span> <span class="k">Adobe CS</span> <span class="g">for interface and visual design,</span> <span class="k">Midjourney, NanoBanana, KlingAI and Veo</span> <span class="g">for image and video generation,</span> <span class="k">Claude, Claude Code, Grok, Gemini and ChatGPT</span> <span class="g">for research, UI and screen generation and motion testing, and</span> <span class="k">VS Code</span> <span class="g">as the editor, with Claude's home base in it.</span> </span>
+        <span data-i18n-ru><span class="g">Мой рабочий стек:</span> <span class="nb"><span class="k">Figma</span></span> <span class="g">и</span> <span class="k">Adobe CS</span> <span class="g">для интерфейсов и визуала,</span> <span class="k">Midjourney, NanoBanana, KlingAI и Veo</span> <span class="g">для генерации изображений и видео,</span> <span class="k">Claude, Claude Code, Grok, Gemini и ChatGPT</span> <span class="g">для исследований, генерации UI и экранов и тестов motion, а</span> <span class="k">VS Code</span> <span class="g">как редактор, где живёт Claude.</span> </span>
+      </p>
+    </div>
+  </section>
+
+  <!-- Лента быстрой навигации по проектам -->
+  <section class="project-strip" aria-label="Projects navigation">
+    <nav class="project-strip__nav" aria-label="Projects">
+      <ul class="project-strip__list">
+      <li><a class="project-strip__card" href="#project-trady" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/trady.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Trady</span>
+        <span class="project-strip__meta"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-trady-landing" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/trady-landing.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Trady Landing</span>
+        <span class="project-strip__meta"><span data-i18n-en>Landing page</span><span data-i18n-ru>Лендинг</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-polyranger" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/polyranger.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Polyranger</span>
+        <span class="project-strip__meta"><span data-i18n-en>Prediction markets</span><span data-i18n-ru>Рынки предсказаний</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-big-board" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/big-board.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Big Board</span>
+        <span class="project-strip__meta"><span data-i18n-en>NFT collection</span><span data-i18n-ru>NFT-коллекция</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-c3tch" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/c3tch.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">C3tch</span>
+        <span class="project-strip__meta"><span data-i18n-en>Web3 networking</span><span data-i18n-ru>Web3-нетворкинг</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-ftlb" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/ftlb.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">FTLB</span>
+        <span class="project-strip__meta"><span data-i18n-en>Mobile UI</span><span data-i18n-ru>Мобильный UI</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-shiro" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/shiro.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Shiro</span>
+        <span class="project-strip__meta"><span data-i18n-en>AI character</span><span data-i18n-ru>AI-персонаж</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#project-cryptorsy" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/cryptorsy.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Cryptorsy</span>
+        <span class="project-strip__meta"><span data-i18n-en>Brand & content</span><span data-i18n-ru>Бренд и контент</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#posters" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/posters.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">Posters design</span>
+        <span class="project-strip__meta"><span data-i18n-en>Poster series</span><span data-i18n-ru>Серия постеров</span></span>
+      </a></li>
+      <li><a class="project-strip__card" href="#more-works" draggable="false">
+        <span class="project-strip__thumb"><img src="img/strip/more-works.webp" alt="" loading="lazy" draggable="false" /></span>
+        <span class="project-strip__name">More works</span>
+        <span class="project-strip__meta"><span data-i18n-en>Brand identity</span><span data-i18n-ru>Айдентика</span></span>
+      </a></li>
+      </ul>
+    </nav>
+  </section>
+
+  <!-- ====================================================
+       PROJECT CARDS
+       ==================================================== -->
+  <div id="project-trady" class="project-heading fade-in">
+    <img src="img/Trady Logo.svg" alt="Trady" class="project-heading__logo" loading="lazy" decoding="async" />
+    <p class="project-heading__subtitle">
+      <span data-i18n-en>Decentralized Trading Terminal. Design System, trading <br /> Interface, cross-chain platform, video &amp; graphics production</span>
+      <span data-i18n-ru>Децентрализованный торговый терминал. Дизайн-система, торговый <br /> интерфейс, кроссчейн-платформа, создание видео и графики</span>
+      <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
+        <span class="metrics-badge__line"><span data-i18n-en>12+ networks supported</span><span data-i18n-ru>Поддержка 12+ сетей</span></span>
+        <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>Full trading UI kit</span><span data-i18n-ru>Полный UI-кит для трейдинга</span></span>
+        <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>30+ screens designed</span><span data-i18n-ru>30+ спроектированных экранов</span></span>
+      </span></span></p>
+    <a href="trady.html" class="project-badge project-badge--link"><span data-i18n-en>View Project</span><span data-i18n-ru>Смотреть проект</span></a>
+
+    <div class="project-heading__role">
+      <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
+      <span class="case__role-value"><span data-i18n-en>Product Designer</span><span data-i18n-ru>Product Designer</span></span>
+    </div>
+  </div>
+
+  <main class="projects">
+
+    <div class="card card--polyranger card--trady fade-in">
+      <div class="card__image">
+        <video src="img/trady_home_loop_2026-10-05_17-16.mp4" poster="img/posters-video/trady-home-loop.webp" data-autoplay loop muted playsinline preload="none"></video>
+      </div>
+    </div>
+
+    <div id="project-trady-landing" class="project-heading project-heading--tight fade-in">
+      <h2 class="project-heading__title">Trady Landing</h2>
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>Landing page for the Trady terminal: animated sky hero, <br /> product video and key features</span>
+        <span data-i18n-ru>Лендинг терминала Trady: анимированный hero с небом, <br /> видео продукта и ключевые возможности</span>
+      </p>
+
+      <!-- ССЫЛКА НА ЛЕНДИНГ: сейчас ведёт на копию внутри портфолио. Когда лендинг опубликуют, замени ТОЛЬКО href ниже на боевой адрес. -->
+      <a href="trady-landing/index.html" target="_blank" rel="noopener" class="project-btn">
+          <span data-i18n-en>View site</span>
+          <span data-i18n-ru>Смотреть сайт</span>
+
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
+          </svg>
+      </a>
+    </div>
+
+    <div class="card card--polyranger card--trady fade-in">
+      <div class="card__image">
+        <video src="img/trady_landing_scroll.mp4" poster="img/posters-video/trady-landing-scroll.webp" data-autoplay loop muted playsinline preload="none"></video>
+      </div>
+    </div>
+
+    <div id="project-polyranger" class="project-heading project-heading--tight fade-in">
+      <h2 class="project-heading__title">POLYRANGER</h2>
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>Prediction Market Aggregator. Design System, trading <br /> Interface, multi-platform</span>
+        <span data-i18n-ru>Агрегатор рынков предсказаний. Дизайн-система, торговый <br /> интерфейс, мультиплатформенность</span>
+        <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
+          <a href="https://polyranger.com/" target="_blank" rel="noopener" class="metrics-badge__line metrics-badge__line--live"><span data-i18n-en>Live Project</span><span data-i18n-ru>Проект в продакшене</span></a>
+          <span class="metrics-badge__line"><span data-i18n-en>40+ screens designed</span><span data-i18n-ru>40+ спроектированных экранов</span></span>
+          <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>3 platforms unified into one</span><span data-i18n-ru>3 платформы объединены в одну</span></span>
+          <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>2 themes — light & dark</span><span data-i18n-ru>2 темы — светлая и тёмная</span></span>
+        </span></span></p>
+
+      <div class="project-heading__role">
+        <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
+        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI Designer</span></span>
+      </div>
+
+      <a href="polyranger.html" class="project-btn">
+          <span data-i18n-en>View Project</span>
+          <span data-i18n-ru>Смотреть проект</span>
+
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
+          </svg>
+      </a>
+    </div>
+
+    <div class="card card--polyranger fade-in">
+      <div class="card__image">
+        <video src="img/polyranger_home.mp4" poster="img/posters-video/polyranger-home.webp" data-autoplay loop muted playsinline preload="none"></video>
+      </div>
+    </div>
+
+    <div id="project-big-board" class="project-heading project-heading--tight fade-in">
+      <h2 class="project-heading__title">BIG BOARD</h2>
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>Proof-of-trade NFT collection. Website, pixel-art world, <br /> five trading desks, 5,000 citizens</span>
+        <span data-i18n-ru>NFT-коллекция proof-of-trade. Сайт, пиксельный мир, <br /> пять торговых десков, 5 000 граждан</span>
+      </p>
+
+      <span class="project-btn project-btn--soon" role="button" aria-disabled="true" tabindex="-1">
+          <span data-i18n-en>Coming soon</span>
+          <span data-i18n-ru>Скоро</span>
+      </span>
+    </div>
+
+    <div class="card card--polyranger card--c3tch fade-in">
+      <div class="card__image">
+        <img src="img/big-board-banner.webp" alt="BIG BOARD NFT collection banner" width="2040" height="1122" loading="lazy" decoding="async" />
+      </div>
+    </div>
+
+    <div id="project-c3tch" class="project-heading project-heading--tight fade-in">
+      <img src="img/c3tch logo.svg" alt="C3tch" class="project-heading__logo project-heading__logo--55" loading="lazy" decoding="async" />
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>Web3 networking platform for deal-making <br /> and professional connections</span>
+        <span data-i18n-ru>Web3-платформа для нетворкинга: заключение сделок <br /> и профессиональные связи</span>
+        <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
+          <span class="metrics-badge__line"><span data-i18n-en>2 core user flows</span><span data-i18n-ru>2 ключевых пользовательских флоу</span></span>
+          <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>Referral system design</span><span data-i18n-ru>Дизайн реферальной системы</span></span>
+          <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>Full profile & leaderboard UI</span><span data-i18n-ru>Полный UI профиля и лидерборда</span></span>
+        </span></span></p>
+
+      <div class="project-heading__role">
+        <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
+        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI Designer</span></span>
+      </div>
+
+      <a href="c3tch.html" class="project-btn">
+          <span data-i18n-en>View Project</span>
+          <span data-i18n-ru>Смотреть проект</span>
+
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
+          </svg>
+      </a>
+    </div>
+
+    <div class="card card--polyranger card--c3tch fade-in">
+      <div class="card__image">
+        <img src="img/c3tch.png" alt="C3tch" width="2040" height="684" loading="lazy" decoding="async" />
+      </div>
+    </div>
+
+    <div id="project-ftlb" class="project-heading project-heading--tight fade-in">
+      <h2 class="project-heading__title">FTLB</h2>
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>Web3 platform mobile UI design</span>
+        <span data-i18n-ru>Мобильный UI-дизайн Web3-платформы</span>
+        <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
+          <span class="metrics-badge__line"><span data-i18n-en>3 mobile screens designed</span><span data-i18n-ru>3 спроектированных мобильных экрана</span></span>
+          <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>Wallet-first UX</span><span data-i18n-ru>UX с приоритетом кошелька</span></span>
+          <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>NFT marketplace flow</span><span data-i18n-ru>Флоу NFT-маркетплейса</span></span>
+        </span></span></p>
+
+      <div class="project-heading__role">
+        <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
+        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI Designer</span></span>
+      </div>
+
+      <a href="ftlb.html" class="project-btn">
+          <span data-i18n-en>View Project</span>
+          <span data-i18n-ru>Смотреть проект</span>
+
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
+          </svg>
+      </a>
+    </div>
+
+    <div class="card card--polyranger card--c3tch fade-in">
+      <div class="card__image">
+        <img src="img/ftlb.webp" alt="FTLB" width="1676" height="950" loading="lazy" decoding="async" />
+      </div>
+    </div>
+
+    <div id="project-shiro" class="project-heading project-heading--tight fade-in">
+      <img src="img/Shiro Logo.svg" alt="Shiro" class="project-heading__logo project-heading__logo--55" loading="lazy" decoding="async" />
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>AI character & social media identity</span>
+        <span data-i18n-ru>AI-персонаж и айдентика для соцсетей</span>
+      </p>
+
+      <div class="project-heading__role">
+        <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
+        <span class="case__role-value"><span data-i18n-en>Graphic Designer</span><span data-i18n-ru>Graphic Designer</span></span>
+      </div>
+
+      <a href="shiro.html" class="project-btn">
+          <span data-i18n-en>View Project</span>
+          <span data-i18n-ru>Смотреть проект</span>
+
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
+          </svg>
+      </a>
+    </div>
+
+    <div class="card card--polyranger card--trio fade-in">
+      <div class="card__row">
+        <div class="card__image">
+          <video src="img/Shiro Free Fall.mp4" poster="img/posters-video/shiro-free-fall.webp" data-autoplay loop muted playsinline preload="none"></video>
+        </div>
+        <div class="card__image">
+          <video src="img/Shiro Descent.mp4" poster="img/posters-video/shiro-descent.webp" data-autoplay loop muted playsinline preload="none"></video>
+        </div>
+        <div class="card__image">
+          <video src="img/Shiro Reset.mp4" poster="img/posters-video/shiro-reset.webp" data-autoplay loop muted playsinline preload="none"></video>
+        </div>
+      </div>
+    </div>
+
+    <div id="project-cryptorsy" class="project-heading project-heading--tight fade-in">
+      <img src="img/Cryptorsy Logo.svg" alt="Cryptorsy" class="project-heading__logo project-heading__logo--55" loading="lazy" decoding="async" />
+      <p class="project-heading__subtitle">
+        <span data-i18n-en>Design for an agency and digital projects</span>
+        <span data-i18n-ru>Дизайн для агентства и digital-проектов</span>
+      </p>
+
+      <div class="project-heading__role">
+        <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
+        <span class="case__role-value"><span data-i18n-en>Graphic Designer</span><span data-i18n-ru>Graphic Designer</span></span>
+      </div>
+
+      <a href="cryptorsy.html" class="project-btn">
+          <span data-i18n-en>View Project</span>
+          <span data-i18n-ru>Смотреть проект</span>
+
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
+              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
+          </svg>
+      </a>
+    </div>
+
+    <div class="card card--polyranger card--c3tch fade-in">
+      <div class="card__image">
+        <video src="img/cryptorsy_banner.mp4" poster="img/Cryptorsy cover.jpg" data-autoplay loop muted playsinline preload="none"></video>
+      </div>
+    </div>
+
+    <section id="posters" class="posters fade-in" aria-labelledby="posters-title">
+      <h2 class="posters__title" id="posters-title">Posters design</h2>
+      <p class="posters__text">
+        <span data-i18n-en>A series of reimagined movie posters — each film reinterpreted through bold typography and raw graphic tension</span>
+        <span data-i18n-ru>Серия переосмысленных киноплакатов: каждый фильм заново рассказан через смелую типографику и сырое графическое напряжение</span>
+      </p>
+      <div class="posters__grid">
+        <button type="button" class="poster" data-slug="forrest-gump" aria-label="Forrest Gump"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="interstellar" aria-label="Interstellar"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="lupin" aria-label="Lupin"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="django-unchained" aria-label="Django Unchained"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="cherry" aria-label="Cherry"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="get-out" aria-label="Get Out"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="joker" aria-label="Joker"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="dunkirk" aria-label="Dunkirk"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="the-green-knight" aria-label="The Green Knight"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="the-social-network" aria-label="The Social Network"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="american-psycho" aria-label="American Psycho"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="oppenheimer" aria-label="Oppenheimer"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="terminator" aria-label="Terminator"><span class="poster__ph"></span></button>
+        <button type="button" class="poster" data-slug="the-shining" aria-label="The Shining"><span class="poster__ph"></span></button>
+      </div>
+      <p class="posters__hint">
+        <span data-i18n-en>Hover to spread, click to open</span>
+        <span data-i18n-ru>Наведи, чтобы раздвинуть, кликни, чтобы открыть</span>
+      </p>
+    </section>
+
+    <section id="more-works" class="gwork fade-in" aria-labelledby="gwork-title">
+      <h2 class="gwork__title" id="gwork-title"><span data-i18n-en>More works</span><span data-i18n-ru>Другие работы</span></h2>
+      <div class="gwork__grid">
+        <a href="gg-hub.html" class="gwork__item">
+          <div class="gwork__img"><img src="img/GG Hub cover.jpg" alt="Genius Growth Hub" width="944" height="514" loading="lazy" decoding="async" /></div>
+          <div class="gwork__name">Genius Growth Hub</div>
+          <div class="gwork__meta"><span data-i18n-en>Brand identity, 2025</span><span data-i18n-ru>Айдентика, 2025</span></div>
+        </a>
+        <a href="hollt-club.html" class="gwork__item">
+          <div class="gwork__img"><img src="img/Hollt Club cover.jpg" alt="Hollt Club" width="944" height="514" loading="lazy" decoding="async" /></div>
+          <div class="gwork__name">Hollt Club</div>
+          <div class="gwork__meta"><span data-i18n-en>Brand identity for a tennis club, 2024</span><span data-i18n-ru>Айдентика теннисного клуба, 2024</span></div>
+        </a>
+      </div>
+    </section>
+
+    <div class="poster-lightbox" id="poster-lightbox" role="dialog" aria-modal="true" aria-label="Poster preview" hidden>
+      <button type="button" class="poster-lightbox__close" aria-label="Close">✕</button>
+      <button type="button" class="poster-lightbox__nav poster-lightbox__nav--prev" aria-label="Previous poster"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button type="button" class="poster-lightbox__nav poster-lightbox__nav--next" aria-label="Next poster"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg></button>
+      <p class="poster-lightbox__title"></p>
+      <div class="poster-lightbox__frame"></div>
+    </div>
+
+    <div class="stack-demo fade-in">
+      <div class="stack">
+        <div class="stack__card stack__card--back-3"><img src="img/widget 1.webp" alt="Widget" loading="lazy" decoding="async" /></div>
+        <div class="stack__card stack__card--back-2"><img src="img/widget 3.webp" alt="Widget" loading="lazy" decoding="async" /></div>
+        <div class="stack__card stack__card--back-1"><img src="img/widget 2.webp" alt="Widget" loading="lazy" decoding="async" /></div>
+        <div class="stack__card stack__card--main"><img src="img/widget 4.webp" alt="Widget" loading="lazy" decoding="async" /></div>
+      </div>
+    </div>
+
+  </main>
+
+  <section class="all-work" id="all-work" aria-labelledby="all-work-title">
+    <div class="all-work__inner">
+      <h2 class="all-work__title" id="all-work-title"><span data-i18n-en>All work</span><span data-i18n-ru>Все работы</span></h2>
+      <div class="all-work__grid">
+        <a class="all-work__tile" href="trady.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--logo-wide"><img src="img/Trady Logo.svg" alt="" loading="lazy" /></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Trady</div><div class="all-work__cat"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></div></div>
+        </a>
+        <a class="all-work__tile" href="#project-trady-landing">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--icon"><svg class="aw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="4" width="19" height="16" rx="3"/><path d="M2.5 9h19M6 6.5h.01M8.5 6.5h.01M6 13h8M6 16h5"/></svg></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Trady Landing</div><div class="all-work__cat"><span data-i18n-en>Landing page</span><span data-i18n-ru>Лендинг</span></div></div>
+        </a>
+        <a class="all-work__tile" href="polyranger.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--icon"><svg class="aw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z"/></svg></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Polyranger</div><div class="all-work__cat"><span data-i18n-en>Prediction markets</span><span data-i18n-ru>Рынки предсказаний</span></div></div>
+        </a>
+        <a class="all-work__tile" href="#project-big-board">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--photo"><img src="img/all-work/big-board-icon.jpg" alt="" loading="lazy" /></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Big Board</div><div class="all-work__cat"><span data-i18n-en>NFT collection</span><span data-i18n-ru>NFT-коллекция</span></div></div>
+        </a>
+        <a class="all-work__tile" href="c3tch.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--logo"><img src="img/c3tch logo.svg" alt="" loading="lazy" /></span></div>
+          <div class="all-work__meta"><div class="all-work__name">C3tch</div><div class="all-work__cat"><span data-i18n-en>Web3 networking</span><span data-i18n-ru>Web3-нетворкинг</span></div></div>
+        </a>
+        <a class="all-work__tile" href="ftlb.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--icon"><svg class="aw-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="3"/><path d="M10.5 5.5h3M9.5 10h5M9.5 13h5M9.5 16h3"/></svg></span></div>
+          <div class="all-work__meta"><div class="all-work__name">FTLB</div><div class="all-work__cat"><span data-i18n-en>Mobile UI</span><span data-i18n-ru>Мобильный UI</span></div></div>
+        </a>
+        <a class="all-work__tile" href="shiro.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--logo-sm"><img src="img/Shiro Logo.svg" alt="" loading="lazy" /></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Shiro</div><div class="all-work__cat"><span data-i18n-en>AI character</span><span data-i18n-ru>AI-персонаж</span></div></div>
+        </a>
+        <a class="all-work__tile" href="cryptorsy.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--logo-sm"><img src="img/Cryptorsy Logo.svg" alt="" loading="lazy" /></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Cryptorsy</div><div class="all-work__cat"><span data-i18n-en>Brand & content</span><span data-i18n-ru>Бренд и контент</span></div></div>
+        </a>
+        <a class="all-work__tile" href="#posters">
+          <div class="all-work__img"><span class="all-work__mark all-work__fan"><img src="img/posters/thumbs/american-psycho.webp" alt="" loading="lazy" /><img src="img/posters/thumbs/cherry.webp" alt="" loading="lazy" /><img src="img/posters/thumbs/dunkirk.webp" alt="" loading="lazy" /></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Posters design</div><div class="all-work__cat"><span data-i18n-en>Poster series</span><span data-i18n-ru>Серия постеров</span></div></div>
+        </a>
+        <a class="all-work__tile" href="gg-hub.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--gg"><svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="24" r="14" fill="none" stroke="#ee4d23" stroke-width="12"/><path d="M8 62 L32 38 L82 54 L96 38 M60 54 V96" fill="none" stroke="#ee4d23" stroke-width="12" stroke-linejoin="miter"/></svg></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Genius Growth Hub</div><div class="all-work__cat"><span data-i18n-en>Brand identity</span><span data-i18n-ru>Айдентика</span></div></div>
+        </a>
+        <a class="all-work__tile" href="hollt-club.html">
+          <div class="all-work__img"><span class="all-work__mark all-work__mark--ball"></span></div>
+          <div class="all-work__meta"><div class="all-work__name">Hollt Club</div><div class="all-work__cat"><span data-i18n-en>Brand identity</span><span data-i18n-ru>Айдентика</span></div></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-root"></div>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/posters-fan.js" defer></script>
+  <script src="js/about-reveal.js" defer></script>
+  <script src="js/project-strip.js" defer></script>
+  <script src="js/all-work.js" defer></script>
+
+</body>
+</html>

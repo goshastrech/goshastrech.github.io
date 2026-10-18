@@ -1,0 +1,128 @@
+/* ============================================================
+   Лента быстрой навигации по проектам (между «Обо мне» и «My stack»).
+   Figma-аналогия: горизонтальный auto-layout с клипом и маской-градиентом
+   по краям (как layer mask на фрейме).
+   Лента сама едет справа налево (бегущая строка). Без JS и при
+   «уменьшить движение» — обычная горизонтальная прокрутка.
+   Подкрутить: --ps-speed (время одного круга: больше = медленнее),
+   --ps-card-w (ширина карточки), --ps-fade (ширина растворения),
+   --ps-gap (расстояние между карточками), padding у .project-strip.
+   ============================================================ */
+.project-strip {
+  --ps-card-w: 320px;
+  --ps-fade: 96px;
+  --ps-gap: 20px;
+  --ps-speed: 46s;           /* время одного полного круга из 10 карточек (меньше = быстрее) */
+  position: relative;
+  width: 100%;
+  margin: 90px 0 200px;      /* сверху ~210px после «Обо мне», снизу +150px до заголовка первого проекта (блока My stack больше нет) */
+  padding: 0;
+}
+.project-strip__nav {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+  padding: 14px 0 26px;      /* запас под подъём и тень */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--ps-fade), #000 calc(100% - var(--ps-fade)), transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0, #000 var(--ps-fade), #000 calc(100% - var(--ps-fade)), transparent 100%);
+}
+.project-strip__nav::-webkit-scrollbar { display: none; }
+
+.project-strip__list {
+  display: flex;
+  gap: var(--ps-gap);
+  width: max-content;
+  margin: 0;
+  /* слева лента стартует от края колонки 1020px, справа запас: последняя карточка доскролливается до центра */
+  padding: 0 max(var(--ps-fade), calc(50vw - var(--ps-card-w) / 2)) 0 max(var(--ps-fade), calc(50vw - 510px));
+  list-style: none;
+}
+.project-strip__list li { flex: 0 0 var(--ps-card-w); scroll-snap-align: center; }
+
+.project-strip__card {
+  display: block;
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 12px;
+  -webkit-user-drag: none;
+  user-select: none;
+  transition: transform .25s cubic-bezier(.2,.7,.2,1);
+}
+.project-strip__thumb {
+  display: block;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  transition: box-shadow .25s ease, border-color .25s ease;
+}
+.project-strip__thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  -webkit-user-drag: none;
+  transition: transform .4s cubic-bezier(.2,.7,.2,1);
+}
+.project-strip__name {
+  display: block;
+  margin-top: 12px;
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: var(--text);
+}
+.project-strip__meta {
+  display: block;
+  margin-top: 2px;
+  font-size: 15px;
+  line-height: 1.3;
+  color: var(--text-2);
+}
+
+@media (hover: hover) {
+  .project-strip__card:hover { transform: translateY(-3px); }
+  .project-strip__card:hover .project-strip__thumb { box-shadow: 0 10px 24px rgba(10,10,10,.10); border-color: #d6d6d6; }
+  .project-strip__card:hover .project-strip__thumb img { transform: scale(1.04); }
+}
+.project-strip__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+
+/* якоря блоков, у которых нет своего scroll-margin (шапка sticky) */
+#posters, #more-works { scroll-margin-top: 110px; }
+
+@media (max-width: 640px) {
+  .project-strip { --ps-card-w: 240px; --ps-fade: 48px; --ps-gap: 16px; margin-top: 50px; margin-bottom: 130px; }
+  .project-strip__name { font-size: 16px; }
+  .project-strip__meta { font-size: 14px; }
+}
+
+/* ---------- Бегущая лента: класс is-marquee ставит JS (и снимает при reduced-motion) ----------
+   Внутри list лежат 2 одинаковых набора карточек; сдвиг на -50% = ровно один набор,
+   поэтому кадр в конце цикла совпадает с кадром в начале (без скачка).
+   Отступ — margin-right у li (а не gap), чтобы половина ширины была точной. */
+.project-strip__nav.is-marquee { overflow: hidden; scroll-snap-type: none; }
+.is-marquee .project-strip__list {
+  gap: 0;
+  padding: 0;
+  will-change: transform;
+  animation: ps-marquee var(--ps-speed) linear infinite;
+}
+.is-marquee .project-strip__list li { margin-right: var(--ps-gap); scroll-snap-align: none; }
+@keyframes ps-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+/* замедление при наведении/фокусе/касании делает js/project-strip.js (плавно меняет скорость, лента не останавливается) */
+
+@media (prefers-reduced-motion: reduce) {
+  .project-strip__card,
+  .project-strip__thumb,
+  .project-strip__thumb img { transition: none; }
+  .project-strip__card:hover { transform: none; }
+  .project-strip__card:hover .project-strip__thumb img { transform: none; }
+}
