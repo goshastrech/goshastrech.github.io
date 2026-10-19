@@ -1323,6 +1323,29 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .team__avatar:first-child { margin-left: 0; }
 
+/* аватары команды: размытые портреты (стоковые фото Pexels, сильно размыты), 8 вариантов по кругу */
+.team__avatar { background-size: cover; background-position: center; }
+.team__group:nth-child(1) .team__avatar:nth-child(1) { background-image: url('../img/team/p1.webp'); }
+.team__group:nth-child(1) .team__avatar:nth-child(2) { background-image: url('../img/team/p2.webp'); }
+.team__group:nth-child(1) .team__avatar:nth-child(3) { background-image: url('../img/team/p3.webp'); }
+.team__group:nth-child(1) .team__avatar:nth-child(4) { background-image: url('../img/team/p4.webp'); }
+.team__group:nth-child(1) .team__avatar:nth-child(5) { background-image: url('../img/team/p5.webp'); }
+.team__group:nth-child(2) .team__avatar:nth-child(1) { background-image: url('../img/team/p2.webp'); }
+.team__group:nth-child(2) .team__avatar:nth-child(2) { background-image: url('../img/team/p3.webp'); }
+.team__group:nth-child(2) .team__avatar:nth-child(3) { background-image: url('../img/team/p4.webp'); }
+.team__group:nth-child(2) .team__avatar:nth-child(4) { background-image: url('../img/team/p5.webp'); }
+.team__group:nth-child(2) .team__avatar:nth-child(5) { background-image: url('../img/team/p6.webp'); }
+.team__group:nth-child(3) .team__avatar:nth-child(1) { background-image: url('../img/team/p6.webp'); }
+.team__group:nth-child(3) .team__avatar:nth-child(2) { background-image: url('../img/team/p7.webp'); }
+.team__group:nth-child(3) .team__avatar:nth-child(3) { background-image: url('../img/team/p8.webp'); }
+.team__group:nth-child(3) .team__avatar:nth-child(4) { background-image: url('../img/team/p1.webp'); }
+.team__group:nth-child(3) .team__avatar:nth-child(5) { background-image: url('../img/team/p2.webp'); }
+.team__group:nth-child(4) .team__avatar:nth-child(1) { background-image: url('../img/team/p7.webp'); }
+.team__group:nth-child(4) .team__avatar:nth-child(2) { background-image: url('../img/team/p8.webp'); }
+.team__group:nth-child(4) .team__avatar:nth-child(3) { background-image: url('../img/team/p1.webp'); }
+.team__group:nth-child(4) .team__avatar:nth-child(4) { background-image: url('../img/team/p2.webp'); }
+.team__group:nth-child(4) .team__avatar:nth-child(5) { background-image: url('../img/team/p3.webp'); }
+
 .team__role {
   font-size: 13px;
   font-weight: 600;
@@ -1710,14 +1733,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .compare-caption {
-  font-size: 13px;
+  /* обычный текст, как под заголовками блоков (без серой плашки и рамки) */
+  font-size: 19px;
   color: var(--text-2);
-  line-height: 1.7;
-  padding: 16px 20px;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 56px;
+  line-height: 1.6;
+  margin: 20px 0 56px;
 }
 
 .compare-caption strong {
@@ -1745,6 +1765,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   background: linear-gradient(135deg, #dcdcdc 0%, #ececec 100%);
   flex-shrink: 0;
 }
+
+/* аватары персонажей Polyranger: размытые стоковые портреты (Pexels) */
+.persona-card__avatar { background-size: cover; background-position: center; }
+.persona-card--trader .persona-card__avatar { background-image: url('../img/team/p3.webp'); }
+.persona-card--newcomer .persona-card__avatar { background-image: url('../img/team/p6.webp'); }
 
 .persona-card__name {
   font-size: 16px;
@@ -2636,3 +2661,47 @@ button.iphone:focus-visible {
     border-radius: 0;
   }
 }
+
+
+/* Баннеры проектов на главной — ссылки на страницу проекта: при наведении приподнимаются, картинка/видео чуть увеличиваются */
+a.card { color: inherit; text-decoration: none; }
+a.card .card__image {
+  box-shadow: 0 0 0 1px #e3e3e8;   /* тонкая серая обводка: отделяет светлые баннеры от белого фона, без тени */
+  transition: transform 0.45s cubic-bezier(.2,.7,.2,1);
+}
+a.card .card__image img,
+a.card .card__image video { transition: transform 0.6s cubic-bezier(.2,.7,.2,1); }
+a.card:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
+@media (hover: hover) {
+  a.card:hover .card__image { transform: translateY(-8px) scale(1.03); }
+  a.card:hover .card__image img,
+  a.card:hover .card__image video { transform: scale(1.06); }
+}
+@media (prefers-reduced-motion: reduce) {
+  a.card .card__image, a.card .card__image img, a.card .card__image video { transition: none; }
+  a.card:hover .card__image, a.card:hover .card__image img, a.card:hover .card__image video { transform: none; }
+}
+
+/* Курсор-«палец» на всём, что ведёт на другую страницу или нажимается (ссылки, кнопки, баннеры, карточки ленты).
+   Экраны с увеличением по клику остаются с курсором-лупой (zoom-in), «Скоро» и заблокированное — обычной стрелкой. */
+a[href],
+button:not(:disabled),
+[role="button"]:not([aria-disabled="true"]),
+.lang-toggle,
+.project-btn:not(.project-btn--soon),
+.project-badge--link,
+a.card,
+.project-strip__card,
+.case__back,
+.case__pitch,
+.about-link,
+.header__right a,
+.header__name,
+.footer a {
+  cursor: pointer;
+}
+button.shot, button.poster, button.iphone, .phone[data-lb-group], .shot, .poster { cursor: zoom-in; }
+.project-btn--soon, [aria-disabled="true"] { cursor: default; }
+
+/* C3tch на главной теперь видео 16:9 — ширина как у остальных видео-баннеров */
+.card--c3tch .card__image:has(video) { width: 940px; }

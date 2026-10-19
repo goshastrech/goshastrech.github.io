@@ -34,19 +34,19 @@
 /* значок-«стикер» 20px: центр значка = середина строчных букв (низ значка = .3em - 10px от базовой линии) */
 .about-me .about-sticker {
   display: inline-block;
-  width: 20px;
-  height: 20px;
-  border-radius: 5px;
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
   object-fit: cover;
-  vertical-align: calc(.3em - 10px);
+  vertical-align: calc(.3em - 13px);
   margin: 0 .3em 0 .06em;
 }
 /* векторные значки стека (Figma / Adobe / Claude): та же посадка и размер */
 .about-me .about-badge {
   display: inline-block;
-  height: 20px;
+  height: 26px;
   width: auto;
-  vertical-align: calc(.3em - 10px);
+  vertical-align: calc(.3em - 13px);
   margin: 0 .3em 0 .06em;
 }
 
@@ -83,3 +83,6 @@
 @media (prefers-reduced-motion: reduce) {
   .about-me .about-link { transition: none; }
 }
+
+/* широкий знак Polyranger с официального сайта: по высоте чуть больше, ширина по пропорции */
+.about-me .about-sticker--wide { width: auto; height: 25px; border-radius: 0; object-fit: contain; vertical-align: calc(.3em - 12px); }

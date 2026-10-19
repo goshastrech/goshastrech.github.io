@@ -58,7 +58,17 @@
       img.src = source;
       img.alt = item.dataset.lbTitle || '';
     }
-    frame.replaceChildren(img);
+    // длинный мобильный экран (C3tch): корпус iPhone фиксированной высоты, экран внутри листается
+    const scrollPhone = item.dataset.lbGroup === 'c3tch-mobile';
+    if (scrollPhone) {
+      const screen = document.createElement('div');
+      screen.className = 'lb-phone-screen';
+      screen.appendChild(img);
+      frame.replaceChildren(screen);
+    } else {
+      frame.replaceChildren(img);
+    }
+    frame.classList.toggle('is-scrollphone', scrollPhone);
     frame.classList.toggle('is-phone', item.classList.contains('iphone')); // экран телефона открываем в корпусе iPhone
     frame.classList.toggle('iphone--notch', item.classList.contains('iphone--notch'));
     frame.classList.toggle('iphone--light', item.classList.contains('iphone--light'));

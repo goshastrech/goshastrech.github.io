@@ -1,0 +1,110 @@
+/* C3tch: просмотр экранов на весь размер.
+   Экраны длинные (мобильные до ~2500px), поэтому в лайтбоксе они не сжимаются до высоты окна,
+   а показываются в нормальную ширину и прокручиваются внутри рамки. */
+.poster-lightbox__frame:has(img[src*="/desktop-"]) {
+  aspect-ratio: auto;
+  width: min(calc(100vw - 48px), 1100px);
+  overflow-y: auto;
+}
+.poster-lightbox__frame:has(img[src*="/mobile-"]) {
+  aspect-ratio: auto;
+  width: min(calc(100vw - 48px), 400px);
+  overflow-y: auto;
+}
+.poster-lightbox__frame img[src*="/desktop-"],
+.poster-lightbox__frame img[src*="/mobile-"] {
+  width: 100%;
+  max-width: none;
+  max-height: none;
+}
+
+/* Десктопные экраны: по одному в ряд, во всю ширину колонки, полной высоты */
+.c3tch-desktop {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 32px 16px;   /* 2 в ряд, как на странице Trady */
+}
+@media (max-width: 640px) { .c3tch-desktop { grid-template-columns: 1fr; } }
+.c3tch-desktop .shot:hover { transform: none; }
+
+/* Мобильные экраны: корпус iPhone из css/ftlb-phones.css (тот же, что на FTLB).
+   Экран листается внутри корпуса; клик открывает экран крупно. */
+.phones .phone { cursor: zoom-in; }
+.phones .phone:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+/* На FTLB сверху висит неподвижная шапка (статус-бар); у C3tch в макетах её нет, поэтому она не нужна */
+.phones .phone__screen { overscroll-behavior: auto; }
+
+/* 2 в ряд на планшете и телефоне (на FTLB на телефоне там карусель, здесь сетка) */
+@media (max-width: 640px) {
+  .phones {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    scroll-snap-type: none;
+    gap: 24px 12px;
+  }
+  .phones .phone-item { flex: 0 0 calc((100% - 12px) / 2); scroll-snap-align: none; }
+}
+
+/* Десктопные экраны в карточке-кадре 1440×1024 (как фрейм в Figma): видна верхняя часть экрана,
+   а полный экран открывается в лайтбоксе по клику */
+.c3tch-desktop .shot img {
+  aspect-ratio: 1440 / 1024;
+  height: auto;
+  object-fit: cover;
+  object-position: top center;
+}
+
+/* Герой: сплошной красный фон бренда и белый кролик по центру */
+.case__hero--brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 460px;
+  background: #FE2425;
+  border: 0;
+}
+.case__hero--brand img { width: 150px; height: 150px; display: block; }
+@media (max-width: 640px) { .case__hero--brand { height: 260px; } .case__hero--brand img { width: 96px; height: 96px; } }
+
+/* Мобильный экран в просмотре: корпус iPhone с островком, внутри экран листается (как в сетке) */
+.poster-lightbox__frame.is-scrollphone {
+  position: relative;
+  box-sizing: border-box;
+  width: min(calc(100vw - 48px), 400px);
+  height: min(calc(86vh - 44px), 860px);
+  aspect-ratio: auto;
+  padding: 10px;
+  background: var(--text);
+  border-radius: 48px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+  overflow: hidden;
+}
+.poster-lightbox__frame.is-scrollphone .lb-phone-screen {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-radius: 38px;
+  background: #fff;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+}
+.poster-lightbox__frame.is-scrollphone .lb-phone-screen::-webkit-scrollbar { display: none; }
+.poster-lightbox__frame.is-scrollphone img {
+  display: block;
+  width: 100%;
+  max-width: none;
+  max-height: none;
+  height: auto;
+}
+.poster-lightbox__frame.is-scrollphone::after {
+  content: "";
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 26%;
+  height: 22px;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #000;
+  pointer-events: none;
+}
