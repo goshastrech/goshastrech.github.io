@@ -67,12 +67,18 @@
       img.alt = titleOf(item);
     }
     // длинный мобильный экран (C3tch): корпус iPhone фиксированной высоты, экран внутри листается
-    const scrollPhone = item.dataset.lbGroup === 'c3tch-mobile';
+    const scrollPhone = item.dataset.lbGroup === 'c3tch-mobile' || item.dataset.lbGroup === 'ftlb';
     if (scrollPhone) {
       const screen = document.createElement('div');
       screen.className = 'lb-phone-screen';
       screen.appendChild(img);
       frame.replaceChildren(screen);
+      // экран с попапом открываем сразу на попапе (data-lb-focus = доля высоты картинки, где его центр), без ручной прокрутки
+      const focus = parseFloat(item.dataset.lbFocus);
+      if (focus > 0) {
+        const applyFocus = () => { screen.scrollTop = Math.max(0, focus * img.clientHeight - screen.clientHeight / 2); };
+        if (img.complete && img.naturalHeight) requestAnimationFrame(applyFocus); else img.addEventListener('load', () => requestAnimationFrame(applyFocus), { once: true });
+      }
     } else {
       frame.replaceChildren(img);
     }
@@ -85,15 +91,8 @@
     frame.classList.toggle('iphone--dark', item.classList.contains('iphone--dark'));
     titleEl.textContent = titleOf(item);
     lb.setAttribute('aria-label', titleOf(item) || 'Screen preview');
-    // альбомная картинка на планшете/телефоне: окно прокручивается по горизонтали (стили в css)
+    // широкие картинки показываем целиком в своих пропорциях: без обрезки и внутренней прокрутки
     frame.classList.remove('is-wide');
-    const special = scrollPhone || frame.classList.contains('is-clip') || frame.classList.contains('is-banner') || frame.classList.contains('is-phone');
-    if (img.tagName === 'IMG' && !special) {
-      const markWide = () => {
-        if (frame.contains(img) && mqTablet.matches && img.naturalHeight && img.naturalWidth / img.naturalHeight > 1.2) frame.classList.add('is-wide');
-      };
-      if (img.complete) markWide(); else img.addEventListener('load', markWide, { once: true });
-    }
     syncWidth(img);
   };
 
@@ -109,7 +108,7 @@
   const close = () => {
     lb.classList.remove('is-open');
     document.body.style.overflow = '';
-    setTimeout(() => { lb.hidden = true; frame.replaceChildren(); }, 250);
+    setTimeout(() => { lb.hidden = true; frame.replaceChildren(); }, 300);
     if (opener && document.contains(opener)) opener.focus(); else group[current].focus();
   };
 

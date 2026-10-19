@@ -322,3 +322,53 @@ if (loopAnimEls.length && 'IntersectionObserver' in window) {
   });
   loopAnimEls.forEach((el) => animObserver.observe(el));
 }
+
+// Пока открыт просмотр (лайтбокс), колесо мыши и свайп не прокручивают страницу за ним.
+// Исключение: внутри самого окна можно прокручивать широкую картинку или экран телефона.
+(function () {
+  function blocked(e) {
+    var box = document.querySelector('.poster-lightbox:not([hidden])');
+    if (!box || !box.contains(e.target)) return false;
+    return !e.target.closest('.is-wide, .is-scrollphone, .lb-phone-screen');
+  }
+  ['wheel', 'touchmove'].forEach(function (type) {
+    document.addEventListener(type, function (e) { if (blocked(e)) e.preventDefault(); }, { passive: false });
+  });
+})();
+
+// «Другие проекты»: лента по кругу. Стрелки листают на одну карточку, на краю перескакивают в другой конец
+// (на любом проекте можно дойти до всех остальных в обе стороны); мышью ленту можно тянуть, на телефоне — свайп.
+(function () {
+  var box = document.querySelector('.more-projects');
+  if (!box) return;
+  var track = box.querySelector('.more-projects__track');
+  var prev = box.querySelector('[data-dir="-1"]'), next = box.querySelector('[data-dir="1"]');
+  function step() { var c = track.querySelector('.more-projects__card'); return c ? c.getBoundingClientRect().width + 20 : 300; }
+  function maxLeft() { return track.scrollWidth - track.clientWidth; }
+  function go(dir) {
+    var x = track.scrollLeft, max = maxLeft();
+    if (dir > 0 && x >= max - 4) { track.scrollTo({ left: 0, behavior: 'smooth' }); return; }
+    if (dir < 0 && x <= 4) { track.scrollTo({ left: max, behavior: 'smooth' }); return; }
+    track.scrollBy({ left: step() * dir, behavior: 'smooth' });
+  }
+  [prev, next].forEach(function (b) { b.addEventListener('click', function () { go(+b.dataset.dir); }); });
+  // перетаскивание мышью (на тач-экранах работает обычная прокрутка пальцем)
+  var down = false, startX = 0, startLeft = 0, moved = false;
+  track.addEventListener('pointerdown', function (e) {
+    if (e.pointerType !== 'mouse') return;
+    down = true; moved = false; startX = e.clientX; startLeft = track.scrollLeft;
+  });
+  window.addEventListener('pointermove', function (e) {
+    if (!down) return;
+    var dx = e.clientX - startX;
+    if (Math.abs(dx) > 4) { moved = true; track.classList.add('is-dragging'); }
+    if (moved) track.scrollLeft = startLeft - dx;
+  });
+  window.addEventListener('pointerup', function () {
+    if (!down) return;
+    down = false; track.classList.remove('is-dragging');
+    if (moved) { var snap = Math.round(track.scrollLeft / step()) * step(); track.scrollTo({ left: snap, behavior: 'smooth' }); }
+  });
+  track.addEventListener('click', function (e) { if (moved) { e.preventDefault(); e.stopPropagation(); moved = false; } }, true);
+  track.addEventListener('dragstart', function (e) { e.preventDefault(); });
+})();

@@ -134,3 +134,13 @@ a.cv-row__name:hover { color:var(--orange); text-decoration-color:currentColor; 
 /* все превью проектов одного размера: рамка 16:9, картинка заполняет её */
 .cv-preview { aspect-ratio: 16 / 9; }
 .cv-preview img { height: 100%; max-height: none; object-fit: cover; }
+
+/* верх резюме — в стиле блока «Обо мне»: маленькое фото-круг и имя 26px в одну строку, иконки справа, роль серой строкой ниже */
+.cv-who { align-items: center; gap: 14px; margin-bottom: 20px; }
+.cv-avatar { width: 44px; height: 44px; max-height: none; align-self: center; aspect-ratio: 1; }
+.cv-who .case__title { font-size: 26px; font-weight: 600; letter-spacing: -.03em; line-height: 1.2; }
+.cv-who__text { display: block; }
+.cv-who .cv-head { align-items: center; margin: 0; }
+.cv-role { font-size: 19px; margin: 0 0 12px; }
+@media (max-width:640px){ .cv-avatar { width: 38px; height: 38px; } .cv-who .case__title { font-size: 20px; } .cv-role { font-size: 17px; } }
+.cv-who { margin-bottom: 24px; }

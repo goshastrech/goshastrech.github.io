@@ -42,12 +42,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Наши стили -->
-  <link rel="stylesheet" href="css/styles.css?v=3" />
+  <link rel="stylesheet" href="css/styles.css?v=36" />
   <!-- Небо первого экрана (стили лежат отдельно, styles.css не тронут) -->
   <link rel="stylesheet" href="css/sky-hero.css" />
   <link rel="stylesheet" href="css/hero-plain.css" />
   <link rel="stylesheet" href="css/hero-intro.css" />
-  <link rel="stylesheet" href="css/header-transparent.css" />
+  <link rel="stylesheet" href="css/header-transparent.css?v=2" />
   <link rel="stylesheet" href="css/about-reveal.css" />
   <link rel="stylesheet" href="css/about-links.css?v=4" />
   <link rel="stylesheet" href="css/posters-fan.css?v=3" />
@@ -56,8 +56,8 @@
   <link rel="stylesheet" href="css/all-work.css" />
   <style>
     /* вариант без первого экрана: страница начинается с текста «Обо мне» */
-    .about-me { padding-top: 150px !important; }
-    @media (max-width: 640px) { .about-me { padding-top: 110px !important; } }
+    .about-me { padding-top: 80px !important; }   /* текст стоит выше: меньше пустоты под шапкой */
+    @media (max-width: 640px) { .about-me { padding-top: 56px !important; } }
     .about-id { display:flex; align-items:center; gap:14px; margin-bottom:44px; }
     .about-id__photo { flex:none; width:44px; height:44px; border-radius:50%; object-fit:cover; display:block; }
     .about-id__line { font-size:26px; letter-spacing:-.03em; line-height:1.2; white-space:nowrap; }
@@ -87,8 +87,8 @@
         <span data-i18n-ru><span class="g">Я</span> <span class="k">продуктовый и&nbsp;визуальный дизайнер,</span> <span class="g">работаю в</span> <span class="k">Web3, крипте и&nbsp;финтехе.</span> <span class="g">Веду продукт от&nbsp;начала до&nbsp;конца: от&nbsp;исследований и&nbsp;UX до</span> <span class="k">дизайн-систем и&nbsp;интерфейсов для&nbsp;веба и&nbsp;iOS.</span></span>
       </p>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">My work ranges from</span> <span class="k">the trading terminal</span> <span class="nbk"><a class="about-link" href="trady.html" data-preview="trady"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a></span> <span class="g">and</span> <span class="k">the prediction-market aggregator</span> <span class="nbk"><a class="about-link" href="polyranger.html" data-preview="polyranger"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">PolyRanger</a></span> <span class="g">to</span> <span class="k">the NFT platform</span> <span class="nbk"><a class="about-link" href="ftlb.html" data-preview="ftlb">FTLB</a></span><span class="g">,</span> <span class="k">the NFT collection</span> <span class="nbk"><a class="about-link" href="index.html#project-big-board" data-preview="big-board">Big Board</a></span><span class="g">,</span> <span class="k">the networking app</span> <span class="nbk"><a class="about-link" href="c3tch.html" data-preview="c3tch"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a></span> <span class="g">and</span> <span class="k">brand identities</span> <span class="g">for</span> <span class="nbk"><a class="about-link" href="shiro.html" data-preview="shiro"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a></span> <span class="g">and</span> <span class="nbk"><a class="about-link" href="cryptorsy.html" data-preview="cryptorsy"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a></span><span class="g">.</span> <span class="g">Dense data, mixed audiences and complex flows are the kinds of problems I like to</span> <span class="k">untangle.</span></span>
-        <span data-i18n-ru><span class="g">В моей работе есть</span> <span class="k">торговый терминал</span> <span class="nbk"><a class="about-link" href="trady.html" data-preview="trady"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a></span><span class="g">,</span> <span class="k">агрегатор рынков предсказаний</span> <span class="nbk"><a class="about-link" href="polyranger.html" data-preview="polyranger"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">PolyRanger</a></span><span class="g">,</span> <span class="k">NFT-платформа</span> <span class="nbk"><a class="about-link" href="ftlb.html" data-preview="ftlb">FTLB</a></span><span class="g">,</span> <span class="k">NFT-коллекция</span> <span class="nbk"><a class="about-link" href="index.html#project-big-board" data-preview="big-board">Big Board</a></span><span class="g">,</span> <span class="k">нетворкинг-приложение</span> <span class="nbk"><a class="about-link" href="c3tch.html" data-preview="c3tch"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a></span><span class="g">, а&nbsp;также</span> <span class="k">айдентика</span> <span class="g">для</span> <span class="nbk"><a class="about-link" href="shiro.html" data-preview="shiro"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a></span> <span class="g">и</span> <span class="nbk"><a class="about-link" href="cryptorsy.html" data-preview="cryptorsy"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a></span><span class="g">.</span> <span class="g">Плотные данные, разная аудитория и&nbsp;сложные сценарии — именно те задачи, которые я люблю</span> <span class="k">распутывать.</span></span>
+        <span data-i18n-en><span class="g">My portfolio includes</span> <span class="k">the trading terminal</span> <span class="nbk"><a class="about-link" href="trady.html" data-preview="trady"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a></span><span class="g">,</span> <span class="k">the prediction-market aggregator</span> <span class="nbk"><a class="about-link" href="polyranger.html" data-preview="polyranger"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">PolyRanger</a></span><span class="g">,</span> <span class="k">the NFT platform</span> <span class="nbk"><a class="about-link" href="ftlb.html" data-preview="ftlb">FTLB</a></span><span class="g">,</span> <span class="k">the NFT collection</span> <span class="nbk"><a class="about-link" href="index.html#project-big-board" data-preview="big-board">Big Board</a></span><span class="g">,</span> <span class="k">the networking app</span> <span class="nbk"><a class="about-link" href="c3tch.html" data-preview="c3tch"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a></span><span class="g">, as&nbsp;well as</span> <span class="k">AI-assisted character design</span> <span class="g">for</span> <span class="nbk"><a class="about-link" href="shiro.html" data-preview="shiro"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a></span> <span class="g">and</span> <span class="k">brand identity</span> <span class="g">for</span> <span class="nbk"><a class="about-link" href="cryptorsy.html" data-preview="cryptorsy"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a></span><span class="g">.</span></span>
+        <span data-i18n-ru><span class="g">В&nbsp;моём портфолио есть</span> <span class="k">торговый терминал</span> <span class="nbk"><a class="about-link" href="trady.html" data-preview="trady"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a></span><span class="g">,</span> <span class="k">агрегатор рынков предсказаний</span> <span class="nbk"><a class="about-link" href="polyranger.html" data-preview="polyranger"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">PolyRanger</a></span><span class="g">,</span> <span class="k">NFT-платформа</span> <span class="nbk"><a class="about-link" href="ftlb.html" data-preview="ftlb">FTLB</a></span><span class="g">,</span> <span class="k">NFT-коллекция</span> <span class="nbk"><a class="about-link" href="index.html#project-big-board" data-preview="big-board">Big Board</a></span><span class="g">,</span> <span class="k">нетворкинг-приложение</span> <span class="nbk"><a class="about-link" href="c3tch.html" data-preview="c3tch"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a></span><span class="g">, а&nbsp;также</span> <span class="k">разработка персонажа с&nbsp;помощью AI</span> <span class="g">для</span> <span class="nbk"><a class="about-link" href="shiro.html" data-preview="shiro"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a></span> <span class="g">и</span> <span class="k">айдентика</span> <span class="g">для</span> <span class="nbk"><a class="about-link" href="cryptorsy.html" data-preview="cryptorsy"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a></span><span class="g">.</span></span>
       </p>
       
       <p class="about-me__big">
@@ -122,18 +122,23 @@
   <div id="project-trady" class="project-heading fade-in">
     <img src="img/Trady Logo.svg" alt="Trady" class="project-heading__logo" width="123" height="35" loading="lazy" decoding="async" />
     <p class="project-heading__subtitle">
-      <span data-i18n-en>Decentralized trading terminal. Design system, trading interface, cross-chain platform, video production</span>
-      <span data-i18n-ru>Децентрализованный торговый терминал. Дизайн&#8209;система, торговый интерфейс, кроссчейн&#8209;платформа, создание видео</span>
+      <span data-i18n-en>Memecoin trading terminal. Design system, trading interface, cross-chain platform, video production</span>
+      <span data-i18n-ru>Торговый терминал для мемкоинов. Дизайн&#8209;система, торговый интерфейс, кроссчейн&#8209;платформа, создание видео</span>
       <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
+          <a href="https://trady.xyz/" target="_blank" rel="noopener" class="metrics-badge__line metrics-badge__line--live"><span data-i18n-en>Live Project</span><span data-i18n-ru>Проект в продакшене</span></a>
           <span class="metrics-badge__line"><span data-i18n-en>Web terminal + iOS app</span><span data-i18n-ru>Веб-терминал и iOS-приложение</span></span>
           <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>24 core screens: 12 web, 12 iOS</span><span data-i18n-ru>24 ключевых экрана: 12 веб, 12 iOS</span></span>
           <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>Pitch deck &amp; video</span><span data-i18n-ru>Питч-дек и видео</span></span>
       </span></span></p>
-    <a href="trady.html" class="project-badge project-badge--link"><span data-i18n-en>View Project</span><span data-i18n-ru>Смотреть проект</span></a>
+    <a href="trady.html" class="project-btn">
+        <span data-i18n-en>View Project</span>
+        <span data-i18n-ru>Смотреть проект</span>
+        <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+      </a>
 
     <div class="project-heading__role">
       <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
-      <span class="case__role-value"><span data-i18n-en>Product Designer</span><span data-i18n-ru>Product Designer</span></span>
+      <span class="case__role-value"><span data-i18n-en>Product Designer</span><span data-i18n-ru>Продуктовый дизайнер</span></span>
     </div>
   </div>
 
@@ -152,14 +157,14 @@
         <span data-i18n-ru>Агрегатор рынков предсказаний. Дизайн&#8209;система, торговый интерфейс, мультиплатформенность</span>
         <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
           <a href="https://polyranger.com/" target="_blank" rel="noopener" class="metrics-badge__line metrics-badge__line--live"><span data-i18n-en>Live Project</span><span data-i18n-ru>Проект в продакшене</span></a>
-          <span class="metrics-badge__line"><span data-i18n-en>36 screens in the case</span><span data-i18n-ru>36 экранов в кейсе</span></span>
+          <span class="metrics-badge__line"><span data-i18n-en>15 screens in the case</span><span data-i18n-ru>15 экранов в кейсе</span></span>
           <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>Desktop &amp; mobile</span><span data-i18n-ru>Десктоп и мобайл</span></span>
           <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>2 themes — light &amp; dark</span><span data-i18n-ru>2 темы — светлая и тёмная</span></span>
         </span></span></p>
 
       <div class="project-heading__role">
         <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
-        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI Designer</span></span>
+        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI&#8209;дизайнер</span></span>
       </div>
 
       <a href="polyranger.html" class="project-btn">
@@ -185,7 +190,7 @@
 
       <div class="project-heading__role">
         <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
-        <span class="case__role-value"><span data-i18n-en>Character &amp; Brand Designer</span><span data-i18n-ru>Character &amp; Brand Designer</span></span>
+        <span class="case__role-value"><span data-i18n-en>Character &amp; Brand Designer</span><span data-i18n-ru>Дизайнер персонажа и&nbsp;бренда</span></span>
       </div>
 
       <a href="shiro.html" class="project-btn">
@@ -216,14 +221,14 @@
         <span data-i18n-en>Web3 networking platform for deal-making and professional connections</span>
         <span data-i18n-ru>Web3&#8209;платформа для нетворкинга: заключение сделок и&nbsp;профессиональные связи</span>
         <span class="metrics-badge">&lt;Metrics/&gt;<span class="metrics-badge__panel">
-          <span class="metrics-badge__line"><span data-i18n-en>32 screens: 12 desktop, 20 mobile</span><span data-i18n-ru>32 экрана: 12 десктоп, 20 мобайл</span></span>
+          <span class="metrics-badge__line"><span data-i18n-en>32 screens</span><span data-i18n-ru>32 экрана</span></span>
           <span class="metrics-badge__line metrics-badge__line--blue"><span data-i18n-en>4 product areas shown</span><span data-i18n-ru>4 раздела продукта</span></span>
           <span class="metrics-badge__line metrics-badge__line--orange"><span data-i18n-en>Pitch deck, 10 slides</span><span data-i18n-ru>Питч-дек, 10 слайдов</span></span>
         </span></span></p>
 
       <div class="project-heading__role">
         <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
-        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI Designer</span></span>
+        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI&#8209;дизайнер</span></span>
       </div>
 
       <a href="c3tch.html" class="project-btn">
@@ -253,7 +258,7 @@
 
       <div class="project-heading__role">
         <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
-        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI Designer</span></span>
+        <span class="case__role-value"><span data-i18n-en>UX/UI Designer</span><span data-i18n-ru>UX/UI&#8209;дизайнер</span></span>
       </div>
 
       <a href="ftlb.html" class="project-btn">
@@ -301,7 +306,7 @@
 
       <div class="project-heading__role">
         <span class="case__role-label"><span data-i18n-en>My role</span><span data-i18n-ru>Моя роль</span></span>
-        <span class="case__role-value"><span data-i18n-en>Graphic Designer</span><span data-i18n-ru>Graphic Designer</span></span>
+        <span class="case__role-value"><span data-i18n-en>Graphic Designer</span><span data-i18n-ru>Графический дизайнер</span></span>
       </div>
 
       <a href="cryptorsy.html" class="project-btn">
@@ -321,8 +326,8 @@
     <section id="posters" class="posters fade-in" aria-labelledby="posters-title">
       <h2 class="posters__title" id="posters-title"><span data-i18n-en>Poster design</span><span data-i18n-ru>Дизайн постеров</span></h2>
       <p class="posters__text">
-        <span data-i18n-en>A series of reimagined movie posters — each film reinterpreted through bold typography and raw graphic tension</span>
-        <span data-i18n-ru>Серия переосмысленных киноплакатов: каждый фильм заново рассказан через смелую типографику и сырое графическое напряжение</span>
+        <span data-i18n-en>A series of reimagined movie posters</span>
+        <span data-i18n-ru>Серия переосмысленных киноплакатов</span>
       </p>
       <div class="posters__grid">
         <button type="button" class="poster" data-slug="forrest-gump" aria-label="Forrest Gump"><span class="poster__ph"></span></button>
@@ -357,13 +362,12 @@
     <div class="stack-demo fade-in">
       <h2 class="posters__title"><span data-i18n-en>Widget design</span><span data-i18n-ru>Дизайн виджетов</span></h2>
       <p class="posters__text">
-        <span data-i18n-en>A set of home-screen widgets — character, weather, reading timer and battery, drawn in one soft, rounded style</span>
-        <span data-i18n-ru>Набор виджетов для домашнего экрана: персонаж, погода, таймер чтения и батарея в одном мягком скруглённом стиле</span>
+        <span data-i18n-en>A set of home-screen widgets — character, weather and battery, drawn in one soft, rounded style</span>
+        <span data-i18n-ru>Набор виджетов для домашнего экрана: персонаж, погода и батарея в одном мягком скруглённом стиле</span>
       </p>
       <div class="stack">
         <div class="stack__card stack__card--back-3"><img src="img/widget 1.webp" alt="Widget" width="800" height="800" loading="lazy" decoding="async" /></div>
         <div class="stack__card stack__card--back-2"><img src="img/widget 3.webp" alt="Widget" width="800" height="800" loading="lazy" decoding="async" /></div>
-        <div class="stack__card stack__card--back-1"><img src="img/widget 2.webp" alt="Widget" width="800" height="800" loading="lazy" decoding="async" /></div>
         <div class="stack__card stack__card--main"><img src="img/widget 4.webp" alt="Widget" width="800" height="800" loading="lazy" decoding="async" /></div>
       </div>
     </div>
@@ -372,11 +376,11 @@
 
   <div id="footer-root"></div>
 
-  <script src="js/components.js?v=3"></script>
-  <script src="js/main.js?v=3"></script>
-  <script src="js/posters-fan.js?v=3" defer></script>
-  <script src="js/about-reveal.js" defer></script>
-  <script src="js/cv-preview.js?v=2" defer></script>
+  <script src="js/components.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
+  <script src="js/posters-fan.js?v=4" defer></script>
+  <script src="js/about-reveal.js?v=2" defer></script>
+  <script src="js/cv-preview.js?v=3" defer></script>
   <script src="js/project-strip.js" defer></script>
 
 </body>

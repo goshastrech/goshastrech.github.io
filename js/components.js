@@ -18,6 +18,7 @@ const HEADER = `
   <div class="header__center">
     <span class="header__timer" id="header-timer">00:00:00</span>
   </div>
+  <button type="button" class="lang-toggle lang-toggle--bar" data-lang-toggle>RU</button>
   <button type="button" class="header__burger" aria-label="Menu" aria-expanded="false" aria-controls="header-menu"><span></span><span></span><span></span></button>
   <nav class="header__right" id="header-menu">
     <a href="cv.html"><span data-i18n-en>CV</span><span data-i18n-ru>Резюме</span></a>
@@ -75,26 +76,28 @@ if (footerRoot) footerRoot.outerHTML = FOOTER;
 // применяется через атрибут data-lang на <html> и CSS-правила [data-i18n-en]/[data-i18n-ru]
 (() => {
   const STORAGE_KEY = 'portfolio-lang';
-  const btn = document.querySelector('[data-lang-toggle]');
-  if (!btn) return;
+  const btns = Array.from(document.querySelectorAll('[data-lang-toggle]'));
+  if (!btns.length) return;
 
   const applyLang = (lang) => {
     document.documentElement.setAttribute('data-lang', lang);
-    btn.textContent = lang.toUpperCase();
-    btn.setAttribute('data-full', lang === 'ru' ? 'Русский' : 'English');   // в мобильном меню показывается полное название
+    btns.forEach((btn) => {
+      btn.textContent = lang.toUpperCase();
+      btn.setAttribute('data-full', lang === 'ru' ? 'Русский' : 'English');
+      // aria-label говорит, на что переключит кнопка (видимая подпись не меняется)
+      btn.setAttribute('aria-label', lang === 'ru' ? 'Переключить язык на английский' : 'Switch language to Russian');
+    });
     document.documentElement.lang = lang;
-    // aria-label говорит, на что переключит кнопка (видимая подпись не меняется)
-    btn.setAttribute('aria-label', lang === 'ru' ? 'Переключить язык на английский' : 'Switch language to Russian');
   };
 
   const savedLang = localStorage.getItem(STORAGE_KEY);
   applyLang(savedLang === 'ru' ? 'ru' : 'en');
 
-  btn.addEventListener('click', () => {
+  btns.forEach((btn) => btn.addEventListener('click', () => {
     const nextLang = document.documentElement.getAttribute('data-lang') === 'ru' ? 'en' : 'ru';
     localStorage.setItem(STORAGE_KEY, nextLang);
     applyLang(nextLang);
-  });
+  }));
 })();
 
 // Прогресс-бар скролла — тонкая полоса внизу хедера

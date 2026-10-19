@@ -14,9 +14,9 @@
     if (node.nodeType === 3) {
       if (!node.nodeValue.trim()) return;
       var frag = document.createDocumentFragment();
-      node.nodeValue.split(/(\s+)/).forEach(function (part) {
+      node.nodeValue.split(/([ \t\r\n\f]+)/).forEach(function (part) {
         if (!part) return;
-        if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+        if (/^[ \t\r\n\f]+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
         var w = document.createElement('span');
         w.className = 'w'; w.textContent = part;
         words.push(w); frag.appendChild(w);

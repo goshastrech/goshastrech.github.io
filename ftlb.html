@@ -23,8 +23,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=3" />
-  <link rel="stylesheet" href="css/ftlb-phones.css" />
+  <link rel="stylesheet" href="css/styles.css?v=36" />
+  <link rel="stylesheet" href="css/ftlb-phones.css?v=2" />
+  <link rel="stylesheet" href="css/header-transparent.css?v=2" />
   <noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
   <link rel="canonical" href="https://goshastrech.github.io/ftlb.html" />
 </head>
@@ -37,9 +38,6 @@
     <a href="index.html" class="case__back fade-in"><span data-i18n-en>← Back to portfolio</span><span data-i18n-ru>← К&nbsp;портфолио</span></a>
 
     <header class="fade-in">
-      <div class="case__meta">
-        <span class="case__year"><span data-i18n-en>Case 2025</span><span data-i18n-ru>Кейс 2025</span></span>
-      </div>
       <h1 class="case__title">FTLB</h1>
       <p class="case__tagline">
         <span data-i18n-en>Mobile version of a Web3 NFT platform</span>
@@ -67,7 +65,7 @@
     <h2 class="shots-heading"><span data-i18n-en>Main screens</span><span data-i18n-ru>Основные экраны</span></h2>
     <div class="phones fade-in">
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Portfolio" data-lb-title-ru="Портфолио" data-lb-src="img/ftlb/portfolio.webp" tabindex="0" role="button" aria-label="Portfolio: open full size">
           <div class="phone__screen" data-shot="portfolio" data-alt="FTLB Portfolio screen with connected wallet" tabindex="0" role="region" aria-label="FTLB Portfolio screen with connected wallet, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
@@ -75,7 +73,7 @@
         <figcaption class="phone-item__caption"><span data-i18n-en>Portfolio</span><span data-i18n-ru>Портфолио</span></figcaption>
       </figure>
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Analytics" data-lb-title-ru="Аналитика" data-lb-src="img/ftlb/analytics.webp" tabindex="0" role="button" aria-label="Analytics: open full size">
           <div class="phone__screen" data-shot="analytics" data-alt="FTLB Analytics screen" tabindex="0" role="region" aria-label="FTLB Analytics screen, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
@@ -83,7 +81,7 @@
         <figcaption class="phone-item__caption"><span data-i18n-en>Analytics</span><span data-i18n-ru>Аналитика</span></figcaption>
       </figure>
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Referrals" data-lb-title-ru="Рефералы" data-lb-src="img/ftlb/referrals.webp" tabindex="0" role="button" aria-label="Referrals: open full size">
           <div class="phone__screen" data-shot="referrals" data-alt="FTLB Referrals screen" tabindex="0" role="region" aria-label="FTLB Referrals screen, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
@@ -91,7 +89,7 @@
         <figcaption class="phone-item__caption"><span data-i18n-en>Referrals</span><span data-i18n-ru>Рефералы</span></figcaption>
       </figure>
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="News" data-lb-title-ru="Новости" data-lb-src="img/ftlb/news.webp" tabindex="0" role="button" aria-label="News: open full size">
           <div class="phone__screen" data-shot="news" data-alt="FTLB news feed screen" tabindex="0" role="region" aria-label="FTLB news feed screen, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
@@ -103,7 +101,7 @@
     <h2 class="shots-heading"><span data-i18n-en>Account</span><span data-i18n-ru>Аккаунт</span></h2>
     <div class="phones fade-in">
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Settings" data-lb-title-ru="Настройки" data-lb-src="img/ftlb/settings.webp" tabindex="0" role="button" aria-label="Settings: open full size">
           <div class="phone__screen" data-shot="settings" data-alt="FTLB Settings screen" tabindex="0" role="region" aria-label="FTLB Settings screen, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
@@ -111,7 +109,7 @@
         <figcaption class="phone-item__caption"><span data-i18n-en>Settings</span><span data-i18n-ru>Настройки</span></figcaption>
       </figure>
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Notifications" data-lb-title-ru="Уведомления" data-lb-src="img/ftlb/notifications.webp" tabindex="0" role="button" aria-label="Notifications: open full size">
           <div class="phone__screen" data-shot="notifications" data-alt="FTLB Notifications list" tabindex="0" role="region" aria-label="FTLB Notifications list, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
@@ -119,54 +117,63 @@
         <figcaption class="phone-item__caption"><span data-i18n-en>Notifications</span><span data-i18n-ru>Уведомления</span></figcaption>
       </figure>
       <figure class="phone-item">
-        <div class="phone">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Notification detail" data-lb-title-ru="Уведомление" data-lb-src="img/ftlb/notification-detail.webp" tabindex="0" role="button" aria-label="Notification detail: open full size">
           <div class="phone__screen" data-shot="notification-detail" data-alt="FTLB opened notification" tabindex="0" role="region" aria-label="FTLB opened notification, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
         </div>
         <figcaption class="phone-item__caption"><span data-i18n-en>Notification detail</span><span data-i18n-ru>Уведомление</span></figcaption>
       </figure>
-    </div>
-
-    <h2 class="shots-heading"><span data-i18n-en>Navigation menu</span><span data-i18n-ru>Навигационное меню</span></h2>
-    <div class="phones fade-in" style="margin-bottom:80px;">
-      <figure class="phone-item">
-        <div class="phone">
-          <div class="phone__screen" data-shot="menu-analytics" data-alt="FTLB navigation menu with Analytics selected" role="img" aria-label="FTLB navigation menu with Analytics selected">
+          <figure class="phone-item">
+        <div class="phone" data-lb-group="ftlb" data-lb-title="Menu" data-lb-title-ru="Меню" data-lb-src="img/ftlb/menu-portfolio.webp" tabindex="0" role="button" aria-label="Menu: open full size">
+          <div class="phone__screen" data-shot="menu-portfolio" data-alt="FTLB navigation menu" tabindex="0" role="region" aria-label="FTLB navigation menu, scrollable">
             <div class="phone__ph" aria-hidden="true"></div>
           </div>
         </div>
-        <figcaption class="phone-item__caption"><span data-i18n-en>Menu — Analytics</span><span data-i18n-ru>Меню&nbsp;— Аналитика</span></figcaption>
-      </figure>
-      <figure class="phone-item">
-        <div class="phone">
-          <div class="phone__screen" data-shot="menu-portfolio" data-alt="FTLB navigation menu with Portfolio selected" role="img" aria-label="FTLB navigation menu with Portfolio selected">
-            <div class="phone__ph" aria-hidden="true"></div>
-          </div>
-        </div>
-        <figcaption class="phone-item__caption"><span data-i18n-en>Menu — Portfolio</span><span data-i18n-ru>Меню&nbsp;— Портфолио</span></figcaption>
-      </figure>
-      <figure class="phone-item">
-        <div class="phone">
-          <div class="phone__screen" data-shot="menu-referrals" data-alt="FTLB navigation menu with Referrals selected" role="img" aria-label="FTLB navigation menu with Referrals selected">
-            <div class="phone__ph" aria-hidden="true"></div>
-          </div>
-        </div>
-        <figcaption class="phone-item__caption"><span data-i18n-en>Menu — Referrals</span><span data-i18n-ru>Меню&nbsp;— Рефералы</span></figcaption>
+        <figcaption class="phone-item__caption"><span data-i18n-en>Menu</span><span data-i18n-ru>Меню</span></figcaption>
       </figure>
     </div>
 
   </div>
 
-  <nav class="case-pager" aria-label="Projects">
-    <a class="case-pager__card case-pager__card--prev" href="c3tch.html"><img src="img/strip/c3tch.webp" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="case-pager__text"><span class="case-pager__label">← <span data-i18n-en>Previous project</span><span data-i18n-ru>Предыдущий проект</span> </span><b>C3tch</b><span class="case-pager__sub"><span data-i18n-en>Web3 networking</span><span data-i18n-ru>Web3-нетворкинг</span></span></span></a>
-    <a class="case-pager__card case-pager__card--next" href="cryptorsy.html"><img src="img/strip/cryptorsy.webp" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="case-pager__text"><span class="case-pager__label"> <span data-i18n-en>Next project</span><span data-i18n-ru>Следующий проект</span> →</span><b>Cryptorsy</b><span class="case-pager__sub"><span data-i18n-en>Brand & content</span><span data-i18n-ru>Бренд и контент</span></span></span></a>
-  </nav>
+  <section class="more-projects" aria-label="More projects">
+    <div class="more-projects__head">
+      <h2 class="more-projects__title"><span data-i18n-en>More projects</span><span data-i18n-ru>Другие проекты</span></h2>
+      <div class="more-projects__arrows">
+        <button type="button" class="more-projects__arrow" data-dir="-1" aria-label="Previous"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button>
+        <button type="button" class="more-projects__arrow" data-dir="1" aria-label="Next"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+    </div>
+    <div class="more-projects__track">
+      <a class="more-projects__card" href="cryptorsy.html">
+        <span class="more-projects__img"><img src="img/pager/cryptorsy.webp" alt="" width="1000" height="545" loading="lazy" decoding="async"></span>
+        <b>Cryptorsy</b><span class="more-projects__sub"><span data-i18n-en>Brand & content</span><span data-i18n-ru>Бренд и контент</span></span>
+      </a>
+      <a class="more-projects__card" href="trady.html">
+        <span class="more-projects__img"><img src="img/pager/trady.webp" alt="" width="1000" height="570" loading="lazy" decoding="async"></span>
+        <b>Trady</b><span class="more-projects__sub"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></span>
+      </a>
+      <a class="more-projects__card" href="polyranger.html">
+        <span class="more-projects__img"><img src="img/pager/polyranger.webp" alt="" width="1000" height="562" loading="lazy" decoding="async"></span>
+        <b>Polyranger</b><span class="more-projects__sub"><span data-i18n-en>Prediction markets</span><span data-i18n-ru>Рынки предсказаний</span></span>
+      </a>
+      <a class="more-projects__card" href="shiro.html">
+        <span class="more-projects__img"><img src="img/pager/shiro.webp" alt="" width="1000" height="625" loading="lazy" decoding="async"></span>
+        <b>Shiro</b><span class="more-projects__sub"><span data-i18n-en>AI character</span><span data-i18n-ru>AI-персонаж</span></span>
+      </a>
+      <a class="more-projects__card" href="c3tch.html">
+        <span class="more-projects__img"><img src="img/pager/c3tch.webp" alt="" width="1000" height="562" loading="lazy" decoding="async"></span>
+        <b>C3tch</b><span class="more-projects__sub"><span data-i18n-en>Web3 networking</span><span data-i18n-ru>Web3-нетворкинг</span></span>
+      </a>
+    </div>
+  </section>
 
   <div id="footer-root"></div>
 
-  <script src="js/components.js?v=3"></script>
-  <script src="js/main.js"></script>
+  <script src="js/components.js?v=6"></script>
+  <script src="js/main.js?v=6"></script>
+  <script src="js/lightbox.js?v=6"></script>
   <script src="js/ftlb-phones.js"></script>
+  <script src="js/c3tch-phones.js"></script>
 </body>
 </html>

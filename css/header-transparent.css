@@ -68,3 +68,6 @@ body .header__progress { display: none !important; }
 body .header__right a:hover,
 body .lang-toggle:hover,
 body .header__name:hover { color: var(--orange); }
+
+/* производительность: размытие шапки вынесено на отдельный слой и стало мягче (радиус 8px) — над играющим видео оно пересчитывалось на каждом кадре и давало подлагивание */
+body .header.header::before { -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); will-change: transform; transform: translateZ(0); }

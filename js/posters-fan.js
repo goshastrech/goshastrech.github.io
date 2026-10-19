@@ -9,7 +9,12 @@
   var N = cards.length;
   if (!N) return;
   // на телефоне/планшете и на устройствах без hover веер не включаем: постеры остаются обычной сеткой по 2 в ряд (стили в styles.css)
-  if (window.matchMedia('(max-width: 1024px), (hover: none)').matches) return;
+  var narrowMq = window.matchMedia('(max-width: 1024px), (hover: none)');
+  // если окно сузили или расширили уже после загрузки, перезагружаем страницу: веер включается или выключается целиком
+  var fanWasOn = !narrowMq.matches;
+  var onChange = function () { if (!narrowMq.matches !== fanWasOn) location.reload(); };
+  if (narrowMq.addEventListener) narrowMq.addEventListener('change', onChange); else if (narrowMq.addListener) narrowMq.addListener(onChange);
+  if (narrowMq.matches) return;
 
   // ---- Подкрутка ----
   var CFG = {

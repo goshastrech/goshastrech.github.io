@@ -117,3 +117,7 @@
     scroll-snap-align: center;
   }
 }
+
+/* телефон открывается в просмотре по клику */
+.phone[data-lb-group] { cursor: zoom-in; }
+.phone[data-lb-group]:focus-visible { outline: 2px solid var(--orange); outline-offset: 4px; }

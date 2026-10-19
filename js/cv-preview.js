@@ -56,11 +56,18 @@
     vid.pause(); vid.removeAttribute('src'); vid.load();
   }
 
+  // превью показываем только когда ссылка уже проявилась: пока текст «Обо мне» появляется, курсор может стоять над ещё невидимым названием
+  function visible(a) { return parseFloat(getComputedStyle(a).opacity) > 0.9 && !!a.closest('.w') === a.classList.contains('in') || (!a.classList.contains('w') && parseFloat(getComputedStyle(a).opacity) > 0.9); }
+  var active = null;
+
   Array.prototype.forEach.call(links, function (a) {
-    a.addEventListener('mouseenter', function (e) { show(a, e); });
-    a.addEventListener('mousemove', move);
-    a.addEventListener('mouseleave', hide);
-    a.addEventListener('focus', function () { show(a); });   // клавиатура: превью рядом со ссылкой
-    a.addEventListener('blur', hide);
+    a.addEventListener('mouseenter', function (e) { if (visible(a)) { active = a; show(a, e); } });
+    a.addEventListener('mousemove', function (e) {
+      if (active === a) { move(e); return; }
+      if (visible(a)) { active = a; show(a, e); }   // курсор стоял на месте, ссылка проявилась, мышь сдвинули — показываем
+    });
+    a.addEventListener('mouseleave', function () { active = null; hide(); });
+    a.addEventListener('focus', function () { if (visible(a)) { active = a; show(a); } });   // клавиатура: превью рядом со ссылкой
+    a.addEventListener('blur', function () { active = null; hide(); });
   });
 })();

@@ -80,3 +80,7 @@
 /* Секция Video: два ролика (терминал 16:9 и промо 3:4) в одной строке, одинаковой высоты */
 .media-row--pair .media-item--wide { flex: 1.752 1 0; }
 .media-row--pair .media-item--ar-34 { flex: 0.75 1 0; }
+
+/* производительность: ролики и их рамки — на отдельных слоях, изолированы от остальной страницы */
+.media-frame { contain: layout paint; transform: translateZ(0); }
+.media-frame video { will-change: transform; backface-visibility: hidden; }

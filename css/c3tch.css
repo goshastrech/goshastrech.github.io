@@ -74,8 +74,10 @@
 .poster-lightbox__frame.is-scrollphone {
   position: relative;
   box-sizing: border-box;
-  width: min(calc(100vw - 48px), 400px);
-  height: min(calc(86vh - 44px), 860px);
+  /* пропорция настоящего телефона (390×844 ≈ 0,462): ширина считается от высоты, а не наоборот, поэтому корпус всегда «вытянутый», как на странице */
+  --ph: min(calc(86dvh - 44px), 860px, calc((100vw - 48px) / 0.462));
+  height: var(--ph);
+  width: calc(var(--ph) * 0.462);
   aspect-ratio: auto;
   padding: 10px;
   background: var(--text);
@@ -135,4 +137,8 @@
     -webkit-mask-image: linear-gradient(#000 calc(100% - 56px), transparent);
     mask-image: linear-gradient(#000 calc(100% - 56px), transparent);
   }
+}
+
+@media (max-width: 1024px) {
+  .poster-lightbox__frame.is-scrollphone { --ph: min(calc(100dvh - 190px), 860px, calc((100vw - 48px) / 0.462)); }
 }

@@ -2177,25 +2177,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   .case__summary-team--lg .team__avatar { width: 44px; height: 44px; margin-left: -14px; }
   .case__summary-team--lg .team__avatar:first-child { margin-left: 0; }
 
-  /* Trady и Polyranger: широкие десктопные скрины и пары «светлая/тёмная» на телефоне — лента со свайпом
-     (карточка ≈88% ширины, следующая выглядывает), а не уменьшение до нечитаемых 340px.
-     Страницы выбираются по телефонам iOS-экранов (.grid-4--phones есть только у этих двух кейсов) */
-  .case:has(.grid-4--phones) :is(.grid-2--shots, .compare-pair:not(.compare-pair--single)) {
-    display: flex;
-    gap: 12px;
-    margin-inline: -20px;
-    padding-inline: 20px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: 20px;
-    scrollbar-width: none;
-  }
-  .case:has(.grid-4--phones) :is(.grid-2--shots, .compare-pair:not(.compare-pair--single))::-webkit-scrollbar { display: none; }
-  .case:has(.grid-4--phones) :is(.grid-2--shots, .compare-pair:not(.compare-pair--single)) > * {
-    flex: 0 0 88%;
-    min-width: 0;
-    scroll-snap-align: start;
-  }
+  /* все сетки скриншотов, баннеров, превью и пар «светлая/тёмная» на телефоне — по 2 в ряд (без прокрутки) */
+  .grid-2, .grid-3, .grid-3.grid-3--banners, .compare-pair:not(.compare-pair--single), .case .case__hero-pair { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .grid-2--shots, .grid-3.grid-3--center { gap: 20px 12px; }
+  .grid-3.grid-3--center > * { grid-column: auto; }
+  .grid-3.grid-3--center > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc((100% - 12px) / 2); }
 }
 
 /* hero кейса с картинкой или видео берёт высоту у самого файла — ставим ПОСЛЕ мобильного блока,
@@ -3193,3 +3179,228 @@ img.team__avatar { display: block; object-fit: cover; flex: none; image-renderin
   .header__right .lang-toggle::after { content: attr(data-full); font-size: 18px; font-weight: 500; letter-spacing: -0.01em; }
   .header__right .lang-toggle:hover { color: var(--orange); }
 }
+
+/* кнопка «View Project»: голубая, с белым свечением внутри (как «Contact me»); «Coming soon» остаётся тёмной */
+.project-btn:not(.project-btn--soon) {
+  background: linear-gradient(180deg, #5cc4ff 0%, #2f9bff 55%, #1b7cff 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 0 22px rgba(255,255,255,.38), 0 10px 26px rgba(27,124,255,.38);
+  transition: opacity .2s ease, transform .2s ease, filter .2s ease, box-shadow .2s ease;
+}
+.project-btn:not(.project-btn--soon):hover { filter: brightness(1.05); box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 0 28px rgba(255,255,255,.5), 0 14px 32px rgba(27,124,255,.45); }
+
+/* кнопка «View Project»: чёрная, с тем же мягким белым свечением внутри */
+.project-btn:not(.project-btn--soon) {
+  background: linear-gradient(180deg, #34343a 0%, #17171a 55%, #0a0a0c 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 20px rgba(255,255,255,.14), 0 10px 26px rgba(10,10,12,.32);
+}
+.project-btn:not(.project-btn--soon):hover { filter: brightness(1.15); box-shadow: inset 0 1px 0 rgba(255,255,255,.4), inset 0 0 26px rgba(255,255,255,.2), 0 14px 32px rgba(10,10,12,.4); }
+
+/* кнопка «Смотреть проект» внутри карточек предыдущий / следующий проект */
+.case-pager__btn { margin-top: 12px; align-self: flex-start; padding: 9px 18px; font-size: 14px; pointer-events: none; }
+.case-pager__card--next .case-pager__btn { align-self: flex-end; }
+.case-pager__btn .project-btn__icon { width: 18px; height: 18px; }
+@media (max-width: 760px) { .case-pager__card--next .case-pager__btn { align-self: flex-start; } }
+
+/* стрелка на кнопке «View Project»: при наведении поворачивается и смотрит вправо */
+.project-btn__icon { transition: transform .3s cubic-bezier(.2,.7,.2,1); }
+@media (hover: hover) {
+  .project-btn:not(.project-btn--soon):hover .project-btn__icon,
+  .case-pager__card:hover .project-btn__icon { transform: rotate(45deg) translate(1px, -1px); }
+}
+@media (prefers-reduced-motion: reduce) { .project-btn__icon { transition: none; } }
+
+/* кнопка со ссылкой на живой проект под заголовком кейса */
+.case__live-btn { margin: 4px 0 0; }
+
+.case__role + .case__live-btn { margin-top: 28px; }
+.case__live-btn { width: fit-content; justify-self: start; align-self: flex-start; }
+.case__role + .case__live-btn { margin-top: 20px; margin-bottom: 8px; }
+
+/* кнопка со ссылкой на живой сайт стоит сразу под строкой «Моя роль»: роль не добавляет большой отступ снизу */
+.case__role:has(+ .case__live-btn) { margin-bottom: 0; }
+.case__role + .case__live-btn { margin-top: 12px; margin-bottom: 8px; }
+/* родитель (блок команды) — flex с gap 36px: компенсируем, чтобы между «Моя роль» и кнопкой было ~14px */
+.case__summary-team .case__role + .case__live-btn { margin-top: -22px; }
+
+/* карточки «предыдущий / следующий проект»: той же ширины, что остальные блоки страницы (1030px), без серого фона */
+.case-pager { max-width: 1030px; width: calc(100% - 40px); padding: 0; margin-left: auto; margin-right: auto; }
+.case-pager__card { background: none; padding: 0; border-radius: 0; box-shadow: none; }
+.case-pager__card:hover { background: none; box-shadow: none; }
+@media (max-width: 1024px) { .case-pager { width: calc(100% - 64px); } }
+@media (max-width: 640px) { .case-pager { width: calc(100% - 40px); } }
+
+/* превью в карточках соседних проектов — баннеры с главной, одной пропорции 16:9 */
+.case-pager__card img { aspect-ratio: 16 / 9; object-fit: cover; }
+
+/* кнопка «Contact me» в шапке: голубая, с белым свечением внутри */
+.header__right a.header__contact {
+  display: inline-flex; align-items: center; padding: 9px 20px; border-radius: 999px; color: #fff;
+  font-size: 15px; font-weight: 500; line-height: 1.2; white-space: nowrap;
+  background: linear-gradient(180deg, #5cc4ff 0%, #2f9bff 55%, #1b7cff 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 0 18px rgba(255,255,255,.38), 0 6px 18px rgba(27,124,255,.32);
+  transition: filter .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+.header__right a.header__contact:hover { color: #fff; filter: brightness(1.06); transform: translateY(-1px); }
+@media (min-width: 1025px) { .header__right { align-items: center; } .header__right .lang-toggle { margin-right: 4px; } }
+@media (max-width: 1024px) {
+  .header__right a.header__contact { align-self: flex-start; margin-top: 28px; padding: 14px 28px; font-size: 18px; border-bottom: 0; letter-spacing: 0; }
+}
+body .header__right a.header__contact, body .header__right a.header__contact:hover { color: #fff; }
+@media (max-width: 1024px) { body .header__right a.header__contact { align-self: flex-start; width: fit-content; justify-content: center; } }
+
+/* пока открыт просмотр (постер, скриншот, ролик), страница за ним не прокручивается */
+html:has(.poster-lightbox:not([hidden])), html:has(.poster-lightbox:not([hidden])) body { overflow: hidden; overscroll-behavior: none; }
+.poster-lightbox { overscroll-behavior: contain; touch-action: none; }
+.poster-lightbox__frame.is-wide, .poster-lightbox__frame.is-scrollphone, .lb-phone-screen { touch-action: pan-x pan-y; }
+
+/* аватарки персон на Polyranger — пиксельные, как в командах */
+.persona-card--trader .persona-card__avatar { background-image: url('../img/team/pixel/persona_trader.png'); }
+.persona-card--newcomer .persona-card__avatar { background-image: url('../img/team/pixel/persona_newcomer.png'); }
+
+/* «Другие проекты»: лента карточек с чёрными кнопками-стрелками (как «View Project») */
+.more-projects { max-width: 1030px; width: calc(100% - 40px); margin: 80px auto 0; }
+.more-projects__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px; }
+.more-projects__title { font-size: 26px; font-weight: 600; letter-spacing: -.02em; }
+.more-projects__arrows { display: flex; gap: 8px; }
+.more-projects__arrow { width: 44px; height: 44px; border-radius: 50%; border: 0; color: #fff; display: grid; place-items: center; cursor: pointer;
+  background: linear-gradient(180deg, #34343a 0%, #17171a 55%, #0a0a0c 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 20px rgba(255,255,255,.14), 0 8px 20px rgba(10,10,12,.28);
+  transition: filter .2s ease, transform .2s ease, opacity .2s ease; }
+.more-projects__arrow:hover { filter: brightness(1.2); transform: translateY(-1px); }
+.more-projects__arrow:disabled { opacity: .3; cursor: default; transform: none; filter: none; }
+.more-projects__arrow:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.more-projects__track { display: flex; gap: 20px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 4px; overscroll-behavior-x: contain; }
+.more-projects__track::-webkit-scrollbar { display: none; }
+.more-projects__card { flex: none; width: calc((100% - 40px) / 3); scroll-snap-align: start; color: var(--text); text-decoration: none; }
+.more-projects__img { position: relative; display: block; border-radius: var(--radius-lg); overflow: hidden; background: #f4f4f6; }
+.more-projects__img img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; transition: transform .5s ease; }
+@media (hover: hover) { .more-projects__card:hover .more-projects__img img { transform: scale(1.05); } .more-projects__card:hover b { color: var(--orange); } }
+.more-projects__chip { position: absolute; left: 10px; top: 10px; background: #fff; color: var(--orange); font-size: 14px; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
+.more-projects__card b { display: block; margin-top: 12px; font-size: 20px; letter-spacing: -.01em; transition: color .2s ease; }
+.more-projects__sub { display: block; font-size: 14px; color: var(--text-2); margin-top: 2px; }
+@media (max-width: 1024px) { .more-projects { width: calc(100% - 64px); } .more-projects__card { width: calc((100% - 20px) / 2); } }
+@media (max-width: 640px) { .more-projects { width: calc(100% - 40px); margin-top: 56px; } .more-projects__card { width: 78%; } .more-projects__title { font-size: 22px; } }
+
+/* кнопка перехода на живой сайт + кнопка-иконка X (Twitter) рядом */
+.case__links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.case__links .project-btn { margin: 0; }
+.case__x-btn { width: 48px; height: 48px; padding: 0; justify-content: center; }
+.case__summary-team .case__role + .case__links { margin-top: -22px; margin-bottom: 8px; }
+
+/* кнопка «Наверх»: серая, с мягким белым свечением внутри */
+.to-top {
+  border: 0;
+  color: #1c1c1f;
+  background: linear-gradient(180deg, #e6e6ea 0%, #d3d3d9 55%, #c3c3ca 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), inset 0 0 16px rgba(255,255,255,.65), 0 8px 20px rgba(20,20,26,.16);
+}
+.to-top:hover { background: linear-gradient(180deg, #ececf0 0%, #dcdce1 55%, #cdcdd4 100%); color: #000; filter: brightness(1.03); }
+
+/* лента «Другие проекты»: стрелки всегда активны (листание по кругу), мышью ленту можно тянуть */
+.more-projects__arrow:disabled { opacity: 1; cursor: pointer; }
+.more-projects__track { cursor: grab; }
+.more-projects__track.is-dragging { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
+.more-projects__track.is-dragging a { pointer-events: none; }
+
+/* сетка из трёх колонок: неполный последний ряд (1–2 карточки) стоит по центру страницы */
+@media (min-width: 641px) {
+  .grid-3.grid-3--center { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .grid-3.grid-3--center > * { grid-column: span 2; }
+  .grid-3.grid-3--center > :nth-last-child(2):nth-child(3n+1) { grid-column: 2 / span 2; }
+  .grid-3.grid-3--center > :last-child:nth-child(3n+1) { grid-column: 3 / span 2; }
+}
+
+/* виджетов теперь три: на десктопе в один ряд, на планшете и телефоне 2 + 1 по центру */
+@media (min-width: 1025px) { .stack { width: min(840px, calc(100vw - 80px)); grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 1024px) { .stack__card:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 6px); } }
+
+/* одинаковый отступ до блока «Задача / Результаты» на всех кейсах (48px), в том числе там, где над ним подзаголовок, а не команда */
+.case__tagline + .case__overview { margin-top: 48px; }
+
+/* телефон и планшет: имя в шапке 24px */
+@media (max-width: 1024px) { .header__name { font-size: 20px; letter-spacing: -0.01em; } }
+
+/* открытое мобильное меню: оранжевый фон, чёрный текст */
+@media (max-width: 1024px) {
+  .header.is-menu-open { background: var(--orange); }
+  body .header.is-menu-open.header::before { display: none; }
+  .header.is-menu-open .header__right { background: var(--orange); }
+  .header.is-menu-open .header__name,
+  .header.is-menu-open .header__right a,
+  .header.is-menu-open .header__right .lang-toggle,
+  .header.is-menu-open .header__burger { color: #0a0a0a; }
+  .header.is-menu-open .header__burger span { background: #0a0a0a; }
+  .header.is-menu-open .header__right a { border-bottom-color: rgba(10, 10, 10, .22); }
+  .header.is-menu-open .header__right a:hover,
+  .header.is-menu-open .header__right .lang-toggle:hover { color: #fff; }
+  .header.is-menu-open .menu-meta { color: rgba(10, 10, 10, .72); }
+  .header.is-menu-open .menu-meta__badge { background: #0a0a0a; color: var(--orange); }
+}
+
+/* язык: на десктопе — в правой части шапки (как раньше), на телефоне и планшете — кнопка слева от бургера, а из меню убрана */
+.lang-toggle--bar { display: none; }
+@media (max-width: 1024px) {
+  .header__right .lang-toggle { display: none; }
+  .lang-toggle--bar { display: inline-flex; align-items: center; justify-content: center; grid-area: lang; min-width: 44px; height: 44px; padding: 0 6px; border: 0; background: none; color: var(--text); font: inherit; font-size: 16px; font-weight: 500; cursor: pointer; z-index: 120; }
+  .lang-toggle--bar::after { content: none; }
+  .header.is-menu-open .lang-toggle--bar { color: #0a0a0a; }
+}
+
+@media (max-width: 1024px) {
+  .header { grid-template-columns: 1fr auto auto; grid-template-areas: "left lang burger"; }
+  .lang-toggle--bar { margin-right: 4px; }
+}
+@media (max-width: 1024px) { .lang-toggle--bar { font-size: 20px; } }
+
+/* меньше отступ между блоком «Задача / Результаты» и баннером под ним */
+.case__overview { margin-bottom: 52px; }
+@media (max-width: 1024px) { .case__overview { margin-bottom: 36px; padding-bottom: 28px; } }
+
+/* просмотр: любая картинка (десктопный скрин, баннер) целиком, в своих пропорциях, по центру */
+.poster-lightbox__frame:not(.is-phone):not(.is-scrollphone):not(.is-clip) { overflow: visible; }
+.poster-lightbox__frame:not(.is-phone):not(.is-scrollphone):not(.is-clip) img {
+  width: auto; height: auto; max-width: calc(100vw - 32px); max-height: min(calc(100dvh - 190px), 86vh); object-fit: contain; min-width: 0;
+}
+
+/* открытое мобильное меню: белый текст на оранжевом */
+@media (max-width: 1024px) {
+  .header.is-menu-open .header__name,
+  .header.is-menu-open .header__right a,
+  .header.is-menu-open .header__right .lang-toggle,
+  .header.is-menu-open .lang-toggle--bar,
+  .header.is-menu-open .header__burger { color: #fff; }
+  .header.is-menu-open .header__burger span { background: #fff; }
+  .header.is-menu-open .header__right a { border-bottom-color: rgba(255, 255, 255, .35); }
+  .header.is-menu-open .header__right a:hover { color: #0a0a0a; }
+  .header.is-menu-open .menu-meta { color: rgba(255, 255, 255, .85); }
+  .header.is-menu-open .menu-meta__badge { background: #fff; color: var(--orange); }
+}
+
+/* карточки пользователей Polyranger: на телефоне одна под другой (в 2 колонки они не помещались и налезали друг на друга) */
+@media (max-width: 640px) {
+  .grid-2:has(.persona-card) { grid-template-columns: 1fr; gap: 28px; }
+  .persona-card__header { align-items: flex-start; }
+  .persona-card__name, .persona-card__role { overflow-wrap: anywhere; }
+}
+
+/* мобильное меню: без разделительных линий между пунктами */
+@media (max-width: 1024px) { .header__right a, .header.is-menu-open .header__right a { border-bottom: 0; border-bottom-color: transparent; } }
+
+/* просмотр: кнопки (закрыть, стрелки) — чёрные, как «View Project», с мягким свечением внутри */
+.poster-lightbox__close, .poster-lightbox__nav {
+  color: #fff; border: 0;
+  background: linear-gradient(180deg, #34343a 0%, #17171a 55%, #0a0a0c 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.28), inset 0 0 18px rgba(255,255,255,.14), 0 8px 20px rgba(0,0,0,.35), 0 0 0 1px rgba(255,255,255,.12);
+}
+.poster-lightbox__close:hover, .poster-lightbox__nav:hover { background: linear-gradient(180deg, #44444b 0%, #232327 55%, #111114 100%); filter: brightness(1.1); }
+
+/* баннеры Cryptorsy на телефоне: нечётный последний стоит по центру */
+@media (max-width: 640px) {
+  .grid-3.grid-3--banners > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc((100% - 12px) / 2); }
+}
+
+/* просмотр: при закрытии всё (фон, картинка, подпись, кнопки) плавно гаснет вместе, а не кнопки висят после затемнения */
+.poster-lightbox { opacity: 0; transition: opacity .28s ease, background-color .28s ease; }
+.poster-lightbox.is-open { opacity: 1; }
+.poster-lightbox__close, .poster-lightbox__nav, .poster-lightbox__title { transition: opacity .28s ease, background .2s ease, filter .2s ease; }
+@media (prefers-reduced-motion: reduce) { .poster-lightbox { transition: none; } }
