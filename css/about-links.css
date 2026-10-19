@@ -86,3 +86,21 @@
 
 /* широкий знак Polyranger с официального сайта: по высоте чуть больше, ширина по пропорции */
 .about-me .about-sticker--wide { width: auto; height: 25px; border-radius: 0; object-fit: contain; vertical-align: calc(.3em - 12px); }
+
+/* превью проекта рядом с курсором при наведении на название (js/cv-preview.js) */
+.cv-preview { position: fixed; left: 0; top: 0; width: 340px; z-index: 300; border-radius: 8px; overflow: hidden; background: #f4f4f6; pointer-events: none; opacity: 0; transform: translate3d(-999px, -999px, 0);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 18px 44px rgba(0,0,0,.18); transition: opacity .15s ease; }
+.cv-preview.is-on { opacity: 1; }
+.cv-preview img, .cv-preview video { display: block; width: 100%; max-height: 380px; object-fit: cover; }
+.cv-preview video { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .2s ease; }
+.cv-preview video.is-playing { opacity: 1; }
+
+
+/* значки инструментов: название можно переносить по словам («Nano / Banana Pro»), значок остаётся рядом с первым словом — иначе длинные названия уезжают на следующую строку целиком и оставляют дырки */
+.about-me .nbk:has(.about-badge--tool) { white-space: normal; }
+
+/* все превью проектов одного размера: рамка 16:9, картинка заполняет её */
+.cv-preview { aspect-ratio: 16 / 9; }
+.cv-preview img { height: 100%; max-height: none; object-fit: cover; }
+/* значок и первое слово названия инструмента не разделяются переносом */
+.about-me .nw { white-space: nowrap; }

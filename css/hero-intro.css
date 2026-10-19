@@ -58,3 +58,11 @@
 }
 /* на десктопе и планшете ручные переносы телефона не нужны */
 @media (min-width: 641px) { .hero__title .mbr { display: none; } }
+
+/* заголовок первого экрана — 26px на всех экранах */
+.hero__title { font-size: 26px !important; line-height: 1.2; }
+.hero__title { letter-spacing: -0.03em !important; }
+/* при 26px ручные переносы на телефоне дают «висящие» слова — строки делятся автоматически */
+.hero__title .mbr { display: none !important; }
+.hero__title [data-i18n-en] .hi-l { display: inline; text-wrap: balance; }
+.hero__title { text-wrap: balance; }

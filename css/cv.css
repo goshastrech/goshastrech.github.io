@@ -73,3 +73,64 @@ a.cv-row__name:hover { color:var(--orange); text-decoration-color:currentColor; 
 /* Опыт: название места работы с описанием (длинное, как в PDF-резюме) и роль — двумя строками, а не слитно */
 .cv-item .cv-row__main { display:block; }
 .cv-item .cv-row__text { display:block; margin-top:2px; }
+
+/* логотипов и букв-иконок у мест работы и проектов больше нет — убираем под них отступы слева */
+.cv-desc, .cv-list .cv-desc { padding-left:20px; }
+@media (max-width:640px){ .cv-row__date { padding-left:0; } .cv-desc, .cv-list .cv-desc { padding-left:20px; } }
+
+/* Опыт: дата справа выровнена по верхней строке названия (раньше стояла по центру двухстрочного блока) */
+.cv-item .cv-row { align-items:flex-start; }
+.cv-item .cv-row__date { line-height:inherit; }
+
+/* Шапка резюме: LinkedIn, Portfolio и почта — иконками справа от имени; роль выше и крупнее */
+.cv-head { flex-wrap:wrap; align-items:center; gap:8px 24px; margin-bottom:0; }
+.cv-head .case__title { margin-bottom:0; }
+.cv-links--icons { display:flex; gap:4px; padding-top:0; }
+.cv-links--icons a { display:grid; place-items:center; width:44px; height:44px; border-radius:50%; text-decoration:none; color:var(--text); transition:color .2s, background-color .2s; }
+.cv-links--icons a svg { width:26px; height:26px; }
+.cv-links--icons a:hover { color:var(--orange); background:#f4f4f6; }
+.cv-links--icons a:focus-visible { outline:2px solid var(--orange); outline-offset:2px; }
+.cv-role { font-size:23px; color:var(--text-2); margin-top:4px; margin-bottom:24px; }
+@media (max-width:640px){ .cv-role { font-size:20px; } }
+
+/* Опыт: названия компаний жирнее, чтобы на них было больше акцента */
+.cv-item .cv-row__name { font-weight:700; }
+
+/* заголовки блоков резюме (Work, Projects, Beyond work, Education, Skills) — оранжевым */
+.cv-list__title { color: var(--orange); }
+
+/* превью проекта рядом с курсором при наведении на название (js/cv-preview.js) */
+.cv-preview { position: fixed; left: 0; top: 0; width: 340px; z-index: 300; border-radius: 8px; overflow: hidden; background: #f4f4f6; pointer-events: none; opacity: 0; transform: translate3d(-999px, -999px, 0);
+  box-shadow: 0 0 0 1px rgba(0,0,0,.08), 0 18px 44px rgba(0,0,0,.18); transition: opacity .15s ease; }
+.cv-preview.is-on { opacity: 1; }
+.cv-preview img, .cv-preview video { display: block; width: 100%; max-height: 380px; object-fit: cover; }
+.cv-preview video { position: absolute; inset: 0; height: 100%; opacity: 0; transition: opacity .2s ease; }
+.cv-preview video.is-playing { opacity: 1; }
+
+/* кнопка «Download CV»: оранжевая, с белым свечением внутри */
+.cv-download .project-btn { background: linear-gradient(180deg, #ff9442 0%, #f97316 55%, #ea5f06 100%); color: #fff; border: 0;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 0 22px rgba(255,255,255,.38), 0 10px 26px rgba(249,115,22,.38);
+  transition: box-shadow .25s ease, transform .25s ease, filter .25s ease; }
+.cv-download .project-btn:hover { filter: brightness(1.04); transform: translateY(-2px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.75), inset 0 0 28px rgba(255,255,255,.5), 0 14px 32px rgba(249,115,22,.45); }
+.cv-download .project-btn .project-btn__icon { color: #fff; stroke: #fff; }
+
+/* аватарка-круг слева от имени и роли */
+.cv-who { display:flex; align-items:center; gap:26px; margin-bottom:24px; }
+.cv-who__text { flex:1; min-width:0; }
+.cv-avatar { flex:none; width:112px; height:112px; border-radius:50%; object-fit:cover; display:block; }
+.cv-who .cv-role { margin-bottom:0; }
+@media (max-width:640px){ .cv-who { gap:16px; margin-bottom:20px; } .cv-avatar { width:68px; height:68px; } }
+
+/* имя в шапке резюме — немного меньше (было до 52px) */
+.cv-who .case__title { font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; }
+
+/* фото по высоте равно блоку «имя + роль» */
+.cv-who { align-items: stretch; }
+.cv-avatar { width: auto; height: auto; aspect-ratio: 1; align-self: stretch; max-height: 84px; }
+.cv-who__text { display: flex; flex-direction: column; justify-content: center; }
+@media (max-width:640px){ .cv-avatar { width: auto; max-height: 64px; } }
+
+/* все превью проектов одного размера: рамка 16:9, картинка заполняет её */
+.cv-preview { aspect-ratio: 16 / 9; }
+.cv-preview img { height: 100%; max-height: none; object-fit: cover; }

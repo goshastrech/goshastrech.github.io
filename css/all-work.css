@@ -97,7 +97,7 @@
 }
 
 /* ---- Крупные заголовки секций «Posters design» и «More works» — в том же стиле, что «All work»; выровнены по центру ---- */
-.posters .posters__title,
+/* «Poster design» теперь того же размера, что «Widget design» (базовый .posters__title из styles.css: 24px / 700) — крупный стиль остался только у «More works» */
 .gwork .gwork__title {
   margin: 0 0 24px;
   font-size: clamp(36px, 5vw, 64px);
@@ -108,9 +108,3 @@
   text-align: center;
 }
 
-.posters .posters__text {
-  max-width: 560px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-}

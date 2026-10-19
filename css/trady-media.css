@@ -76,3 +76,7 @@
   .poster-lightbox__frame video { max-height: min(calc(100dvh - 190px), 856px); }
   .poster-lightbox__frame.is-phone video { max-height: min(calc(100dvh - 210px), 836px); }
 }
+
+/* Секция Video: два ролика (терминал 16:9 и промо 3:4) в одной строке, одинаковой высоты */
+.media-row--pair .media-item--wide { flex: 1.752 1 0; }
+.media-row--pair .media-item--ar-34 { flex: 0.75 1 0; }

@@ -22,8 +22,8 @@
 
   /* ── Типографика ────────────────────────────────────── */
   --font:        'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  --text-xs:     12px;
-  --text-sm:     13px;
+  --text-xs:     14px;
+  --text-sm:     14px;
   --text-base:   14px;
   --text-md:     18px;
   --text-lg:     32px;
@@ -80,7 +80,7 @@ a {
 /* ровные переносы: заголовки делятся поровну, абзацы без «висящих» слов в последней строке
    (первый экран главной .hero__title не трогаем — его переносы задаёт hero-intro.css) */
 :where(h1, h2, h3):not(.hero__title) { text-wrap: balance; }
-p { text-wrap: pretty; }
+p { text-wrap: wrap; }   /* описания тянутся на всю ширину колонки, без «обрезания» строк */
 
 img {
   display: block;
@@ -206,7 +206,7 @@ img {
   gap: 8px;
   color: #e8e6e3;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -442,7 +442,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .about-explorer__label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -462,7 +462,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   background: transparent;
   color: var(--text-2);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   text-align: left;
   cursor: pointer;
   appearance: none;
@@ -523,7 +523,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .code-card__title {
   color: var(--text);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 2px;
   text-transform: uppercase;
@@ -691,7 +691,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   justify-content: center;
   gap: 8px;
   margin-top: 20px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .project-btn {
@@ -784,7 +784,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   align-items: center;
   gap: 8px;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   color: #e8e6e3;
   white-space: nowrap;
 }
@@ -874,7 +874,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   background: var(--text);
   color: var(--bg);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.15s ease;
@@ -1109,7 +1109,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   right: -28px;
   background: var(--badge);
   color: #000;
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -1141,7 +1141,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .card__year {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-3);
   flex-shrink: 0;
 }
@@ -1158,7 +1158,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .contact__label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-3);
   margin-bottom: 20px;
 }
@@ -1209,7 +1209,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   display: inline-block;
   padding: 12px 0;   /* высота кликабельной зоны ≥44px; margin уменьшен на те же 12px сверху и снизу */
   margin: 28px 0 36px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-2);
   transition: color 0.2s;
 }
@@ -1225,7 +1225,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .case__year {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-2);
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -1233,7 +1233,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .case__tag {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--orange);
   white-space: nowrap;
   font-variant-ligatures: none;
@@ -1262,7 +1262,6 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
-  max-width: 720px;   /* длина строки ≤ ~75 знаков */
   margin-bottom: 24px;
 }
 
@@ -1290,7 +1289,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   display: inline-flex;
   align-items: center;
   gap: 7px;
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-2);
   background: var(--surface);
   border: 1px solid var(--border);
@@ -1345,37 +1344,16 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .team__avatar:first-child { margin-left: 0; }
 
-/* аватары команды: размытые портреты (стоковые фото Pexels, сильно размыты), 8 вариантов по кругу */
-.team__avatar { background-size: cover; background-position: center; }
-.team__group:nth-child(1) .team__avatar:nth-child(1) { background-image: url('../img/team/p1.webp'); }
-.team__group:nth-child(1) .team__avatar:nth-child(2) { background-image: url('../img/team/p2.webp'); }
-.team__group:nth-child(1) .team__avatar:nth-child(3) { background-image: url('../img/team/p3.webp'); }
-.team__group:nth-child(1) .team__avatar:nth-child(4) { background-image: url('../img/team/p4.webp'); }
-.team__group:nth-child(1) .team__avatar:nth-child(5) { background-image: url('../img/team/p5.webp'); }
-.team__group:nth-child(2) .team__avatar:nth-child(1) { background-image: url('../img/team/p2.webp'); }
-.team__group:nth-child(2) .team__avatar:nth-child(2) { background-image: url('../img/team/p3.webp'); }
-.team__group:nth-child(2) .team__avatar:nth-child(3) { background-image: url('../img/team/p4.webp'); }
-.team__group:nth-child(2) .team__avatar:nth-child(4) { background-image: url('../img/team/p5.webp'); }
-.team__group:nth-child(2) .team__avatar:nth-child(5) { background-image: url('../img/team/p6.webp'); }
-.team__group:nth-child(3) .team__avatar:nth-child(1) { background-image: url('../img/team/p6.webp'); }
-.team__group:nth-child(3) .team__avatar:nth-child(2) { background-image: url('../img/team/p7.webp'); }
-.team__group:nth-child(3) .team__avatar:nth-child(3) { background-image: url('../img/team/p8.webp'); }
-.team__group:nth-child(3) .team__avatar:nth-child(4) { background-image: url('../img/team/p1.webp'); }
-.team__group:nth-child(3) .team__avatar:nth-child(5) { background-image: url('../img/team/p2.webp'); }
-.team__group:nth-child(4) .team__avatar:nth-child(1) { background-image: url('../img/team/p7.webp'); }
-.team__group:nth-child(4) .team__avatar:nth-child(2) { background-image: url('../img/team/p8.webp'); }
-.team__group:nth-child(4) .team__avatar:nth-child(3) { background-image: url('../img/team/p1.webp'); }
-.team__group:nth-child(4) .team__avatar:nth-child(4) { background-image: url('../img/team/p2.webp'); }
-.team__group:nth-child(4) .team__avatar:nth-child(5) { background-image: url('../img/team/p3.webp'); }
+/* аватары команды: пиксельные портреты — явные <img class="team__avatar"> в разметке (img/team/pixel/) */
 
 .team__role {
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   color: var(--text);
 }
 
 .team__count {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-2);
 }
 
@@ -1431,7 +1409,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .overview__label {
-  font-size: 11px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-2);
@@ -1515,7 +1493,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .case-img__placeholder--lg  { height: 380px; }
 
 .case-img__caption {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-2);
   padding: 10px 14px;
   border-top: 1px solid var(--border);
@@ -1542,7 +1520,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .case-section__label {
-  font-size: 12px;
+  font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-2);
@@ -1564,7 +1542,6 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
-  max-width: 720px;   /* длина строки ≤ ~75 знаков на широких экранах */
   margin: -12px 0 28px;
 }
 
@@ -1605,13 +1582,13 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .case-shot__note {
   max-width: 420px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.6;
   color: var(--text-2);
 }
 
 .case-shot__caption {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-2);
   line-height: 1.7;
   margin-bottom: 56px;
@@ -1674,7 +1651,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   background: var(--bg);
   border: 1.5px solid var(--border);
   font-family: 'JetBrains Mono', monospace;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
   color: var(--text-2);
   box-shadow: 0 2px 8px rgba(10, 10, 10, 0.06);
@@ -1708,7 +1685,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .flow-step__desc {
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.45;
   color: var(--text-2);
   min-height: 18px;
@@ -1722,7 +1699,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   gap: 6px;
   margin-top: -4px;
   margin-bottom: 16px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-3);
 }
 
@@ -1743,7 +1720,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   position: absolute;
   top: 12px;
   left: 12px;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 9999px;
@@ -1761,7 +1738,6 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
-  max-width: 720px;
   margin: 20px 0 56px;
 }
 
@@ -1803,7 +1779,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .persona-card__role {
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-2);
 }
 
@@ -1817,7 +1793,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .persona-card__list li {
   position: relative;
   padding-left: 15px;
-  font-size: 13px;
+  font-size: 14px;
   line-height: 1.5;
   color: var(--text);
 }
@@ -1937,7 +1913,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   background: transparent;
   color: var(--text-2);
   font-family: var(--font);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   appearance: none;
@@ -1967,7 +1943,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .concept-form__label {
-  font-size: 13px;
+  font-size: 14px;
   color: var(--text-2);
   margin-bottom: 8px;
 }
@@ -2030,7 +2006,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   display: flex;
   justify-content: flex-end;
   margin-top: 8px;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-3);
 }
 
@@ -2090,7 +2066,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   margin-top: 16px;
   text-align: center;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
+  font-size: 14px;
   color: var(--text-3);
 }
 
@@ -2171,7 +2147,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 @media (max-width: 760px) {
   .case__overview { grid-template-columns: 1fr; gap: 28px; }
   .overview__text,
-  .overview__results { max-width: 640px; }
+  .overview__results { max-width: none; }
 }
 
 /* кейсы на планшете и телефоне: сетки, команда, ленты скринов */
@@ -3155,4 +3131,65 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
 @media (min-width: 1025px) {
   .stack { width: min(1100px, calc(100vw - 80px)); height: auto; margin-inline: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; cursor: default; }
   .stack__card { position: relative; inset: auto; aspect-ratio: 1; transform: none !important; opacity: 1 !important; }
+}
+
+/* Десктоп: описания проектов на главной — в две строки (узкая колонка по центру); на планшете и телефоне свои правила выше */
+@media (min-width: 1025px) {
+  .project-heading__subtitle { max-width: 560px; margin-left: auto; margin-right: auto; text-wrap: balance; }
+}
+/* русские описания длиннее — колонка чуть шире, чтобы у Trady тоже вышло две строки, а не три */
+@media (min-width: 1025px) {
+  html[data-lang="ru"] .project-heading__subtitle { max-width: 640px; }
+}
+
+/* пиксельные аватары команды (<img>): обрезка по кругу, без сжатия во flex */
+img.team__avatar { display: block; object-fit: cover; flex: none; image-rendering: pixelated; }
+
+/* футер-терминал — ссылка на главную */
+.footer__home { color: inherit; text-decoration: none; cursor: pointer; }
+.footer__home:hover .footer__prompt { color: var(--orange); }
+
+/* кнопка Contact me: тот же объёмный стиль со свечением, голубая */
+.hero__cta { background: linear-gradient(180deg, #5cc4ff 0%, #2f9bff 55%, #1b7cff 100%) !important; color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.65), inset 0 0 22px rgba(255,255,255,.38), 0 10px 26px rgba(27,124,255,.38) !important; }
+.hero__cta:hover { filter: brightness(1.04); }
+
+/* Внизу страницы проекта: карточки «предыдущий / следующий проект» */
+.case-pager { display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:1060px; margin:72px auto 0; padding:0 40px; }
+.case-pager__card { display:flex; align-items:center; gap:18px; padding:14px; border-radius:var(--radius-lg); background:#f6f6f8; color:var(--text); text-decoration:none; transition:background-color .2s ease, box-shadow .2s ease; }
+.case-pager__card--next { flex-direction:row-reverse; text-align:right; }
+.case-pager__card img { flex:none; width:44%; aspect-ratio:8/5; object-fit:cover; border-radius:6px; display:block; }
+.case-pager__text { display:flex; flex-direction:column; gap:4px; min-width:0; flex:1; }
+.case-pager__label { font-size:14px; color:var(--text-2); }
+.case-pager__text b { font-size:24px; letter-spacing:-.02em; }
+.case-pager__sub { font-size:14px; color:var(--text-2); }
+.case-pager__card:hover .case-pager__text b { color:var(--orange); }
+.case-pager__card:hover { background:#f0f0f3; box-shadow:0 0 0 1px #e3e3e8; }
+@media (max-width:760px){ .case-pager { grid-template-columns:1fr; padding:0 20px; margin-top:56px; gap:12px; } .case-pager__card--next { flex-direction:row; text-align:left; } .case-pager__card img { width:38%; } .case-pager__text b { font-size:20px; } }
+
+/* меньше отступ между описанием проекта и «Моя роль» (везде) */
+.project-heading__subtitle { margin-bottom: 0; }
+.project-heading__role, .project-heading .project-heading__role { margin-top: 10px; }
+/* картинки в карточках «предыдущий / следующий проект»: атрибут height не должен ломать пропорцию */
+.case-pager__card img { height: auto; }
+
+/* появление шапки при загрузке страницы: плавно проявляется, имя и ссылки чуть опускаются на место */
+@keyframes header-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes header-drop { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: none; } }
+.header { animation: header-in .7s ease backwards; }
+.header__name, .header__center { animation: header-drop .7s .1s cubic-bezier(.2,.7,.2,1) backwards; }
+@media (min-width: 1025px) { .header__right { animation: header-drop .7s .22s cubic-bezier(.2,.7,.2,1) backwards; } }
+@media (prefers-reduced-motion: reduce) { .header, .header__name, .header__center, .header__right { animation: none; } }
+
+/* телефон: у тройки роликов Shiro на главной показываем 2 (третий скрыт) */
+@media (max-width: 640px) { .card--trio .card__row .card__image:nth-child(3) { display: none; } }
+
+/* иконка на кнопках «View Project» крупнее */
+.project-btn__icon { width: 24px; height: 24px; }
+
+/* мобильное меню: язык — просто текст с полным названием (English / Русский) вместо круглой кнопки «EN» */
+@media (max-width: 1024px) {
+  .header__right .lang-toggle { border: 0; border-radius: 0; background: none; padding: 12px 0; min-width: 0; margin: 12px 0 0; font-size: 0; color: var(--text-2); }
+  .header__right .lang-toggle::after { content: attr(data-full); font-size: 18px; font-weight: 500; letter-spacing: -0.01em; }
+  .header__right .lang-toggle:hover { color: var(--orange); }
 }

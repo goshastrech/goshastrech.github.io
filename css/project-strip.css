@@ -9,9 +9,9 @@
    --ps-gap (расстояние между карточками), padding у .project-strip.
    ============================================================ */
 .project-strip {
-  --ps-card-w: 320px;
+  --ps-card-w: 230px;
   --ps-fade: 96px;
-  --ps-gap: 20px;
+  --ps-gap: 16px;
   --ps-speed: 46s;           /* время одного полного круга из 10 карточек (меньше = быстрее) */
   position: relative;
   width: 100%;
@@ -103,15 +103,15 @@
   .project-strip { --ps-card-w: 170px; --ps-fade: 48px; --ps-gap: 14px; --ps-speed: 40s; margin-top: 60px; margin-bottom: 120px; }
   .project-strip__nav { padding: 8px 0 10px; }
   .project-strip__name { margin-top: 8px; font-size: 14px; }
-  .project-strip__meta { font-size: 12px; }
+  .project-strip__meta { font-size: 14px; }
 }
 @media (max-width: 640px) {
   /* телефон: карточки вдвое меньше (120px) и два ряда, едущие в разные стороны */
   .project-strip { --ps-card-w: 120px; --ps-fade: 32px; --ps-gap: 10px; --ps-speed: 38s; margin-top: 50px; margin-bottom: 110px; }
   .project-strip__nav { padding: 6px 0 8px; }
   .project-strip__thumb { border-radius: 4px; }
-  .project-strip__name { margin-top: 6px; font-size: 12px; }
-  .project-strip__meta { font-size: 10px; }
+  .project-strip__name { margin-top: 6px; font-size: 14px; }
+  .project-strip__meta { font-size: 14px; }
   .project-strip__card { border-radius: 4px; }
 }
 .project-strip__nav--rev.is-marquee .project-strip__list { animation-direction: reverse; }
@@ -146,3 +146,30 @@
 /* видео в миниатюре всегда вписано в карточку фиксированной ширины (не растягивается до своего размера) */
 .project-strip__thumb { width: 100%; min-width: 0; }
 .project-strip__thumb video { max-width: 100%; max-height: 100%; }
+
+/* Лента проектов внизу первого экрана: заезжает на нижнюю «пустую» часть hero, дальше идёт «Обо мне» */
+.hero-strip { position: relative; z-index: 3; margin-top: -300px; margin-bottom: 0; }
+.hero-strip .project-strip { margin: 0; }
+@media (max-width: 640px) { .hero-strip { margin-top: -250px; } }
+
+/* место под ленту внизу первого экрана: контент hero центрируется выше неё */
+.sky-hero { padding-bottom: 230px; }
+.hero-strip { margin-top: -215px; }
+@media (max-width: 640px) { .sky-hero { padding-bottom: 250px; } .hero-strip { margin-top: -240px; } }
+
+/* подписи под карточками (название и описание) убраны — остаются только превью; aria-label у ссылок остаётся из текста внутри */
+.project-strip__name, .project-strip__meta { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.sky-hero { padding-bottom: 190px; }
+.hero-strip { margin-top: -170px; }
+@media (max-width: 640px) { .sky-hero { padding-bottom: 190px; } .hero-strip { margin-top: -170px; } }
+
+/* больше белого места под лентой внизу первого экрана (~90px) */
+.sky-hero { padding-bottom: 280px; }
+.hero-strip { margin-top: -260px; }
+@media (max-width: 640px) { .sky-hero { padding-bottom: 260px; } .hero-strip { margin-top: -240px; } }
+
+/* десктоп: карточки шире при той же высоте (~144px): 300px × 2.08 */
+@media (min-width: 1025px) {
+  .project-strip { --ps-card-w: 300px; }
+  .project-strip__thumb { aspect-ratio: 2.08 / 1; }
+}

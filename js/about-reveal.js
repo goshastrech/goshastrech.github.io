@@ -32,6 +32,10 @@
     }
   }
   texts.forEach(wrapText);
+  texts.forEach(function (t) { t.classList.add('is-split'); });   // слова обёрнуты — блок можно показывать (до этого он скрыт CSS, без «вспышки»)
+  // блок «фото + имя» (если есть на странице) проявляется первой строкой, как текст ниже
+  var idBlock = document.querySelector('.about-me .about-id');
+  if (idBlock) { idBlock.classList.add('w'); words.unshift(idBlock); }
   // нижний ряд ссылок проявляется как последняя «строка» после абзацев (без JS он просто виден)
   var linksRow = document.querySelector('.about-me .about-links');
   if (linksRow) { linksRow.classList.add('w'); words.push(linksRow); }

@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
   <noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
   <link rel="canonical" href="https://goshastrech.github.io/polyranger.html" />
 </head>
@@ -51,7 +51,7 @@
         <div class="case__team">
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--p_cto" src="img/team/pixel/p_cto.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>C-level</span><span data-i18n-ru>Руководство</span></div>
@@ -60,7 +60,7 @@
           </div>
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--p_pm" src="img/team/pixel/p_pm.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>Product</span><span data-i18n-ru>Продукт</span></div>
@@ -69,8 +69,8 @@
           </div>
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--p_d1" src="img/team/pixel/p_d1.png" alt="" width="256" height="256">
+              <img class="team__avatar team__avatar--p_d2" src="img/team/pixel/p_d2.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>Development</span><span data-i18n-ru>Разработка</span></div>
@@ -79,7 +79,7 @@
           </div>
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--owner" src="img/team/pixel/owner.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>Design</span><span data-i18n-ru>Дизайн</span></div>
@@ -452,9 +452,14 @@
 
   </div>
 
+  <nav class="case-pager" aria-label="Projects">
+    <a class="case-pager__card case-pager__card--prev" href="trady.html"><img src="img/strip/trady.webp" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="case-pager__text"><span class="case-pager__label">← <span data-i18n-en>Previous project</span><span data-i18n-ru>Предыдущий проект</span> </span><b>Trady</b><span class="case-pager__sub"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></span></span></a>
+    <a class="case-pager__card case-pager__card--next" href="shiro.html"><img src="img/strip/shiro.webp" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="case-pager__text"><span class="case-pager__label"> <span data-i18n-en>Next project</span><span data-i18n-ru>Следующий проект</span> →</span><b>Shiro</b><span class="case-pager__sub"><span data-i18n-en>AI character</span><span data-i18n-ru>AI-персонаж</span></span></span></a>
+  </nav>
+
   <div id="footer-root"></div>
 
-  <script src="js/components.js"></script>
+  <script src="js/components.js?v=3"></script>
   <script src="js/main.js"></script>
   <script src="js/lightbox.js"></script>
 </body>

@@ -23,7 +23,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
   <link rel="canonical" href="https://goshastrech.github.io/shiro.html" />
   <noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
 </head>
@@ -50,8 +50,8 @@
         <div class="case__team">
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--s_f1" src="img/team/pixel/s_f1.png" alt="" width="256" height="256">
+              <img class="team__avatar team__avatar--s_f2" src="img/team/pixel/s_f2.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>Founders</span><span data-i18n-ru>Основатели</span></div>
@@ -60,7 +60,7 @@
           </div>
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--owner" src="img/team/pixel/owner.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>Design</span><span data-i18n-ru>Дизайн</span></div>
@@ -69,7 +69,7 @@
           </div>
           <div class="team__group">
             <div class="team__avatars">
-              <div class="team__avatar"></div>
+              <img class="team__avatar team__avatar--s_v" src="img/team/pixel/s_v.png" alt="" width="256" height="256">
             </div>
             <div>
               <div class="team__role"><span data-i18n-en>Video Production</span><span data-i18n-ru>Видеопродакшн</span></div>
@@ -220,9 +220,14 @@
 
   </div>
 
+  <nav class="case-pager" aria-label="Projects">
+    <a class="case-pager__card case-pager__card--prev" href="polyranger.html"><img src="img/strip/polyranger.webp" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="case-pager__text"><span class="case-pager__label">← <span data-i18n-en>Previous project</span><span data-i18n-ru>Предыдущий проект</span> </span><b>Polyranger</b><span class="case-pager__sub"><span data-i18n-en>Prediction markets</span><span data-i18n-ru>Рынки предсказаний</span></span></span></a>
+    <a class="case-pager__card case-pager__card--next" href="c3tch.html"><img src="img/strip/c3tch.webp" alt="" width="800" height="500" loading="lazy" decoding="async"><span class="case-pager__text"><span class="case-pager__label"> <span data-i18n-en>Next project</span><span data-i18n-ru>Следующий проект</span> →</span><b>C3tch</b><span class="case-pager__sub"><span data-i18n-en>Web3 networking</span><span data-i18n-ru>Web3-нетворкинг</span></span></span></a>
+  </nav>
+
   <div id="footer-root"></div>
 
-  <script src="js/components.js"></script>
+  <script src="js/components.js?v=3"></script>
   <script src="js/main.js"></script>
   <script src="js/lightbox.js"></script>
 </body>

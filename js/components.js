@@ -35,7 +35,7 @@ const HEADER = `
 
 const FOOTER = `
 <footer class="footer">
-  <p class="footer__prompt">heorhi@portfolio <span class="footer__prompt-muted">~</span> % <span class="footer__prompt-muted">whoami</span><span class="cursor-blink"></span></p>
+  <a href="index.html" class="footer__home" aria-label="Home"><p class="footer__prompt">heorhi@portfolio <span class="footer__prompt-muted">~</span> % <span class="footer__prompt-muted">whoami</span><span class="cursor-blink"></span></p></a>
   <!-- Кнопка «Написать мне в Telegram» временно убрана (вернуть: раскомментировать)
   <a href="https://t.me/goshast11" target="_blank" rel="noopener noreferrer" class="footer__write"><span data-i18n-en>Write me on Telegram</span><span data-i18n-ru>Написать мне в Telegram</span></a>
   -->
@@ -81,6 +81,7 @@ if (footerRoot) footerRoot.outerHTML = FOOTER;
   const applyLang = (lang) => {
     document.documentElement.setAttribute('data-lang', lang);
     btn.textContent = lang.toUpperCase();
+    btn.setAttribute('data-full', lang === 'ru' ? 'Русский' : 'English');   // в мобильном меню показывается полное название
     document.documentElement.lang = lang;
     // aria-label говорит, на что переключит кнопка (видимая подпись не меняется)
     btn.setAttribute('aria-label', lang === 'ru' ? 'Переключить язык на английский' : 'Switch language to Russian');

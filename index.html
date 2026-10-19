@@ -21,6 +21,19 @@
   <meta name="twitter:image" content="https://goshastrech.github.io/img/og-image-v2.jpg" />
   <link rel="canonical" href="https://goshastrech.github.io/" />
   <noscript><style>.fade-in{opacity:1!important;transform:none!important}</style></noscript>
+  <script>
+  /* Главная всегда открывается сверху (в том числе при возврате с проекта кнопкой «назад» и при обновлении),
+     кроме ссылок с якорем (#project-...). Класс js-reveal-about ставим сразу, чтобы блок «Обо мне» не мигал до запуска скрипта. */
+  (function () {
+    try { history.scrollRestoration = 'manual'; } catch (e) {}
+    if (!location.hash) window.scrollTo(0, 0);
+    window.addEventListener('pageshow', function (e) { if (e.persisted && !location.hash) window.scrollTo(0, 0); });
+    if (!(window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) {
+      document.documentElement.classList.add('js-reveal-about');
+      setTimeout(function () { if (!document.querySelector('.about-me__big.is-split')) document.documentElement.classList.remove('js-reveal-about'); }, 4000);
+    }
+  })();
+  </script>
   <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png" />
   <link rel="icon" type="image/png" sizes="192x192" href="img/favicon-192.png" />
   <link rel="apple-touch-icon" href="img/apple-touch-icon.png" />
@@ -29,18 +42,30 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
 
   <!-- Наши стили -->
-  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/styles.css?v=3" />
   <!-- Небо первого экрана (стили лежат отдельно, styles.css не тронут) -->
   <link rel="stylesheet" href="css/sky-hero.css" />
   <link rel="stylesheet" href="css/hero-plain.css" />
   <link rel="stylesheet" href="css/hero-intro.css" />
   <link rel="stylesheet" href="css/header-transparent.css" />
   <link rel="stylesheet" href="css/about-reveal.css" />
-  <link rel="stylesheet" href="css/about-links.css" />
-  <link rel="stylesheet" href="css/posters-fan.css" />
+  <link rel="stylesheet" href="css/about-links.css?v=4" />
+  <link rel="stylesheet" href="css/posters-fan.css?v=3" />
   <link rel="stylesheet" href="css/big-board.css" />
-  <!-- <link rel="stylesheet" href="css/project-strip.css?v=5" /> -->
+  <link rel="stylesheet" href="css/project-strip.css?v=10" />
   <link rel="stylesheet" href="css/all-work.css" />
+  <style>
+    /* вариант без первого экрана: страница начинается с текста «Обо мне» */
+    .about-me { padding-top: 150px !important; }
+    @media (max-width: 640px) { .about-me { padding-top: 110px !important; } }
+    .about-id { display:flex; align-items:center; gap:14px; margin-bottom:44px; }
+    .about-id__photo { flex:none; width:44px; height:44px; border-radius:50%; object-fit:cover; display:block; }
+    .about-id__line { font-size:26px; letter-spacing:-.03em; line-height:1.2; white-space:nowrap; }
+    .about-id__name { font-weight:600; color:var(--text); }
+    .about-id__role { font-weight:500; color:var(--text-2); }
+    @media (max-width:640px){ .about-id { gap:14px; margin-bottom:32px; } .about-id__photo { width:38px; height:38px; } .about-id__line { font-size:20px; white-space:normal; } }
+    .about-me .about-badge--tool { height:24px; width:24px; object-fit:contain; border-radius:0; }
+  </style>
 </head>
 <body>
 
@@ -49,127 +74,47 @@
   <!-- ====================================================
        HERO
        ==================================================== -->
-  <div class="sky-hero" id="sky-hero">
-
-    <section class="hero">
-
-      <img class="hero__avatar" src="img/avatar-photo.webp" alt="Heorhi Strechan" width="122" height="122" fetchpriority="high" decoding="async" />
-
-      <div class="hero__status">
-        <span class="hero__dot"></span>
-        <span data-i18n-en>Available for work</span>
-        <span data-i18n-ru>Открыт для работы</span>
-      </div>
-
-      <h1 class="hero__title">
-        <span data-i18n-en>
-          <span class="hi-l" style="--i:0">Heorhi Strechan,<br class="mbr" /> product &amp; visual designer,<br class="mbr" /></span>
-          <span class="hi-l" style="--i:1">creating modern digital products<br class="mbr" /> by combining</span>
-          <span class="hi-l" style="--i:2">UX analysis and visual design.<br class="mbr" /> <span class="accent"> Web3, Crypto,<br />
-           Fintech, Social Products </span></span>
-        </span>
-        <span data-i18n-ru>
-          <span class="hi-l" style="--i:0">Стречень Георгий, продуктовый дизайнер,</span>
-          <span class="hi-l" style="--i:1">создаю современные цифровые продукты, объединяя UX-анализ и визуальный дизайн.</span>
-          <span class="hi-l accent" style="--i:2"> Web3, Crypto, Fintech, Social Products </span>
-        </span>
-      </h1>
-
-      <a href="https://t.me/goshast11" target="_blank" class="hero__cta" rel="noopener noreferrer">
-        <span data-i18n-en>Contact me</span>
-        <span data-i18n-ru>Связаться</span>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20.483 2.98596C20.12 2.89696 19.7074 2.91097 19.2018 3.04798C16.2726 3.84198 4.62866 7.62596 3.67046 8.04996C2.62616 8.51196 2.02356 9.32596 2.01426 10.394C2.00186 11.822 3.15286 12.943 4.51426 12.895C4.55806 12.894 6.24256 12.917 7.20176 12.927C7.20176 12.927 8.05796 17.208 8.07866 17.259C8.32856 17.873 8.91476 18.056 9.42046 17.835L12.2643 16.584C12.5862 16.901 14.7506 18.992 14.983 19.179C15.6756 19.735 16.2741 19.91 17.0143 19.929C18.206 19.96 19.247 19.259 19.7955 18.116C20.1398 17.399 21.7445 7.35798 21.8893 6.36197C22.1192 4.78097 22.0672 4.15997 21.4205 3.51697C21.1606 3.25897 20.8461 3.07396 20.483 2.98596ZM20.0142 4.92496C20.0142 4.92496 20.0628 5.10196 19.9205 6.07996C19.4114 9.58196 18.2049 16.747 17.9518 17.334C17.7789 17.736 17.4324 17.939 17.0455 17.928C16.705 17.919 16.5355 17.859 16.233 17.616C16.0774 17.491 15.3773 16.826 14.3893 15.865C14.3769 15.853 12.4187 13.942 12.4187 13.942C12.2278 13.752 12.0484 13.639 11.6725 13.635C11.4539 13.635 11.1654 13.801 11.1654 13.801L9.66156 15.074L9.13926 12.52L15.4205 9.83198C15.9279 9.61398 16.17 9.02596 15.9518 8.51896C15.7337 8.01096 15.1467 7.76898 14.6393 7.98698L7.82676 10.926C7.43886 10.924 4.54836 10.891 4.45176 10.895C4.22926 10.902 4.01176 10.684 4.01426 10.394C4.01626 10.162 4.11856 10.024 4.48296 9.86299C5.32756 9.48898 16.8309 5.75796 19.6701 4.98896C19.9379 4.91596 20.0142 4.92496 20.0142 4.92496Z" fill="white"/>
-        </svg>
-      </a>
-
-    </section>
-  </div>
-
   <section class="about-me" aria-label="About me">
     <div class="about-me__body">
+      <div class="about-id js-id">
+        <img class="about-id__photo" src="img/avatar-photo.webp" alt="Heorhi Strechan" width="122" height="122" decoding="async" />
+        <div class="about-id__text">
+          <div class="about-id__line"><span class="about-id__name"><span data-i18n-en>Heorhi Strechan</span><span data-i18n-ru>Стречень Георгий</span></span></div>
+        </div>
+      </div>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">I'm a</span> <span class="k">product and visual designer</span> <span class="nb"><span class="g">working</span></span> <span class="g">in</span> <span class="k">Web3, crypto and fintech.</span> <span class="g">I design the</span> <span class="pill">whole</span> <span class="k">path</span> <span class="g">of a product,</span> <span class="nb"><span class="k">from</span></span> <span class="k">research and UX</span> <span class="g">to</span> <span class="nb"><span class="k">interfaces</span></span> <span class="k">for web and iOS.</span></span>
-        <span data-i18n-ru><span class="g">Я&nbsp;—</span> <span class="k">продуктовый и&nbsp;визуальный дизайнер,</span> <span class="nb"><span class="g">работаю</span></span> <span class="g">в</span>&nbsp;<span class="k">Web3, крипто и&nbsp;финтехе.</span> <span class="g">Проектирую</span> <span class="pill">весь</span> <span class="k">путь</span> <span class="g">продукта,</span> <span class="nb"><span class="k">от</span></span>&nbsp;<span class="k">исследования и&nbsp;UX</span> <span class="g">до</span>&nbsp;<span class="nb"><span class="k">интерфейсов</span></span> <span class="k">для веба и&nbsp;iOS.</span></span>
+        <span data-i18n-en><span class="g">I’m a</span> <span class="k">product and visual designer</span> <span class="g">working in</span> <span class="k">Web3, crypto and fintech.</span> <span class="g">I design products end to end, from research and UX to</span> <span class="k">design systems and interfaces for web and iOS.</span></span>
+        <span data-i18n-ru><span class="g">Я</span> <span class="k">продуктовый и&nbsp;визуальный дизайнер,</span> <span class="g">работаю в</span> <span class="k">Web3, крипте и&nbsp;финтехе.</span> <span class="g">Веду продукт от&nbsp;начала до&nbsp;конца: от&nbsp;исследований и&nbsp;UX до</span> <span class="k">дизайн-систем и&nbsp;интерфейсов для&nbsp;веба и&nbsp;iOS.</span></span>
       </p>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">My work ranges from</span> <span class="k">trading terminals</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="trady.html"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a><span class="g">)</span></span> <span class="g">and</span> <span class="k">prediction-market aggregators</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="polyranger.html"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">Polyranger</a><span class="g">)</span></span> <span class="g">to</span> <span class="k">NFT platforms</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="ftlb.html"><img class="about-sticker" src="img/about/plain/ftlb.svg" alt="" width="20" height="20" loading="lazy" decoding="async">FTLB</a><span class="g">),</span></span> <span class="k">an NFT collection</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="index.html#project-big-board">Big Board</a><span class="g">),</span></span> <span class="g">networking products</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="c3tch.html"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a><span class="g">)</span></span> <span class="g">and</span> <span class="k">brand identities</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="shiro.html"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a><span class="g">,</span></span> <span class="nbk"><a class="about-link" href="cryptorsy.html"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a><span class="g">).</span></span> <span class="g">Dense data, mixed audiences and complex flows are the kind of problems I like to</span> <span class="pill">untangle.</span> </span>
-        <span data-i18n-ru><span class="g">Мои работы&nbsp;— от</span>&nbsp;<span class="k">торговых терминалов</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="trady.html"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a><span class="g">)</span></span> <span class="g">и</span>&nbsp;<span class="k">агрегаторов рынков предсказаний</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="polyranger.html"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">Polyranger</a><span class="g">)</span></span> <span class="g">до</span>&nbsp;<span class="k">NFT&#8209;платформ</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="ftlb.html"><img class="about-sticker" src="img/about/plain/ftlb.svg" alt="" width="20" height="20" loading="lazy" decoding="async">FTLB</a><span class="g">),</span></span> <span class="k">NFT&#8209;коллекции</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="index.html#project-big-board">Big Board</a><span class="g">),</span></span> <span class="g">нетворкинг&#8209;продуктов</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="c3tch.html"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a><span class="g">)</span></span> <span class="g">и</span>&nbsp;<span class="k">айдентики</span> <span class="nbk"><span class="g">(</span><a class="about-link" href="shiro.html"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a><span class="g">,</span></span> <span class="nbk"><a class="about-link" href="cryptorsy.html"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a><span class="g">).</span></span> <span class="g">Больше всего мне нравится</span> <span class="pill">разбираться</span> <span class="g">в&nbsp;плотных данных, разной аудитории и&nbsp;сложных сценариях.</span> </span>
+        <span data-i18n-en><span class="g">My work ranges from</span> <span class="k">the trading terminal</span> <span class="nbk"><a class="about-link" href="trady.html" data-preview="trady"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a></span> <span class="g">and</span> <span class="k">the prediction-market aggregator</span> <span class="nbk"><a class="about-link" href="polyranger.html" data-preview="polyranger"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">PolyRanger</a></span> <span class="g">to</span> <span class="k">the NFT platform</span> <span class="nbk"><a class="about-link" href="ftlb.html" data-preview="ftlb">FTLB</a></span><span class="g">,</span> <span class="k">the NFT collection</span> <span class="nbk"><a class="about-link" href="index.html#project-big-board" data-preview="big-board">Big Board</a></span><span class="g">,</span> <span class="k">the networking app</span> <span class="nbk"><a class="about-link" href="c3tch.html" data-preview="c3tch"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a></span> <span class="g">and</span> <span class="k">brand identities</span> <span class="g">for</span> <span class="nbk"><a class="about-link" href="shiro.html" data-preview="shiro"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a></span> <span class="g">and</span> <span class="nbk"><a class="about-link" href="cryptorsy.html" data-preview="cryptorsy"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a></span><span class="g">.</span> <span class="g">Dense data, mixed audiences and complex flows are the kinds of problems I like to</span> <span class="k">untangle.</span></span>
+        <span data-i18n-ru><span class="g">В моей работе есть</span> <span class="k">торговый терминал</span> <span class="nbk"><a class="about-link" href="trady.html" data-preview="trady"><img class="about-sticker" src="img/about/plain/trady.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Trady</a></span><span class="g">,</span> <span class="k">агрегатор рынков предсказаний</span> <span class="nbk"><a class="about-link" href="polyranger.html" data-preview="polyranger"><img class="about-sticker about-sticker--wide" src="img/about/plain/polyranger-site-wide.png" alt="" width="46" height="25" loading="lazy" decoding="async">PolyRanger</a></span><span class="g">,</span> <span class="k">NFT-платформа</span> <span class="nbk"><a class="about-link" href="ftlb.html" data-preview="ftlb">FTLB</a></span><span class="g">,</span> <span class="k">NFT-коллекция</span> <span class="nbk"><a class="about-link" href="index.html#project-big-board" data-preview="big-board">Big Board</a></span><span class="g">,</span> <span class="k">нетворкинг-приложение</span> <span class="nbk"><a class="about-link" href="c3tch.html" data-preview="c3tch"><img class="about-sticker" src="img/about/plain/c3tch.svg" alt="" width="20" height="20" loading="lazy" decoding="async">C3tch</a></span><span class="g">, а&nbsp;также</span> <span class="k">айдентика</span> <span class="g">для</span> <span class="nbk"><a class="about-link" href="shiro.html" data-preview="shiro"><img class="about-sticker" src="img/about/plain/shiro.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Shiro</a></span> <span class="g">и</span> <span class="nbk"><a class="about-link" href="cryptorsy.html" data-preview="cryptorsy"><img class="about-sticker" src="img/about/plain/cryptorsy.svg" alt="" width="20" height="20" loading="lazy" decoding="async">Cryptorsy</a></span><span class="g">.</span> <span class="g">Плотные данные, разная аудитория и&nbsp;сложные сценарии — именно те задачи, которые я люблю</span> <span class="k">распутывать.</span></span>
+      </p>
+      
+      <p class="about-me__big">
+        <span data-i18n-en><span class="g">Beyond interfaces, I make</span> <span class="k">graphics</span> <span class="g">and</span> <span class="k">video</span> <span class="g">for social media,</span> <span class="k">pitch decks</span> <span class="g">for investors and</span> <span class="k">AI-generated visuals,</span> <span class="g">so a product looks</span> <span class="k">consistent</span> <span class="g">from the first screen to the first post.</span></span>
+        <span data-i18n-ru><span class="g">Помимо интерфейсов, делаю</span> <span class="k">графику</span> <span class="g">и</span> <span class="k">видео</span> <span class="g">для&nbsp;соцсетей,</span> <span class="k">питч-деки</span> <span class="g">для&nbsp;инвесторов и</span> <span class="k">AI-визуалы,</span> <span class="g">чтобы продукт выглядел</span> <span class="k">цельно</span> <span class="g">от&nbsp;первого экрана до&nbsp;первого поста.</span></span>
       </p>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">I merge existing</span> <span class="nb"><span class="k">design</span></span> <span class="k">systems</span> <span class="g">into one final system and then build it in code with</span> <span class="nb"><span class="k">AI.</span></span> <span class="g">This lets me</span> <span class="k">generate quality mockups</span> <span class="pill">quickly</span> <span class="g">and hand them to</span> <span class="nb"><span class="g">developers</span></span> <span class="g">without losing details, which speeds up the whole process.</span></span>
-        <span data-i18n-ru><span class="g">Я собираю несколько существующих</span> <span class="nb"><span class="k">дизайн&#8209;систем</span></span> <span class="g">в&nbsp;одну финальную и&nbsp;затем воссоздаю её в&nbsp;коде с&nbsp;помощью</span> <span class="nb"><span class="k">AI.</span></span> <span class="g">Так я</span> <span class="k">быстро делаю качественные макеты</span> <span class="g">и&nbsp;передаю их</span> <span class="nb"><span class="g">разработчикам</span></span> <span class="g">без потери деталей, а&nbsp;весь процесс идёт</span> <span class="pill">быстрее.</span></span>
+        <span data-i18n-en><span class="g">I work closely with</span> <span class="k">founders</span> <span class="g">and</span> <span class="k">developers.</span> <span class="g">I prefer</span> <span class="k">short feedback loops,</span> <span class="g">clear handoffs and decisions based on how real people use the product.</span></span>
+        <span data-i18n-ru><span class="g">Работаю плотно с</span> <span class="k">фаундерами</span> <span class="g">и</span> <span class="k">разработчиками.</span> <span class="g">Люблю</span> <span class="k">короткие циклы обратной связи,</span> <span class="g">понятный хэндофф и&nbsp;решения, основанные на&nbsp;том, как&nbsp;продуктом пользуются реальные люди.</span></span>
       </p>
       <p class="about-me__big">
-        <span data-i18n-en><span class="g">Beyond interfaces, I make</span> <span class="nb"><span class="k">graphics</span></span> <span class="g">and</span> <span class="nb"><span class="k">video</span></span> <span class="g">for social media,</span> <span class="nb"><span class="k">pitch</span></span> <span class="k">decks</span> <span class="g">for investors and</span> <span class="k">AI-generated visuals,</span> <span class="g">so a product looks</span> <span class="pill">consistent</span> <span class="g">from the first screen to the first post.</span></span>
-        <span data-i18n-ru><span class="g">Помимо интерфейсов, я делаю</span> <span class="nb"><span class="k">графику</span></span> <span class="g">и</span>&nbsp;<span class="nb"><span class="k">видео</span></span> <span class="g">для соцсетей,</span> <span class="nb"><span class="k">питч&#8209;деки</span></span> <span class="g">для инвесторов и</span>&nbsp;<span class="k">AI&#8209;визуалы,</span> <span class="g">чтобы продукт выглядел</span> <span class="pill">цельно</span> <span class="g">от&nbsp;первого экрана до&nbsp;первого поста.</span></span>
+        <span data-i18n-en><span class="g">My daily stack:</span> <span class="nb"><svg class="about-badge" viewBox="0 0 38 57" width="13" height="20" aria-hidden="true" focusable="false"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/></svg><span class="k">Figma</span></span> <span class="g">and</span> <span class="nbk"><svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5" fill="#FA0F00"/><path fill="#fff" d="M13.6 4.6h4.2L22 19.4h-3.9zM10.4 4.6H6.2L2 19.4h3.9zM12 11.2l2.7 8.2h-3.2l-.9-2.4h-2z"/></svg><span class="k">Adobe</span></span> <span class="k">Creative Cloud</span> <span class="g">for interface and visual design;</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/midjourney.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Midjourney</span></span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/nano-banana.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Nano</span></span><span class="k"> Banana Pro</span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/kling.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Kling</span></span><span class="k"> AI</span></span> <span class="g">and</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/veo-google.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Veo</span></span></span> <span class="g">for image and video generation;</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/claude.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Claude</span></span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/claude-code.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Claude</span></span><span class="k"> Code</span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/grok.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Grok</span></span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/gemini.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Gemini</span></span></span> <span class="g">and</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/chatgpt.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">ChatGPT</span></span></span> <span class="g">for research, UI generation and motion testing; and</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/vscode.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">VS</span></span><span class="k"> Code</span></span> <span class="g">as my editor, where Claude lives.</span></span>
+        <span data-i18n-ru><span class="g">Мой стек на&nbsp;каждый день:</span> <span class="nb"><svg class="about-badge" viewBox="0 0 38 57" width="13" height="20" aria-hidden="true" focusable="false"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/></svg><span class="k">Figma</span></span> <span class="g">и</span> <span class="nbk"><svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5" fill="#FA0F00"/><path fill="#fff" d="M13.6 4.6h4.2L22 19.4h-3.9zM10.4 4.6H6.2L2 19.4h3.9zM12 11.2l2.7 8.2h-3.2l-.9-2.4h-2z"/></svg><span class="k">Adobe</span></span> <span class="k">Creative Cloud</span> <span class="g">для&nbsp;интерфейсов и&nbsp;визуала;</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/midjourney.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Midjourney</span></span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/nano-banana.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Nano</span></span><span class="k"> Banana Pro</span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/kling.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Kling</span></span><span class="k"> AI</span></span> <span class="g">и</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/veo-google.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Veo</span></span></span> <span class="g">для&nbsp;генерации изображений и&nbsp;видео;</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/claude.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Claude</span></span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/claude-code.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Claude</span></span><span class="k"> Code</span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/grok.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Grok</span></span></span>, <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/gemini.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">Gemini</span></span></span> <span class="g">и</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/chatgpt.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">ChatGPT</span></span></span> <span class="g">для&nbsp;исследований, генерации UI и&nbsp;тестов анимации; и</span> <span class="nbk"><span class="nw"><img class="about-badge about-badge--tool" src="img/tools/vscode.svg" alt="" width="22" height="22" loading="lazy" decoding="async"><span class="k">VS</span></span><span class="k"> Code</span></span> <span class="g">как&nbsp;редактор, в&nbsp;котором живёт Claude.</span></span>
       </p>
-      <p class="about-me__big">
-        <span data-i18n-en><span class="g">I work closely with</span> <span class="nb"><span class="k">founders</span></span> <span class="g">and</span> <span class="k">developers:</span> <span class="g">I prefer</span> <span class="k">short feedback loops,</span> <span class="g">clear handoff and decisions backed by how real people use the product.</span> </span>
-        <span data-i18n-ru><span class="g">Я тесно работаю с</span>&nbsp;<span class="nb"><span class="k">фаундерами</span></span> <span class="g">и</span>&nbsp;<span class="k">разработчиками:</span> <span class="g">люблю</span> <span class="k">короткие циклы обратной связи,</span> <span class="g">понятную передачу в&nbsp;разработку и&nbsp;решения, опирающиеся на&nbsp;то, как реальные люди пользуются продуктом.</span> </span>
-      </p>
-      <p class="about-me__big">
-        <span data-i18n-en><span class="g">My daily stack:</span> <span class="nb"><svg class="about-badge" viewBox="0 0 38 57" width="13" height="20" aria-hidden="true" focusable="false"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/></svg><span class="k">Figma</span></span> <span class="g">and</span> <span class="nbk"><svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5" fill="#FA0F00"/><path fill="#fff" d="M13.6 4.6h4.2L22 19.4h-3.9zM10.4 4.6H6.2L2 19.4h3.9zM12 11.2l2.7 8.2h-3.2l-.9-2.4h-2z"/></svg><span class="k">Adobe</span></span> <span class="k">Creative Cloud</span> <span class="g">for interface and visual design,</span> <span class="k">Midjourney, Nano Banana Pro, Kling AI and Veo</span> <span class="g">for image and video generation,</span> <svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><g stroke="#D97757" stroke-width="2.3" stroke-linecap="round"><path d="M12 12V1.6M12 12l3.4-9.2M12 12l7.4-7.4M12 12l9.2-3.4M12 12h10.4M12 12l9.2 3.4M12 12l5.4 9.4M12 12l-1.9 10.4M12 12l-5.4 9.4M12 12l-9.6 3.2M12 12H1.6M12 12L3.2 7.6M12 12L6.4 3.4"/></g></svg><span class="k">Claude, Claude Code, Grok, Gemini and ChatGPT</span> <span class="g">for research, UI and screen generation and motion testing, and</span> <span class="k">VS Code</span> <span class="g">as my editor, where Claude lives.</span> </span>
-        <span data-i18n-ru><span class="g">Мой рабочий стек:</span> <span class="nb"><svg class="about-badge" viewBox="0 0 38 57" width="13" height="20" aria-hidden="true" focusable="false"><path fill="#F24E1E" d="M19 0H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#FF7262" d="M19 0h9.5a9.5 9.5 0 0 1 0 19H19z"/><path fill="#A259FF" d="M19 19H9.5a9.5 9.5 0 0 0 0 19H19z"/><path fill="#0ACF83" d="M19 38H9.5A9.5 9.5 0 1 0 19 47.5z"/><circle fill="#1ABCFE" cx="28.5" cy="28.5" r="9.5"/></svg><span class="k">Figma</span></span> <span class="g">и</span> <span class="nbk"><svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><rect width="24" height="24" rx="5" fill="#FA0F00"/><path fill="#fff" d="M13.6 4.6h4.2L22 19.4h-3.9zM10.4 4.6H6.2L2 19.4h3.9zM12 11.2l2.7 8.2h-3.2l-.9-2.4h-2z"/></svg><span class="k">Adobe</span></span> <span class="k">Creative Cloud</span> <span class="g">для интерфейсов и&nbsp;визуала,</span> <span class="k">Midjourney, Nano Banana Pro, Kling AI и&nbsp;Veo</span> <span class="g">для генерации изображений и видео,</span> <svg class="about-badge" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><g stroke="#D97757" stroke-width="2.3" stroke-linecap="round"><path d="M12 12V1.6M12 12l3.4-9.2M12 12l7.4-7.4M12 12l9.2-3.4M12 12h10.4M12 12l9.2 3.4M12 12l5.4 9.4M12 12l-1.9 10.4M12 12l-5.4 9.4M12 12l-9.6 3.2M12 12H1.6M12 12L3.2 7.6M12 12L6.4 3.4"/></g></svg><span class="k">Claude, Claude Code, Grok, Gemini и ChatGPT</span> <span class="g">для исследований, генерации UI и&nbsp;экранов и&nbsp;тестирования анимации, а</span>&nbsp;<span class="k">VS Code</span> <span class="g">как редактор, где живёт Claude.</span> </span>
-      </p>
+      <!-- Ряд ссылок LinkedIn / Dribbble / Telegram / CV под текстом временно убран (вернуть: раскомментировать)
       <div class="about-links">
         <a class="about-link" href="https://www.linkedin.com/in/heorhi-strechan-09a1552a1/" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="1.7" y="1.7" width="12.6" height="12.6" rx="2.5"/><path d="M5.2 7v4M5.2 4.9v.1M8 11V7m0 2.2c0-1.4.9-2.2 2-2.2s1.8.8 1.8 2.2V11"/></svg><span>LinkedIn</span></a>
         <a class="about-link" href="https://dribbble.com/HeorhiStrechan" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="6.4"/><path d="M3 3.6c3 .9 6.2 3.6 8 8.6M1.7 7.7c3.3.4 7.3-.3 11.3-2M6.2 1.8c2.3 2.2 4.4 5.7 5.2 10"/></svg><span data-i18n-en>Dribbble</span><span data-i18n-ru>Dribbble</span></a>
         <a class="about-link" href="https://t.me/goshast11" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M14 2.5 1.8 7.2l3.6 1.4 1.4 4.3 2.2-2.6 3.3 2.4z"/><path d="m5.4 8.6 6.6-4.4"/></svg><span>Telegram</span></a>
         <a class="about-link" href="cv.html"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3.6 1.7h5.6l3.2 3.2v8.2a1.2 1.2 0 0 1-1.2 1.2H3.6a1.2 1.2 0 0 1-1.2-1.2V2.9a1.2 1.2 0 0 1 1.2-1.2z"/><path d="M9 1.9v3.2h3.2M5 8.4h5.6M5 11h5.6"/></svg><span data-i18n-en>CV</span><span data-i18n-ru>Резюме</span></a>
       </div>
+      -->
     </div>
   </section>
 
   <!-- Лента быстрой навигации по проектам -->
-  <!-- Лента проектов временно убрана с сайта (вернуть: убрать эти комментарии у блока, у <link> project-strip.css и у <script> project-strip.js)
-  <section class="project-strip" aria-label="Projects navigation">
-    <nav class="project-strip__nav" aria-label="Projects">
-      <ul class="project-strip__list">
-      <li><a class="project-strip__card" href="trady.html" draggable="false">
-        <span class="project-strip__thumb"><video src="img/strip/trady.mp4" poster="img/strip/trady.webp" autoplay muted loop playsinline preload="metadata" draggable="false" aria-hidden="true"></video></span>
-        <span class="project-strip__name">Trady</span>
-        <span class="project-strip__meta"><span data-i18n-en>Trading terminal</span><span data-i18n-ru>Торговый терминал</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="polyranger.html" draggable="false">
-        <span class="project-strip__thumb"><video src="img/strip/polyranger.mp4" poster="img/strip/polyranger.webp" autoplay muted loop playsinline preload="metadata" draggable="false" aria-hidden="true"></video></span>
-        <span class="project-strip__name">Polyranger</span>
-        <span class="project-strip__meta"><span data-i18n-en>Prediction markets</span><span data-i18n-ru>Рынки предсказаний</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="shiro.html" draggable="false">
-        <span class="project-strip__thumb"><img src="img/strip/shiro.webp" alt="" width="800" height="500" loading="lazy" draggable="false" /></span>
-        <span class="project-strip__name">Shiro</span>
-        <span class="project-strip__meta"><span data-i18n-en>AI character</span><span data-i18n-ru>AI-персонаж</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="c3tch.html" draggable="false">
-        <span class="project-strip__thumb"><video src="img/strip/c3tch.mp4" poster="img/strip/c3tch.webp" autoplay muted loop playsinline preload="metadata" draggable="false" aria-hidden="true"></video></span>
-        <span class="project-strip__name">C3tch</span>
-        <span class="project-strip__meta"><span data-i18n-en>Web3 networking</span><span data-i18n-ru>Web3-нетворкинг</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="ftlb.html" draggable="false">
-        <span class="project-strip__thumb"><img src="img/strip/ftlb.webp" alt="" width="800" height="500" loading="lazy" draggable="false" /></span>
-        <span class="project-strip__name">FTLB</span>
-        <span class="project-strip__meta"><span data-i18n-en>Mobile UI</span><span data-i18n-ru>Мобильный UI</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="#project-big-board" draggable="false">
-        <span class="project-strip__thumb"><img src="img/strip/big-board.webp" alt="" width="800" height="500" loading="lazy" draggable="false" /></span>
-        <span class="project-strip__name">Big Board</span>
-        <span class="project-strip__meta"><span data-i18n-en>NFT collection</span><span data-i18n-ru>NFT-коллекция</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="cryptorsy.html" draggable="false">
-        <span class="project-strip__thumb"><video src="img/strip/cryptorsy.mp4" poster="img/strip/cryptorsy.webp" autoplay muted loop playsinline preload="metadata" draggable="false" aria-hidden="true"></video></span>
-        <span class="project-strip__name">Cryptorsy</span>
-        <span class="project-strip__meta"><span data-i18n-en>Brand &amp; content</span><span data-i18n-ru>Бренд и контент</span></span>
-      </a></li>
-      <li><a class="project-strip__card" href="#posters" draggable="false">
-        <span class="project-strip__thumb"><img src="img/strip/posters.webp" alt="" width="800" height="500" loading="lazy" draggable="false" /></span>
-        <span class="project-strip__name"><span data-i18n-en>Poster design</span><span data-i18n-ru>Дизайн постеров</span></span>
-        <span class="project-strip__meta"><span data-i18n-en>Poster series</span><span data-i18n-ru>Серия постеров</span></span>
-      </a></li>
-      </ul>
-    </nav>
-  </section>
-  -->
 
   <!-- ====================================================
        PROJECT CARDS
@@ -221,9 +166,7 @@
           <span data-i18n-en>View Project</span>
           <span data-i18n-ru>Смотреть проект</span>
 
-          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
-              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
-          </svg>
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>
     </div>
 
@@ -249,9 +192,7 @@
           <span data-i18n-en>View Project</span>
           <span data-i18n-ru>Смотреть проект</span>
 
-          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
-              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
-          </svg>
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>
     </div>
 
@@ -289,9 +230,7 @@
           <span data-i18n-en>View Project</span>
           <span data-i18n-ru>Смотреть проект</span>
 
-          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
-              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
-          </svg>
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>
     </div>
 
@@ -321,9 +260,7 @@
           <span data-i18n-en>View Project</span>
           <span data-i18n-ru>Смотреть проект</span>
 
-          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
-              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
-          </svg>
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>
     </div>
 
@@ -331,7 +268,7 @@
       <div class="card__image">
         <picture>
           <source media="(max-width: 640px)" srcset="img/ftlb-banner-2phones.webp" width="836" height="950" />
-          <img src="img/ftlb-banner.webp" alt="FTLB — mobile screens" width="1676" height="950" loading="lazy" decoding="async" />
+          <img src="img/ftlb-banner-closer.webp" alt="FTLB — mobile screens" width="1676" height="950" loading="lazy" decoding="async" />
         </picture>
       </div>
     </a>
@@ -371,9 +308,7 @@
           <span data-i18n-en>View Project</span>
           <span data-i18n-ru>Смотреть проект</span>
 
-          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none">
-              <path d="M21 7V3H17M21 3L9.70711 14.2929M18.575 11.082C19.9989 13.8669 20.371 17.0719 19.623 20.109C19.5752 20.305 19.4774 20.4853 19.3393 20.6324C19.2012 20.7795 19.0274 20.8884 18.8348 20.9485C18.6421 21.0086 18.4372 21.0178 18.24 20.9753C18.0427 20.9329 17.8598 20.8401 17.709 20.706L14 17M7 10L3.29 6.29C3.15693 6.13896 3.06507 5.95614 3.02331 5.75922C2.98156 5.5623 2.99131 5.35793 3.05164 5.16588C3.11197 4.97383 3.22083 4.8006 3.3677 4.66293C3.51456 4.52526 3.69446 4.42781 3.89 4.38C6.92828 3.63186 10.1345 4.00467 12.92 5.43M9.70711 14.2929C9.89465 14.4804 10 14.7348 10 15V17C10.0004 17.2242 9.95639 17.4463 9.87058 17.6535C9.78477 17.8606 9.65883 18.0487 9.5 18.207L6.854 20.854C6.78407 20.9241 6.6949 20.9719 6.59779 20.9912C6.50069 21.0106 6.40001 21.0007 6.30854 20.9628C6.21707 20.9249 6.13891 20.8606 6.08398 20.7783C6.02905 20.6959 5.99983 20.599 6 20.5V19C6 18.7348 5.89465 18.4804 5.70711 18.2929C5.51957 18.1054 5.26522 18 5 18H3.5C3.40107 18 3.30436 17.9706 3.22213 17.9156C3.13989 17.8606 3.07582 17.7824 3.03803 17.691C3.00024 17.5996 2.99042 17.499 3.00981 17.402C3.02921 17.3049 3.07696 17.2159 3.147 17.146L5.793 14.5C5.95128 14.3412 6.1394 14.2152 6.34655 14.1294C6.5537 14.0436 6.77578 13.9996 7 14H9C9.26522 14 9.51957 14.1054 9.70711 14.2929Z" />
-          </svg>
+          <svg class="project-btn__icon" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
       </a>
     </div>
 
@@ -437,11 +372,12 @@
 
   <div id="footer-root"></div>
 
-  <script src="js/components.js"></script>
-  <script src="js/main.js"></script>
-  <script src="js/posters-fan.js" defer></script>
+  <script src="js/components.js?v=3"></script>
+  <script src="js/main.js?v=3"></script>
+  <script src="js/posters-fan.js?v=3" defer></script>
   <script src="js/about-reveal.js" defer></script>
-  <!-- <script src="js/project-strip.js" defer></script> -->
+  <script src="js/cv-preview.js?v=2" defer></script>
+  <script src="js/project-strip.js" defer></script>
 
 </body>
 </html>

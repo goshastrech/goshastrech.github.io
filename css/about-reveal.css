@@ -46,6 +46,12 @@
 /* ---- Иконки: стеклянные плитки (радиус 22%) + объёмная папка + рукописные закорючки ---- */
 
 /* ---- Построчное проявление: opacity .55s (слова, таблетки и иконки; цвета не меняются) ---- */
+/* до того как скрипт разобьёт текст на слова, блок скрыт — иначе при обновлении он на миг виден целиком, а ссылки и значки так и остаются видимыми */
+.js-reveal-about .about-me__big:not(.is-split) { visibility: hidden; }
+.js-reveal-about .about-me .about-links:not(.w) { opacity: 0; }
+/* ссылки и значки стека существуют до запуска скрипта: делаем их прозрачными с первого кадра, как слова, которые скрипт создаёт уже скрытыми */
+.js-reveal-about .about-me__big a.about-link,
+.js-reveal-about .about-me__big svg.about-badge { opacity: 0; }
 .js-reveal-about .about-me .w { opacity: 0; transition: opacity .55s ease; }
 .js-reveal-about .about-me .w.in { opacity: 1; }
 
@@ -56,3 +62,6 @@
 @media (prefers-reduced-motion: reduce) {
   .js-reveal-about .about-me .w { opacity: 1; transition: none; transform: none; }
 }
+
+/* блок «фото + имя» скрыт до запуска скрипта (иначе при обновлении он на миг виден целиком), потом проявляется как первая строка */
+.js-reveal-about .about-me .about-id:not(.w) { opacity: 0; }
