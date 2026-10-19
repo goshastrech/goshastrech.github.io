@@ -1,4 +1,5 @@
 // Scroll animations — запускает .fade-in когда элемент появляется в viewport
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const observer = new IntersectionObserver(
   (entries, obs) => {
     entries.forEach((entry) => {
@@ -8,10 +9,14 @@ const observer = new IntersectionObserver(
       }
     });
   },
-  { threshold: 0.08 }
+  // threshold 0: срабатывает, как только верх блока вошёл в окно (у очень высоких блоков долю 8% не набрать)
+  { threshold: 0, rootMargin: '0px 0px -8% 0px' }
 );
 
-document.querySelectorAll('.fade-in').forEach((el) => observer.observe(el));
+document.querySelectorAll('.fade-in').forEach((el) => {
+  if (reduceMotion) el.classList.add('visible'); // без анимации — показываем сразу
+  else observer.observe(el);
+});
 
 // Project rail — боковая навигация по проектам, подсветка активного при скролле
 const projectRail = document.querySelector('.project-rail');
@@ -295,7 +300,10 @@ if (posterGrid && lightbox) {
 // play() сам запускает загрузку. Ушло с экрана — пауза.
 // Вместо autoplay в HTML стоит data-autoplay: Chrome с атрибутом autoplay качает видео сразу, игнорируя preload="none".
 const autoVideos = document.querySelectorAll('video[autoplay], video[data-autoplay]');
-if (autoVideos.length && 'IntersectionObserver' in window) {
+if (autoVideos.length && reduceMotion) {
+  // reduced motion: ролики не запускаем, остаётся постер
+  autoVideos.forEach((video) => { video.removeAttribute('autoplay'); video.pause(); });
+} else if (autoVideos.length && 'IntersectionObserver' in window) {
   const videoObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) entry.target.play().catch(() => {});

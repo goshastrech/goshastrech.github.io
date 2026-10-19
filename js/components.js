@@ -21,8 +21,10 @@ const HEADER = `
   <button type="button" class="header__burger" aria-label="Menu" aria-expanded="false" aria-controls="header-menu"><span></span><span></span><span></span></button>
   <nav class="header__right" id="header-menu">
     <a href="cv.html"><span data-i18n-en>CV</span><span data-i18n-ru>Резюме</span></a>
-    <a href="https://www.linkedin.com/in/heorhi-strechan-09a1552a1/" target="_blank" rel="noopener noreferrer">Linkedin</a>
+    <a href="https://www.linkedin.com/in/heorhi-strechan-09a1552a1/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <!-- Ссылка Dribbble временно убрана из шапки (вернуть: раскомментировать)
     <a href="https://dribbble.com/HeorhiStrechan" target="_blank" rel="noopener noreferrer">Dribbble</a>
+    -->
     <a href="https://t.me/goshast11" target="_blank" rel="noopener noreferrer">Telegram</a>
     <button type="button" class="lang-toggle" data-lang-toggle>RU</button>
     <p class="menu-meta"><span class="menu-meta__badge">v1.0</span><span data-i18n-en>Redesigned Oct 2026</span><span data-i18n-ru>Редизайн октябрь 2026</span></p>
@@ -34,7 +36,9 @@ const HEADER = `
 const FOOTER = `
 <footer class="footer">
   <p class="footer__prompt">heorhi@portfolio <span class="footer__prompt-muted">~</span> % <span class="footer__prompt-muted">whoami</span><span class="cursor-blink"></span></p>
+  <!-- Кнопка «Написать мне в Telegram» временно убрана (вернуть: раскомментировать)
   <a href="https://t.me/goshast11" target="_blank" rel="noopener noreferrer" class="footer__write"><span data-i18n-en>Write me on Telegram</span><span data-i18n-ru>Написать мне в Telegram</span></a>
+  -->
   <span class="footer__copy">// Portfolio ©2026</span>
 </footer>
 `;
@@ -77,6 +81,9 @@ if (footerRoot) footerRoot.outerHTML = FOOTER;
   const applyLang = (lang) => {
     document.documentElement.setAttribute('data-lang', lang);
     btn.textContent = lang.toUpperCase();
+    document.documentElement.lang = lang;
+    // aria-label говорит, на что переключит кнопка (видимая подпись не меняется)
+    btn.setAttribute('aria-label', lang === 'ru' ? 'Переключить язык на английский' : 'Switch language to Russian');
   };
 
   const savedLang = localStorage.getItem(STORAGE_KEY);
@@ -144,5 +151,5 @@ if (footerRoot) footerRoot.outerHTML = FOOTER;
   burger.addEventListener('click', () => setOpen(!header.classList.contains('is-menu-open')));
   header.querySelectorAll('.header__right a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setOpen(false); });
-  window.matchMedia('(min-width: 641px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  window.matchMedia('(min-width: 1025px)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 })();

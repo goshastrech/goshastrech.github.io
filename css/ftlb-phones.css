@@ -90,9 +90,15 @@
   color: var(--text);
 }
 
-/* Планшет: 2 в ряд */
-@media (max-width: 900px) {
-  .phone-item { flex-basis: calc((100% - 24px) / 2); }
+/* Планшет 641–900: 2 в ряд, корпус не шире 340px, пара по центру (на 901–1024 остаются 4 в ряд, на ≤640 — блок ниже) */
+@media (min-width: 641px) and (max-width: 900px) {
+  .phones { justify-content: center; }
+  .phone-item { flex-basis: min(340px, calc((100% - 24px) / 2)); }
+}
+
+/* сенсорные экраны: при доходе до края внутреннего экрана прокрутка передаётся странице (экран не «ловушка» для пальца) */
+@media (hover: none) {
+  .phone__screen { overscroll-behavior: auto; touch-action: pan-y; }
 }
 
 /* Мобильный: ряд внутри блока с горизонтальным snap-скроллом; страница не ширится */

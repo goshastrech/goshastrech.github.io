@@ -61,3 +61,18 @@
 /* Web terminal: подзаголовки подразделов (Search / Trackers / Header / Themes) */
 .case-section .shots-heading + .case-section__desc { margin: -8px 0 24px; }
 .case-section .shots-heading + .grid-2--shots { margin-top: 0; }
+
+/* планшет (721–1024): вертикальный телефонный ролик в ряду чуть шире, чтобы не был меньше ~190px */
+@media (min-width: 721px) and (max-width: 1024px) {
+  .media-item--ar-phone { flex-grow: 0.7; }
+}
+
+/* просмотр видео: высота в dvh; на планшете и телефоне оставляем место под заголовок и стрелки */
+@supports (height: 1dvh) {
+  .poster-lightbox__frame video { max-height: min(calc(86dvh - 44px), 856px); }
+  .poster-lightbox__frame.is-phone video { max-height: min(calc(86dvh - 64px), 836px); }
+}
+@media (max-width: 1024px) {
+  .poster-lightbox__frame video { max-height: min(calc(100dvh - 190px), 856px); }
+  .poster-lightbox__frame.is-phone video { max-height: min(calc(100dvh - 210px), 836px); }
+}

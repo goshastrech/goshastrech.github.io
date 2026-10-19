@@ -29,6 +29,14 @@
 
   let group = [];
   let current = 0;
+  let opener = null; // элемент, открывший окно: туда вернём фокус
+  const mqTablet = window.matchMedia('(max-width: 1024px)');
+
+  // подпись: русская (data-lb-title-ru) при html[lang=ru], иначе data-lb-title
+  const titleOf = (item) => {
+    const ru = document.documentElement.lang === 'ru' && item.dataset.lbTitleRu;
+    return ru || item.dataset.lbTitle || '';
+  };
 
   // Стрелки стоят у краёв картинки: ширину берём у самой картинки
   const syncWidth = (img) => {
@@ -50,13 +58,13 @@
       if (itemVideo.getAttribute('poster')) img.poster = itemVideo.getAttribute('poster');
       img.autoplay = img.loop = img.muted = img.playsInline = true;
       img.setAttribute('autoplay', ''); img.setAttribute('loop', ''); img.setAttribute('muted', ''); img.setAttribute('playsinline', '');
-      img.setAttribute('aria-label', item.dataset.lbTitle || '');
+      img.setAttribute('aria-label', titleOf(item));
       img.play().catch(() => {});
     } else {
       const source = item.dataset.lbSrc || item.querySelector('img').getAttribute('src');
       img = new Image();
       img.src = source;
-      img.alt = item.dataset.lbTitle || '';
+      img.alt = titleOf(item);
     }
     // длинный мобильный экран (C3tch): корпус iPhone фиксированной высоты, экран внутри листается
     const scrollPhone = item.dataset.lbGroup === 'c3tch-mobile';
@@ -75,7 +83,17 @@
     frame.classList.toggle('iphone--notch', item.classList.contains('iphone--notch'));
     frame.classList.toggle('iphone--light', item.classList.contains('iphone--light'));
     frame.classList.toggle('iphone--dark', item.classList.contains('iphone--dark'));
-    titleEl.textContent = item.dataset.lbTitle || '';
+    titleEl.textContent = titleOf(item);
+    lb.setAttribute('aria-label', titleOf(item) || 'Screen preview');
+    // альбомная картинка на планшете/телефоне: окно прокручивается по горизонтали (стили в css)
+    frame.classList.remove('is-wide');
+    const special = scrollPhone || frame.classList.contains('is-clip') || frame.classList.contains('is-banner') || frame.classList.contains('is-phone');
+    if (img.tagName === 'IMG' && !special) {
+      const markWide = () => {
+        if (frame.contains(img) && mqTablet.matches && img.naturalHeight && img.naturalWidth / img.naturalHeight > 1.2) frame.classList.add('is-wide');
+      };
+      if (img.complete) markWide(); else img.addEventListener('load', markWide, { once: true });
+    }
     syncWidth(img);
   };
 
@@ -92,7 +110,7 @@
     lb.classList.remove('is-open');
     document.body.style.overflow = '';
     setTimeout(() => { lb.hidden = true; frame.replaceChildren(); }, 250);
-    group[current].focus();
+    if (opener && document.contains(opener)) opener.focus(); else group[current].focus();
   };
 
   // элементы-кнопки (div с role=button) открываются и с клавиатуры
@@ -102,6 +120,7 @@
 
   items.forEach((item) => {
     item.addEventListener('click', () => {
+      opener = item;
       group = items.filter((el) => el.dataset.lbGroup === item.dataset.lbGroup);
       prevBtn.hidden = nextBtn.hidden = group.length < 2;
       lb.classList.remove('is-swapping');
@@ -122,7 +141,15 @@
 
   document.addEventListener('keydown', (e) => {
     if (lb.hidden) return;
-    if (e.key === 'Escape') close();
+    if (e.key === 'Tab') {
+      // фокус-ловушка: Tab ходит по кнопкам окна по кругу
+      const f = Array.from(lb.querySelectorAll('button')).filter((b) => !b.hidden);
+      if (!f.length) return;
+      const i = f.indexOf(document.activeElement);
+      e.preventDefault();
+      f[e.shiftKey ? (i <= 0 ? f.length - 1 : i - 1) : (i === f.length - 1 ? 0 : i + 1)].focus();
+    }
+    else if (e.key === 'Escape') close();
     else if (e.key === 'ArrowLeft') go(-1);
     else if (e.key === 'ArrowRight') go(1);
   });

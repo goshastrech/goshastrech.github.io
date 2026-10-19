@@ -44,6 +44,10 @@
   --radius-lg:   16px;
   --radius-full: 9999px;
 
+  /* ── Раскладка главной ──────────────────────────────── */
+  --projects-gap: 300px;   /* расстояние между блоками проектов (на планшете и телефоне меньше — см. ниже) */
+  --card-w:       1020px;  /* ширина баннеров проектов: одна на все карточки (раньше 940 и 1020 вперемешку) */
+
 }
 
 
@@ -72,6 +76,11 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+/* ровные переносы: заголовки делятся поровну, абзацы без «висящих» слов в последней строке
+   (первый экран главной .hero__title не трогаем — его переносы задаёт hero-intro.css) */
+:where(h1, h2, h3):not(.hero__title) { text-wrap: balance; }
+p { text-wrap: pretty; }
 
 img {
   display: block;
@@ -246,7 +255,9 @@ img {
   font-size: 18px;
   font-weight: 500;
   line-height: 1;
-  padding: 0;
+  /* зона нажатия 44×44 для пальца: padding увеличивает её, отрицательный margin возвращает прежнее место в шапке */
+  padding: 13px 10px;
+  margin: -13px -10px;
   border: none;
   background: none;
   color: var(--orange);
@@ -602,11 +613,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   scroll-margin-top: 110px;
 }
 
-/* второй (и последующие) блок внутри .projects уже получает 300px
+/* второй (и последующие) блок внутри .projects уже получает --projects-gap
    от flex gap, поэтому margin-bottom компенсируется до реальных 56px */
 .project-heading--tight {
   margin-top: 0;
-  margin-bottom: -244px;
+  margin-bottom: calc(56px - var(--projects-gap));
 }
 
 .project-heading__title {
@@ -654,9 +665,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.project-badge--link:hover {
-  opacity: 0.9;
-  transform: translateY(-3px);
+@media (hover: hover) {
+  .project-badge--link:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+  }
 }
 
 .project-badge--link:focus-visible {
@@ -696,9 +709,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.project-btn:hover {
-  opacity: 0.9;
-  transform: translateY(-3px);
+@media (hover: hover) {
+  .project-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-3px);
+  }
 }
 
 .project-heading .project-btn {
@@ -882,7 +897,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .projects {
   display: flex;
   flex-direction: column;
-  gap: 300px;
+  gap: var(--projects-gap);
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
@@ -963,7 +978,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .card--polyranger .card__image {
-  width: 940px;
+  width: var(--card-w);
   max-width: 100%;
   height: auto;
 }
@@ -982,7 +997,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .card--trady .card__image {
-  width: 940px;
+  width: var(--card-w);
   max-width: 100%;
 }
 
@@ -993,7 +1008,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .card--c3tch .card__image {
-  width: 1020px;
+  width: var(--card-w);
   max-width: 100%;
 }
 
@@ -1001,7 +1016,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .card--trio .card__row {
   display: flex;
   gap: 16px;
-  width: 1020px;
+  width: var(--card-w);
   max-width: 100%;
 }
 
@@ -1066,23 +1081,25 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   opacity: 0.7;
 }
 
-.stack:hover .stack__card--main {
-  transform: translate(0, 12px) rotate(0deg);
-}
+@media (hover: hover) {
+  .stack:hover .stack__card--main {
+    transform: translate(0, 12px) rotate(0deg);
+  }
 
-.stack:hover .stack__card--back-1 {
-  transform: translate(0, -70px) rotate(0deg) scale(1);
-  opacity: 1;
-}
+  .stack:hover .stack__card--back-1 {
+    transform: translate(0, -70px) rotate(0deg) scale(1);
+    opacity: 1;
+  }
 
-.stack:hover .stack__card--back-2 {
-  transform: translate(-90px, -50px) rotate(-10deg) scale(1);
-  opacity: 1;
-}
+  .stack:hover .stack__card--back-2 {
+    transform: translate(-90px, -50px) rotate(-10deg) scale(1);
+    opacity: 1;
+  }
 
-.stack:hover .stack__card--back-3 {
-  transform: translate(90px, -50px) rotate(10deg) scale(1);
-  opacity: 1;
+  .stack:hover .stack__card--back-3 {
+    transform: translate(90px, -50px) rotate(10deg) scale(1);
+    opacity: 1;
+  }
 }
 
 /* угловой бейдж — rotated ribbon */
@@ -1190,7 +1207,8 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .case__back {
   display: inline-block;
-  margin: 40px 0 48px;
+  padding: 12px 0;   /* высота кликабельной зоны ≥44px; margin уменьшен на те же 12px сверху и снизу */
+  margin: 28px 0 36px;
   font-size: 13px;
   color: var(--text-2);
   transition: color 0.2s;
@@ -1222,8 +1240,9 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-feature-settings: "liga" 0, "calt" 0;
 }
 
+/* иерархия: короткий h1 (C3tch/Shiro/FTLB/Cryptorsy) всегда крупнее h2 секций; «regular»-вариант (Trady/Polyranger) мельче, но тоже крупнее h2 */
 .case__title {
-  font-size: clamp(28px, 4vw, 52px);
+  font-size: clamp(40px, 6.5vw, 52px);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -1232,7 +1251,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 /* модификатор — заголовок и тэглайн объединены в один текст */
 .case__title--regular {
-  font-size: clamp(22px, 3vw, 38px);
+  font-size: clamp(26px, 3vw, 38px);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 1.3;
@@ -1243,6 +1262,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
+  max-width: 720px;   /* длина строки ≤ ~75 знаков */
   margin-bottom: 24px;
 }
 
@@ -1283,12 +1303,14 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   flex-shrink: 0;
 }
 
-.case__pitch:hover {
-  background: #ffffff;
-  color: var(--text);
-  border-color: #d8d8d8;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+@media (hover: hover) {
+  .case__pitch:hover {
+    background: #ffffff;
+    color: var(--text);
+    border-color: #d8d8d8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  }
 }
 
 /* team credit block — состав команды + роль автора */
@@ -1425,7 +1447,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 /* крупный regular-заголовок вместо мелкого eyebrow-лейбла */
 .overview__title {
-  font-size: clamp(26px, 3vw, 38px);
+  font-size: clamp(22px, 2.4vw, 30px);
   font-weight: 400;
   letter-spacing: -0.01em;
   color: var(--text);
@@ -1488,7 +1510,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   background: linear-gradient(135deg, #e0e0e0 0%, #ebebeb 100%);
 }
 
-.case-img__placeholder--md  { height: 240px; }
+.case-img__placeholder--md  { height: auto; aspect-ratio: 1440 / 1024; }   /* пропорция скриншотов: плашка не ниже соседней карточки со скрином */
 .case-img__placeholder--sm  { height: 180px; }
 .case-img__placeholder--lg  { height: 380px; }
 
@@ -1513,14 +1535,14 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 /* меньше воздуха между последним блоком кейса и футером (было 80 + 80 + 48 px) */
 /* резервируем место под шапку до того, как js вставит её (иначе страница «подпрыгивает» на 79px) */
 #header-root { min-height: 79px; }
-@media (max-width: 640px) { #header-root { min-height: 64px; } }
+@media (max-width: 1024px) { #header-root { min-height: 72px; } }   /* высота мобильной/планшетной шапки: 14 + 44 + 14 */
 
 .case + .footer {
   margin-top: 0;
 }
 
 .case-section__label {
-  font-size: 11px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-2);
@@ -1542,7 +1564,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
-  max-width: none;
+  max-width: 720px;   /* длина строки ≤ ~75 знаков на широких экранах */
   margin: -12px 0 28px;
 }
 
@@ -1659,9 +1681,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.flow-step:hover .flow-step__index {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 14px rgba(10, 10, 10, 0.1);
+@media (hover: hover) {
+  .flow-step:hover .flow-step__index {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 14px rgba(10, 10, 10, 0.1);
+  }
 }
 
 .flow-step--accent .flow-step__index {
@@ -1737,6 +1761,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   font-size: 19px;
   color: var(--text-2);
   line-height: 1.6;
+  max-width: 720px;
   margin: 20px 0 56px;
 }
 
@@ -1871,6 +1896,13 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .fade-in.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* «уменьшить движение»: блоки видны сразу, без плавного появления; пульс точки статуса, мигающий курсор и плавная прокрутка якорей выключены */
+@media (prefers-reduced-motion: reduce) {
+  .fade-in { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  .hero__dot, .cursor-blink { animation: none; }
 }
 
 /* ============================================================
@@ -2066,16 +2098,12 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
    RESPONSIVE — мобильный
    ============================================================ */
 
-@media (max-width: 640px) {
-  .header {
-    grid-template-columns: 1fr;
-    grid-template-areas: "left" "right";
-    row-gap: 10px;
-    padding: 16px 20px;
-  }
+/* Схема адаптива: ≤640 телефон, 641–1024 планшет (мобильная структура, но крупнее),
+   ≥1025 десктоп. Всё, что общее для телефона и планшета, лежит в блоке max-width:1024px;
+   чисто телефонное — в max-width:640px; планшетный тюнинг — в min-width:641px and max-width:1024px. */
+@media (max-width: 1024px) {
+  :root { --projects-gap: 140px; }
 
-  .header__left { grid-area: left; justify-content: center; }
-  .header__right { grid-area: right; justify-content: center; gap: 16px; }
   .header__center { display: none; }
 
   /* центрированные тултипы (бейдж версии, метрики) на узком экране могут
@@ -2095,12 +2123,6 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
     white-space: normal;
   }
 
-  .hero { padding: 48px 20px 48px; }
-
-  /* три вертикальных видео Shiro остаются в один ряд (раньше колонка схлопывалась в 0 высоты из-за flex: 1 1 0) */
-  .card--trio .card__row { flex-direction: row; gap: 8px; width: 100%; }
-  .card--trio .card__image { flex: 1 1 0; aspect-ratio: 9 / 16; height: auto; border-radius: 6px; }
-
   .about-explorer {
     flex-direction: column;
     gap: 20px;
@@ -2116,12 +2138,25 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   .about-explorer__label {
     display: none;
   }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .projects { padding: 0 32px; }
+  .case { padding: 0 32px; }
+}
+
+@media (max-width: 640px) {
+  :root { --projects-gap: 100px; }
+
+  .hero { padding: 48px 20px 48px; }
+
+  /* три вертикальных видео Shiro остаются в один ряд (раньше колонка схлопывалась в 0 высоты из-за flex: 1 1 0) */
+  .card--trio .card__row { flex-direction: row; gap: 8px; width: 100%; }
+  .card--trio .card__image { flex: 1 1 0; aspect-ratio: 9 / 16; height: auto; border-radius: 6px; }
 
   .projects { padding: 0 20px; }
 
   .case { padding: 0 20px; }
-
-  .case__overview { grid-template-columns: 1fr; gap: 28px; }
 
   .grid-2, .grid-3 { grid-template-columns: 1fr; }
 
@@ -2131,6 +2166,66 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
   .footer { padding: 24px 20px; margin-top: 64px; }
 }
+
+/* Challenge / Results: две колонки до ~760px (на планшете это компактнее), ниже — одна колонка с нормальной длиной строки */
+@media (max-width: 760px) {
+  .case__overview { grid-template-columns: 1fr; gap: 28px; }
+  .overview__text,
+  .overview__results { max-width: 640px; }
+}
+
+/* кейсы на планшете и телефоне: сетки, команда, ленты скринов */
+/* метка секции стоит сразу перед абзацем (без h2 между ними): отрицательный margin абзаца рассчитан на h2, поэтому здесь возвращаем воздух */
+.case-section__label + .case-section__intro,
+.case-section__label + .case-section__desc { margin-top: 8px; }
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* баннеры Cryptorsy: 2 колонки (3 колонки слишком мелкие, 1 колонка — слишком длинная страница) */
+  .grid-3.grid-3--banners { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* телефоны Trady/Polyranger: 2 в ряд, корпус не шире 260px, группа по центру */
+  .grid-4.grid-4--phones { grid-template-columns: repeat(2, minmax(0, 260px)); justify-content: center; }
+}
+
+@media (max-width: 640px) {
+  /* ролики Shiro (9:16): на телефоне 2 колонки, а не одна на весь экран */
+  .grid-3.grid-3--clips { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  /* одинокий последний ролик в нечётном блоке стоит по центру, а не прижат влево */
+  .grid-3--clips > :last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc((100% - 12px) / 2); }
+
+  /* hero-пара Polyranger (светлая + тёмная тема): на телефоне друг под другом */
+  .case .case__hero-pair { grid-template-columns: 1fr; gap: 12px; }
+
+  /* команда: аватары 44px и компактные отступы, чтобы группы не рвались с «дырой» в строке */
+  .case__summary-team--lg .case__team { gap: 24px 28px; }
+  .case__summary-team--lg .team__group { gap: 12px; }
+  .case__summary-team--lg .team__avatar { width: 44px; height: 44px; margin-left: -14px; }
+  .case__summary-team--lg .team__avatar:first-child { margin-left: 0; }
+
+  /* Trady и Polyranger: широкие десктопные скрины и пары «светлая/тёмная» на телефоне — лента со свайпом
+     (карточка ≈88% ширины, следующая выглядывает), а не уменьшение до нечитаемых 340px.
+     Страницы выбираются по телефонам iOS-экранов (.grid-4--phones есть только у этих двух кейсов) */
+  .case:has(.grid-4--phones) :is(.grid-2--shots, .compare-pair:not(.compare-pair--single)) {
+    display: flex;
+    gap: 12px;
+    margin-inline: -20px;
+    padding-inline: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 20px;
+    scrollbar-width: none;
+  }
+  .case:has(.grid-4--phones) :is(.grid-2--shots, .compare-pair:not(.compare-pair--single))::-webkit-scrollbar { display: none; }
+  .case:has(.grid-4--phones) :is(.grid-2--shots, .compare-pair:not(.compare-pair--single)) > * {
+    flex: 0 0 88%;
+    min-width: 0;
+    scroll-snap-align: start;
+  }
+}
+
+/* hero кейса с картинкой или видео берёт высоту у самого файла — ставим ПОСЛЕ мобильного блока,
+   иначе .case__hero { height: 220px } обрезает ролик и под ним остаётся белая полоса */
+.case__hero--image,
+.case__hero--video { height: auto; }
 
 /* ============================================================
    POSTERS (сетка постеров + оверлей по клику)
@@ -2176,7 +2271,9 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   transition: transform 0.2s ease;
 }
 
-.poster:hover { transform: scale(1.03); }
+@media (hover: hover) {
+  .poster:hover { transform: scale(1.03); }
+}
 
 .poster:focus-visible {
   outline: 2px solid var(--blue);
@@ -2223,7 +2320,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   height: min(calc(86vh - 44px), 856px);
   aspect-ratio: 5 / 7;
   max-width: 100%;
-  border-radius: var(--radius-md);
+  border-radius: 6px;   /* как у остальных рамок скриншотов (не 12px из токена-копии) */
   background: var(--surface);
   overflow: hidden;
   opacity: 0;
@@ -2318,13 +2415,11 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   outline-offset: 2px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
   .posters { padding: 0 var(--space-sm); }
-  .posters__grid { grid-template-columns: repeat(4, 1fr); }
 }
 
 @media (max-width: 640px) {
-  .posters__grid { grid-template-columns: repeat(3, 1fr); }
   .poster-lightbox__nav { width: 36px; height: 36px; margin-top: -18px; }
 }
 
@@ -2364,7 +2459,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .gwork__img {
   aspect-ratio: 944 / 514;
-  border-radius: var(--radius-lg);
+  border-radius: 8px;   /* как у карточек проектов (не 16px из токена-копии) */
   background: var(--surface);
   overflow: hidden;
 }
@@ -2377,12 +2472,14 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   transition: transform 0.4s ease;
 }
 
-.gwork__item:hover .gwork__img img { transform: scale(1.03); }
+@media (hover: hover) {
+  .gwork__item:hover .gwork__img img { transform: scale(1.03); }
+}
 
 .gwork__item:focus-visible {
   outline: 2px solid var(--blue);
   outline-offset: 4px;
-  border-radius: var(--radius-lg);
+  border-radius: 8px;
 }
 
 .gwork__name {
@@ -2507,7 +2604,9 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   transition: transform 0.2s ease;
 }
 
-.shot:hover { transform: scale(1.015); }
+@media (hover: hover) {
+  .shot:hover { transform: scale(1.015); }
+}
 
 .shot img { display: block; width: 100%; height: auto; }
 
@@ -2531,7 +2630,9 @@ button.iphone {
   transition: transform 0.2s ease;
 }
 
-button.iphone:hover { transform: scale(1.03); }
+@media (hover: hover) {
+  button.iphone:hover { transform: scale(1.03); }
+}
 
 .shot:focus-visible,
 button.iphone:focus-visible {
@@ -2705,7 +2806,7 @@ button.shot, button.poster, button.iphone, .phone[data-lb-group], .shot, .poster
 .project-btn--soon, [aria-disabled="true"] { cursor: default; }
 
 /* C3tch на главной теперь видео 16:9 — ширина как у остальных видео-баннеров */
-.card--c3tch .card__image:has(video) { width: 940px; }
+.card--c3tch .card__image:has(video) { width: var(--card-w); }
 
 /* Кнопка «Наверх» (js/components.js) */
 .to-top {
@@ -2733,7 +2834,9 @@ button.shot, button.poster, button.iphone, .phone[data-lb-group], .shot, .poster
 .to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
 .to-top:hover { background: var(--text); color: #fff; }
 .to-top:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
-@media (max-width: 640px) { .to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; } }
+@media (max-width: 1024px) { .to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; } }
+/* пока открыт просмотр (лайтбокс), кнопка «Наверх» не просвечивает сквозь тёмный фон */
+body:has(.poster-lightbox:not([hidden])) .to-top { visibility: hidden; opacity: 0; }
 @media (prefers-reduced-motion: reduce) { .to-top { transition: none; } }
 
 /* пиксельные аватары команды: чёткие квадраты без сглаживания */
@@ -2749,7 +2852,7 @@ button.shot, button.poster, button.iphone, .phone[data-lb-group], .shot, .poster
   width: auto;
   max-width: calc(100vw - 48px);
   background: #000;
-  border-radius: var(--radius-md);
+  border-radius: 6px;
 }
 .poster-lightbox__frame.is-clip video { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (hover: hover) {
@@ -2800,17 +2903,19 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
 .footer__write:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
 
 
-/* ── Мобильная шапка: слева имя, справа бургер; ссылки — на полноэкранной странице ── */
+/* ── Мобильная и планшетная шапка (≤1024): слева имя, справа бургер; ссылки — на полноэкранной странице ── */
 .header__burger, .menu-meta { display: none; }
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .header {
     grid-template-columns: 1fr auto;
     grid-template-areas: "left burger";
     row-gap: 0;
-    padding: 14px 20px;
+    padding: 14px 32px;
   }
   .header__left { grid-area: left; justify-content: flex-start; position: relative; z-index: 102; }
   .header__left .badge-version { display: none; }
+  /* имя — кликабельная зона 44px по высоте (как бургер), внешний вид не меняется */
+  .header__name { display: inline-flex; align-items: center; min-height: 44px; }
   .header__burger {
     grid-area: burger;
     display: grid;
@@ -2842,7 +2947,7 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
     align-items: flex-start;
     justify-content: flex-start;
     gap: 0;
-    padding: 96px 24px 32px;
+    padding: 96px 32px 32px;
     background: #fff;
     overflow-y: auto;
   }
@@ -2850,13 +2955,14 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
   .header.is-menu-open .header__right { display: flex; animation: menu-in 0.25s ease; }
   .header__right a {
     width: 100%;
+    max-width: 560px;   /* на планшете список не растягивается на весь экран */
     padding: 16px 0;
     border-bottom: 1px solid var(--border);
-    font-size: 28px;
+    font-size: 22px;
     font-weight: 500;
     letter-spacing: -0.02em;
   }
-  .header__right .lang-toggle { margin-top: 24px; padding: 12px 24px; font-size: 16px; }
+  .header__right .lang-toggle { margin: 24px 0 0; padding: 12px 24px; font-size: 16px; }
   .menu-meta {
     display: flex;
     align-items: center;
@@ -2867,11 +2973,7 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
     color: var(--text-2);
   }
   .menu-meta__badge { padding: 4px 12px; border-radius: 999px; background: #e7f9ec; color: #16a34a; font-weight: 600; }
-}
-@keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
-@media (prefers-reduced-motion: reduce) { .header.is-menu-open .header__right { animation: none; } .header__burger span { transition: none; } }
 
-@media (max-width: 640px) {
   .header__right .lang-toggle {
     width: auto;
     min-width: 72px;
@@ -2886,9 +2988,28 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
     cursor: pointer;
   }
 }
+/* телефон: поля шапки 20px, ссылки меню крупнее (28px) */
+@media (max-width: 640px) {
+  .header { padding: 14px 20px; }
+  .header__right { padding: 96px 24px 32px; }
+  .header__right a { font-size: 28px; }
+}
+@keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .header.is-menu-open .header__right { animation: none; } .header__burger span { transition: none; } }
 
-/* Мобильные заголовки проектов на главной: текст шире и без принудительных переносов <br>,
+/* Заголовки проектов на главной для планшета и телефона: текст без принудительных переносов <br>,
    строки делятся ровно (без «висящих» слов), чтобы описание проекта читалось как абзац */
+@media (max-width: 1024px) {
+  .project-heading__subtitle br { display: none; }
+}
+/* планшет: описание не шире ~560px, по центру (иначе строки по 120 знаков) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .project-heading__subtitle { max-width: 560px; margin-inline: auto; }
+}
+/* десктоп и планшет: заголовки блоков делятся поровну (на телефоне ниже — pretty, строки тянутся к краям колонки) */
+@media (min-width: 641px) {
+  .project-heading__subtitle { text-wrap: balance; }
+}
 @media (max-width: 640px) {
   .project-heading { padding: 0; }   /* боковые 20px уже даёт страница, поэтому текст на всю ширину колонки */
   .project-heading:not(.project-heading--tight) { padding: 0 20px; }   /* первый блок (Trady) стоит вне колонки и сам держит отступы */
@@ -2899,35 +3020,45 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
     letter-spacing: 0;
     text-wrap: pretty;   /* строки тянутся к краям колонки, а не жмутся к центру */
   }
-  .project-heading__subtitle br { display: none; }
   .project-heading__role { margin-top: 20px; }
 }
 
 
-/* ── Мобильная версия главной: постеры 2 в ряд, виджеты 2×2, без бейджа Metrics ── */
-@media (max-width: 640px) {
+/* ── Планшет и телефон главной: постеры сеткой (3–4 колонки на планшете, 2 на телефоне), виджеты 2×2, без бейджа Metrics ── */
+@media (max-width: 1024px) {
   .metrics-badge { display: none; }
-
-  .posters__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .posters__hint { display: none; }
+  .posters__grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+}
+@media (max-width: 1024px), (hover: none) {
+  .posters__hint { display: none; }   /* подсказка «наведи на веер» не нужна, веера на этих экранах нет */
 
   .stack-demo { padding: 48px 0; }
-  .stack { width: 100%; height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; cursor: default; }
+  .stack { width: 100%; max-width: 520px; margin-inline: auto; height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; cursor: default; }
   .stack__card { position: relative; inset: auto; aspect-ratio: 1; transform: none !important; opacity: 1 !important; }
+}
+/* планшет: 4 в ряд, а 14 постеров дают неполный последний ряд — он стоит по центру, а не прижат влево */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .posters__grid { display: flex; flex-wrap: wrap; justify-content: center; }
+  .posters__grid .poster { flex: 0 0 calc((100% - 36px) / 4); }
+}
+@media (max-width: 640px) {
+  .posters__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 
-/* Мобильная: баннер FTLB показывает 2 телефона из 3, покрупнее (кадр обрезан по краям картинки) */
+/* Телефон: баннер FTLB показывает 2 телефона из 3, покрупнее (кадр обрезан по краям картинки; <source media="(max-width: 640px)" в HTML) */
 @media (max-width: 640px) {
   .card[href="ftlb.html"] .card__image img { width: 100%; height: auto; }   /* на телефоне — своя картинка: 2 телефона с узким зазором */
+}
+@media (max-width: 1024px) {
   .stack-demo { flex-direction: column; align-items: stretch; }
   .stack-demo .posters__title, .stack-demo .posters__text { text-align: center; }
   .stack-demo .posters__text { max-width: 100%; text-wrap: pretty; }
   .stack-demo .posters__text { margin-bottom: 8px; }
 }
 
-/* Мобильный просмотр: стрелки «назад / вперёд» стоят под картинкой по центру, а не поверх неё */
-@media (max-width: 640px) {
+/* Просмотр на планшете и телефоне (≤1024): стрелки «назад / вперёд» стоят под картинкой по центру, а не поверх неё */
+@media (max-width: 1024px) {
   .poster-lightbox { --poster-h: min(calc(100dvh - 190px), 856px); padding-bottom: 88px; }
   .poster-lightbox__frame { height: var(--poster-h); }
   .poster-lightbox__nav {
@@ -2947,7 +3078,7 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
 
 /* Мобильный просмотр, уточнение: стрелки стоят ВПЛОТНУЮ под самим постером (а не у низа экрана).
    Высота постера = ширина / 0.7066; заголовок над ним фиксирован (44px), поэтому место стрелок считается от центра экрана. */
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .poster-lightbox { --fh: calc(var(--poster-w) / 0.7066); padding-bottom: var(--space-md); }
   .poster-lightbox__title { height: 32px; line-height: 32px; margin-bottom: 12px; }
   .poster-lightbox__nav { bottom: auto; top: calc(50% + (44px + var(--fh)) / 2 + 16px); }
@@ -2955,7 +3086,7 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
 
 /* Мобильный просмотр, финал: стрелки идут в потоке ПОД картинкой с одинаковым отступом 16px
    (любая высота и пропорция картинки). Сетка: заголовок / картинка / [ ‹ ›] */
-@media (max-width: 640px) {
+@media (max-width: 1024px) {
   .poster-lightbox:not([hidden]) {
     display: grid;
     grid-template-columns: 1fr 48px 48px 1fr;
@@ -2974,5 +3105,54 @@ a.card[href="ftlb.html"] .card__image { box-shadow: none; }
   .poster-lightbox__nav--next { grid-column: 3; left: auto; }
 }
 
+/* ── Просмотр (лайтбокс): высоты в dvh ──
+   dvh = высота окна без выезжающих панелей браузера (iOS/Android); где dvh не поддерживается — остаётся vh выше.
+   Блок стоит в конце файла, чтобы перебить более ранние правила с теми же селекторами. */
+@supports (height: 1dvh) {
+  .poster-lightbox { --poster-h: min(calc(86dvh - 44px), 856px); }
+  .poster-lightbox__frame { height: var(--poster-h); }
+  .poster-lightbox__frame img { max-height: min(calc(86dvh - 44px), 856px); }
+  .poster-lightbox__frame.is-phone img { max-height: min(calc(86dvh - 64px), 836px); }
+  .poster-lightbox__frame.is-phone.iphone--notch img { max-height: min(calc(86dvh - 120px), 780px); }
+  .poster-lightbox__frame.is-clip { height: min(calc(86dvh - 44px), 900px); }
+  .poster-lightbox__frame.is-banner img { max-height: calc(100dvh - 110px); }
+}
+
+/* планшет и телефон: сверху заголовок (~44px), снизу стрелки (~64px) и поля — рамка не выше 100dvh − 190px,
+   чтобы стрелки не уходили за экран (в том числе на iPad в альбомной ориентации 1024×768) */
+@media (max-width: 1024px) {
+  .poster-lightbox { --poster-h: min(calc(100dvh - 190px), 856px); }
+  .poster-lightbox__frame img,
+  .poster-lightbox__frame video { max-height: min(calc(100dvh - 190px), 856px); }
+  .poster-lightbox__frame.is-phone img,
+  .poster-lightbox__frame.is-phone video { max-height: min(calc(100dvh - 210px), 836px); }
+  .poster-lightbox__frame.is-phone.iphone--notch img { max-height: min(calc(100dvh - 266px), 780px); }
+  .poster-lightbox__frame.is-clip { height: min(calc(100dvh - 190px), 900px); }
+  .poster-lightbox__frame.is-banner img { max-height: calc(100dvh - 190px); }
+
+  /* широкая (альбомная) картинка на планшете: окно прокручивается по горизонтали, сам скрин не меньше ~900px — текст на нём читается
+     (класс is-wide ставит js/lightbox.js, когда картинка альбомная и экран ≤1024) */
+  .poster-lightbox__frame.is-wide {
+    overflow: auto;
+    max-width: 100%;
+    max-height: min(calc(100dvh - 190px), 856px);
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+  .poster-lightbox__frame.is-wide:not(.is-phone) img {
+    width: max(900px, 100%);
+    min-width: 900px;
+    max-width: none;
+    max-height: none;
+    height: auto;
+  }
+}
+
 /* Линия прогресса прокрутки под шапкой убрана на всех страницах (на любой ширине) */
 .header__progress { display: none !important; }
+
+/* Виджеты на десктопе: 4 штуки просто в один ряд (без стопки и раскрытия при наведении) */
+@media (min-width: 1025px) {
+  .stack { width: min(1100px, calc(100vw - 80px)); height: auto; margin-inline: auto; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; cursor: default; }
+  .stack__card { position: relative; inset: auto; aspect-ratio: 1; transform: none !important; opacity: 1 !important; }
+}

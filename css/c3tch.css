@@ -64,7 +64,11 @@
   border: 0;
 }
 .case__hero--brand img { width: 150px; height: 150px; display: block; }
-@media (max-width: 640px) { .case__hero--brand { height: 260px; } .case__hero--brand img { width: 96px; height: 96px; } }
+/* планшет и телефон: высота плавно от 260px (телефон) до 460px (десктоп), логотип 96–150px */
+@media (max-width: 1024px) {
+  .case__hero--brand { height: clamp(260px, 38vw, 460px); }
+  .case__hero--brand img { width: clamp(96px, 14vw, 150px); height: clamp(96px, 14vw, 150px); }
+}
 
 /* Мобильный экран в просмотре: корпус iPhone с островком, внутри экран листается (как в сетке) */
 .poster-lightbox__frame.is-scrollphone {
@@ -107,4 +111,28 @@
   border-radius: 999px;
   background: #000;
   pointer-events: none;
+}
+
+/* dvh вместо vh: рамка не выше видимой части окна даже при выезжающей адресной строке */
+@supports (height: 1dvh) {
+  .poster-lightbox__frame.is-scrollphone { height: min(calc(86dvh - 44px), 860px); }
+}
+/* планшет и телефон: сверху заголовок, снизу стрелки — запас 190px (iPad в альбомной ориентации 1024×768: рамка 578px) */
+@media (max-width: 1024px) {
+  .poster-lightbox__frame.is-scrollphone { height: min(calc(100dvh - 190px), 860px); }
+  /* экраны C3tch (desktop-/mobile-) прокручиваются внутри рамки: ей нужна ограниченная высота */
+  .poster-lightbox__frame:has(img[src*="/desktop-"]),
+  .poster-lightbox__frame:has(img[src*="/mobile-"]) { max-height: min(calc(100dvh - 190px), 856px); }
+}
+
+/* сенсорные экраны: экран телефона внутри корпуса не перехватывает прокрутку страницы
+   (палец, начавший движение на телефоне, листает страницу; полный экран открывается тапом в просмотре),
+   а нижний край мягко растворяется — обрезанная строка текста не выглядит багом */
+@media (hover: none) {
+  .phones .phone[data-lb-group] .phone__screen {
+    overflow-y: hidden;
+    touch-action: pan-y;
+    -webkit-mask-image: linear-gradient(#000 calc(100% - 56px), transparent);
+    mask-image: linear-gradient(#000 calc(100% - 56px), transparent);
+  }
 }

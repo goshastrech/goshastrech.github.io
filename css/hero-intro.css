@@ -17,23 +17,44 @@
   .hero__cta { animation: hi-pop .45s .85s cubic-bezier(.2,.9,.3,1.3) backwards; }
 }
 
+/* Первый экран на планшете (641–1024): заголовок 28–32px, колонка до 760px, без жёсткой ширины телефона.
+   Межбуквенный интервал нормальный (в styles.css он -2px под десктопный размер),
+   строки делятся ровно (balance); ручные переносы <br class="mbr"> здесь не нужны */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .hero__title {
+    font-size: clamp(28px, 4vw, 32px);
+    line-height: 1.2;
+    letter-spacing: -0.03em;
+    width: 100%;
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero__title { text-wrap: balance; }
+  .hero__title br:not(.mbr) { display: none; }
+  /* английский заголовок — один абзац (как на телефоне), а не три блока: иначе balance делает нижние строки уже верхней */
+  .hero__title [data-i18n-en] .hi-l { display: inline; }
+  .hero__title [data-i18n-ru] .hi-l { text-wrap: pretty; }
+}
+
 /* Мобильный первый экран: нормальный межбуквенный интервал (в styles.css он -2px при шрифте 20px = слишком тесно),
    крупнее шрифт, ровные переносы строк без «висящих» слов, без принудительного <br> */
 @media (max-width: 640px) {
   .hero__title {
-    /* тот же размер, что у текста «Обо мне» (20px, межстрочный 1.16, интервал -.03em); ширина блока 372px */
+    /* тот же размер, что у текста «Обо мне» (20px, межстрочный 1.16, интервал -.03em); блок до 372px, но не шире экрана.
+       Раньше width:372px жёстко распирало .hero до 412px (372 + поля 2×20) и страница шла по горизонтали;
+       теперь ширина — в процентах (не влияет на минимальный размер .hero) и на 12px шире колонки, чтобы строки не переносились */
     font-size: 20px;
     line-height: 1.16;
     letter-spacing: -0.03em;
-    width: 372px;
-    max-width: calc(100vw - 16px);
-    margin-left: auto;
-    margin-right: auto;
+    width: calc(100% + 24px);
+    max-width: min(372px, calc(100vw - 16px));
+    /* без margin auto: блок шире колонки, и auto-поля сдвинули бы его к левому краю — центрирует align-items родителя */
   }
   .hero__title .hi-l { text-wrap: balance; }
   .hero__title br:not(.mbr) { display: none; }
   /* английский заголовок на телефоне: строки задаём вручную (<br class="mbr">), как просил автор */
   .hero__title [data-i18n-en] .hi-l { display: inline; text-wrap: wrap; }
 }
-/* на десктопе ручные переносы телефона не нужны */
+/* на десктопе и планшете ручные переносы телефона не нужны */
 @media (min-width: 641px) { .hero__title .mbr { display: none; } }

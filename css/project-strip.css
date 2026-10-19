@@ -97,6 +97,14 @@
 /* якоря блоков, у которых нет своего scroll-margin (шапка sticky) */
 #posters, #more-works { scroll-margin-top: 110px; }
 
+/* планшет и телефон (≤1024): два ряда, едущие в разные стороны (второй ряд строит js/project-strip.js по тому же порогу).
+   Планшет: карточки 170px; телефон ниже уменьшает их до 120px */
+@media (max-width: 1024px) {
+  .project-strip { --ps-card-w: 170px; --ps-fade: 48px; --ps-gap: 14px; --ps-speed: 40s; margin-top: 60px; margin-bottom: 120px; }
+  .project-strip__nav { padding: 8px 0 10px; }
+  .project-strip__name { margin-top: 8px; font-size: 14px; }
+  .project-strip__meta { font-size: 12px; }
+}
 @media (max-width: 640px) {
   /* телефон: карточки вдвое меньше (120px) и два ряда, едущие в разные стороны */
   .project-strip { --ps-card-w: 120px; --ps-fade: 32px; --ps-gap: 10px; --ps-speed: 38s; margin-top: 50px; margin-bottom: 110px; }

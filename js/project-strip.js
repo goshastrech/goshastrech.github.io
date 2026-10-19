@@ -10,7 +10,7 @@
   if (!nav || !list) return;
 
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
-  var mqMobile = window.matchMedia ? window.matchMedia('(max-width: 640px)') : null;
+  var mqMobile = window.matchMedia ? window.matchMedia('(max-width: 1024px)') : null;
   var clones = [];
   var nav2 = null;   /* второй ряд на телефоне: те же карточки, другой порядок, едет в обратную сторону */
 
@@ -54,6 +54,12 @@
   }
   function sync() { if (mq && mq.matches) stop(); else start(); }
   sync();
+  // граница 1024: пересобираем ряды (stop убирает все клоны и второй ряд, start строит заново)
+  if (mqMobile) {
+    var rebuild = function () { if (!(mq && mq.matches)) { stop(); start(); } };
+    if (mqMobile.addEventListener) mqMobile.addEventListener('change', rebuild);
+    else if (mqMobile.addListener) mqMobile.addListener(rebuild);
+  }
   if (mq) {
     if (mq.addEventListener) mq.addEventListener('change', sync);
     else if (mq.addListener) mq.addListener(sync);

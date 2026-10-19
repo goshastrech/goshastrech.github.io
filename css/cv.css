@@ -69,3 +69,7 @@ a.cv-row__name:hover { color:var(--orange); text-decoration-color:currentColor; 
 
 /* логотипы проектов — без серой подложки и рамки */
 .cv-row__ico--logo { background:none; box-shadow:none; }
+
+/* Опыт: название места работы с описанием (длинное, как в PDF-резюме) и роль — двумя строками, а не слитно */
+.cv-item .cv-row__main { display:block; }
+.cv-item .cv-row__text { display:block; margin-top:2px; }
