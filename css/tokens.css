@@ -38,9 +38,9 @@
   --space-2xl:   80px;
 
   /* ── Радиусы ────────────────────────────────────────── */
-  --radius-sm:   8px;
-  --radius-md:   12px;
-  --radius-lg:   16px;
+  --radius-sm:   4px;
+  --radius-md:   6px;
+  --radius-lg:   8px;
   --radius-full: 9999px;
 
 }

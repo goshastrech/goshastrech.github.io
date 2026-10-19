@@ -46,7 +46,7 @@
   display: block;
   color: var(--text);
   text-decoration: none;
-  border-radius: 12px;
+  border-radius: 6px;
   -webkit-user-drag: none;
   user-select: none;
   transition: transform .25s cubic-bezier(.2,.7,.2,1);
@@ -55,12 +55,13 @@
   display: block;
   aspect-ratio: 16 / 10;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid var(--border);
   background: var(--surface);
   transition: box-shadow .25s ease, border-color .25s ease;
 }
-.project-strip__thumb img {
+.project-strip__thumb img,
+.project-strip__thumb video {
   display: block;
   width: 100%;
   height: 100%;
@@ -88,7 +89,8 @@
 @media (hover: hover) {
   .project-strip__card:hover { transform: translateY(-3px); }
   .project-strip__card:hover .project-strip__thumb { box-shadow: 0 10px 24px rgba(10,10,10,.10); border-color: #d6d6d6; }
-  .project-strip__card:hover .project-strip__thumb img { transform: scale(1.04); }
+  .project-strip__card:hover .project-strip__thumb img,
+  .project-strip__card:hover .project-strip__thumb video { transform: scale(1.04); }
 }
 .project-strip__card:focus-visible { outline: 2px solid var(--blue); outline-offset: 4px; }
 
@@ -96,10 +98,15 @@
 #posters, #more-works { scroll-margin-top: 110px; }
 
 @media (max-width: 640px) {
-  .project-strip { --ps-card-w: 240px; --ps-fade: 48px; --ps-gap: 16px; margin-top: 50px; margin-bottom: 130px; }
-  .project-strip__name { font-size: 16px; }
-  .project-strip__meta { font-size: 14px; }
+  /* телефон: карточки вдвое меньше (120px) и два ряда, едущие в разные стороны */
+  .project-strip { --ps-card-w: 120px; --ps-fade: 32px; --ps-gap: 10px; --ps-speed: 38s; margin-top: 50px; margin-bottom: 110px; }
+  .project-strip__nav { padding: 6px 0 8px; }
+  .project-strip__thumb { border-radius: 4px; }
+  .project-strip__name { margin-top: 6px; font-size: 12px; }
+  .project-strip__meta { font-size: 10px; }
+  .project-strip__card { border-radius: 4px; }
 }
+.project-strip__nav--rev.is-marquee .project-strip__list { animation-direction: reverse; }
 
 /* ---------- Бегущая лента: класс is-marquee ставит JS (и снимает при reduced-motion) ----------
    Внутри list лежат 2 одинаковых набора карточек; сдвиг на -50% = ровно один набор,
@@ -122,7 +129,12 @@
 @media (prefers-reduced-motion: reduce) {
   .project-strip__card,
   .project-strip__thumb,
-  .project-strip__thumb img { transition: none; }
+  .project-strip__thumb img,
+  .project-strip__thumb video { transition: none; }
   .project-strip__card:hover { transform: none; }
   .project-strip__card:hover .project-strip__thumb img { transform: none; }
 }
+
+/* видео в миниатюре всегда вписано в карточку фиксированной ширины (не растягивается до своего размера) */
+.project-strip__thumb { width: 100%; min-width: 0; }
+.project-strip__thumb video { max-width: 100%; max-height: 100%; }

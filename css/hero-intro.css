@@ -16,3 +16,24 @@
   .hero__title .hi-l.accent { animation: hi-rise .55s calc(.45s + var(--i, 0) * .1s) backwards; }
   .hero__cta { animation: hi-pop .45s .85s cubic-bezier(.2,.9,.3,1.3) backwards; }
 }
+
+/* Мобильный первый экран: нормальный межбуквенный интервал (в styles.css он -2px при шрифте 20px = слишком тесно),
+   крупнее шрифт, ровные переносы строк без «висящих» слов, без принудительного <br> */
+@media (max-width: 640px) {
+  .hero__title {
+    /* тот же размер, что у текста «Обо мне» (20px, межстрочный 1.16, интервал -.03em); ширина блока 372px */
+    font-size: 20px;
+    line-height: 1.16;
+    letter-spacing: -0.03em;
+    width: 372px;
+    max-width: calc(100vw - 16px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero__title .hi-l { text-wrap: balance; }
+  .hero__title br:not(.mbr) { display: none; }
+  /* английский заголовок на телефоне: строки задаём вручную (<br class="mbr">), как просил автор */
+  .hero__title [data-i18n-en] .hi-l { display: inline; text-wrap: wrap; }
+}
+/* на десктопе ручные переносы телефона не нужны */
+@media (min-width: 641px) { .hero__title .mbr { display: none; } }

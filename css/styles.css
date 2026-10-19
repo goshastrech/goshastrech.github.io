@@ -897,7 +897,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
 .card {
   display: block;
-  border-radius: 16px;
+  border-radius: 8px;
   cursor: pointer;
 }
 
@@ -908,7 +908,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   width: 100%;
   height: 480px;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 8px;
 }
 
 .card__image img {
@@ -1032,7 +1032,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .stack__card {
   position: absolute;
   inset: 0;
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease;
 }
@@ -1371,7 +1371,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 /* hero image кейса */
 .case__hero {
   margin: 48px 0 56px;
-  border-radius: 16px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
   height: 460px;
@@ -1467,7 +1467,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 }
 
 .case-img {
-  border-radius: 12px;
+  border-radius: 6px;
   overflow: hidden;
   border: 1px solid var(--border);
 }
@@ -1513,7 +1513,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 /* меньше воздуха между последним блоком кейса и футером (было 80 + 80 + 48 px) */
 /* резервируем место под шапку до того, как js вставит её (иначе страница «подпрыгивает» на 79px) */
 #header-root { min-height: 79px; }
-@media (max-width: 640px) { #header-root { min-height: 110px; } }
+@media (max-width: 640px) { #header-root { min-height: 64px; } }
 
 .case + .footer {
   margin-top: 0;
@@ -1565,7 +1565,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   align-items: center;
   justify-content: center;
   aspect-ratio: 1.66 / 1;
-  border-radius: 12px;
+  border-radius: 6px;
   border: 1px solid var(--border);
   background: linear-gradient(135deg, #e0e0e0 0%, #ebebeb 100%);
   padding: 24px;
@@ -2097,8 +2097,9 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 
   .hero { padding: 48px 20px 48px; }
 
-  .card--trio .card__row { flex-direction: column; width: 100%; }
-  .card--trio .card__image { aspect-ratio: unset; height: 360px; }
+  /* три вертикальных видео Shiro остаются в один ряд (раньше колонка схлопывалась в 0 высоты из-за flex: 1 1 0) */
+  .card--trio .card__row { flex-direction: row; gap: 8px; width: 100%; }
+  .card--trio .card__image { flex: 1 1 0; aspect-ratio: 9 / 16; height: auto; border-radius: 6px; }
 
   .about-explorer {
     flex-direction: column;
@@ -2499,7 +2500,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
   width: 100%;
   padding: 0;
   border: 1px solid var(--border);
-  border-radius: 12px;
+  border-radius: 6px;
   overflow: hidden;
   background: none;
   cursor: zoom-in;
@@ -2511,7 +2512,7 @@ html[data-lang="ru"] [data-i18n-en] { display: none; }
 .shot img { display: block; width: 100%; height: auto; }
 
 /* рамка для картинки без клика (тот же вид, что у .shot, но без zoom-in и hover) */
-.shot-frame { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+.shot-frame { border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
 .shot-frame img { display: block; width: 100%; height: auto; }
 
 .shot-item__name {
@@ -2705,3 +2706,273 @@ button.shot, button.poster, button.iphone, .phone[data-lb-group], .shot, .poster
 
 /* C3tch на главной теперь видео 16:9 — ширина как у остальных видео-баннеров */
 .card--c3tch .card__image:has(video) { width: 940px; }
+
+/* Кнопка «Наверх» (js/components.js) */
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 60;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: var(--text);
+  box-shadow: 0 6px 20px rgba(10, 10, 10, 0.12);
+  opacity: 0;
+  transform: translateY(12px);
+  pointer-events: none;
+  cursor: pointer;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.2s ease, color 0.2s ease;
+}
+.to-top.is-visible { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { background: var(--text); color: #fff; }
+.to-top:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+@media (max-width: 640px) { .to-top { right: 16px; bottom: 16px; width: 44px; height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .to-top { transition: none; } }
+
+/* пиксельные аватары команды: чёткие квадраты без сглаживания */
+.team__avatar, .persona-card__avatar { image-rendering: pixelated; }
+
+
+/* Ролики Shiro: клик открывает вертикальное видео крупно */
+[data-lb-kind="clip"] { cursor: zoom-in; }
+[data-lb-kind="clip"]:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+.poster-lightbox__frame.is-clip {
+  aspect-ratio: 9 / 16;
+  height: min(calc(86vh - 44px), 900px);
+  width: auto;
+  max-width: calc(100vw - 48px);
+  background: #000;
+  border-radius: var(--radius-md);
+}
+.poster-lightbox__frame.is-clip video { width: 100%; height: 100%; object-fit: cover; display: block; }
+@media (hover: hover) {
+  [data-lb-kind="clip"] video { transition: transform 0.5s cubic-bezier(.2,.7,.2,1); }
+  [data-lb-kind="clip"]:hover video { transform: scale(1.04); }
+}
+
+/* Баннер FTLB: чистые три телефона на белом фоне, без обводки */
+a.card[href="ftlb.html"] .card__image { box-shadow: none; }
+
+/* Баннеры Shiro (соцсети): клик открывает баннер крупно, чтобы разглядеть мелкий текст */
+[data-lb-group="shiro-banners"][role="button"] { cursor: zoom-in; overflow: hidden; } /* [role] нужен, чтобы перебить общее правило курсора для кнопок */
+[data-lb-group="shiro-banners"]:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+@media (hover: hover) {
+  [data-lb-group="shiro-banners"] img { transition: transform 0.5s cubic-bezier(.2,.7,.2,1); }
+  [data-lb-group="shiro-banners"]:hover img { transform: scale(1.02); }
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-lb-group="shiro-banners"] img { transition: none; }
+  [data-lb-group="shiro-banners"]:hover img { transform: none; }
+}
+/* в просмотре баннер занимает почти всё окно */
+.poster-lightbox__frame.is-banner img {
+  width: min(calc(100vw - 48px), 1600px);
+  max-height: calc(100vh - 110px);
+  object-fit: contain;
+}
+
+/* ролики Shiro: курсор-лупа должен перебивать общее правило курсор-палец для role="button" */
+[data-lb-kind="clip"][role="button"] { cursor: zoom-in; }
+
+
+/* Футер: ссылка «Написать мне в Telegram» — кнопка-пилюля над строкой копирайта */
+.footer__write {
+  display: inline-flex;
+  align-items: center;
+  margin: 8px 0 12px;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.footer__write:hover { background: var(--text); color: #fff; border-color: var(--text); }
+.footer__write:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+
+/* ── Мобильная шапка: слева имя, справа бургер; ссылки — на полноэкранной странице ── */
+.header__burger, .menu-meta { display: none; }
+@media (max-width: 640px) {
+  .header {
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "left burger";
+    row-gap: 0;
+    padding: 14px 20px;
+  }
+  .header__left { grid-area: left; justify-content: flex-start; position: relative; z-index: 102; }
+  .header__left .badge-version { display: none; }
+  .header__burger {
+    grid-area: burger;
+    display: grid;
+    align-content: center;
+    gap: 6px;
+    width: 44px;
+    height: 44px;
+    margin-right: -10px;
+    padding: 0 10px;
+    border: 0;
+    background: none;
+    color: var(--text);
+    cursor: pointer;
+    position: relative;
+    z-index: 102;
+  }
+  .header__burger span { display: block; height: 2px; border-radius: 2px; background: currentColor; transition: transform 0.25s ease, opacity 0.2s ease; }
+  .header.is-menu-open .header__burger span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .header.is-menu-open .header__burger span:nth-child(2) { opacity: 0; }
+  .header.is-menu-open .header__burger span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+  .header__burger:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; border-radius: 8px; }
+
+  .header__right {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 101;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 96px 24px 32px;
+    background: #fff;
+    overflow-y: auto;
+  }
+  .header.is-menu-open { -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  .header.is-menu-open .header__right { display: flex; animation: menu-in 0.25s ease; }
+  .header__right a {
+    width: 100%;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 28px;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .header__right .lang-toggle { margin-top: 24px; padding: 12px 24px; font-size: 16px; }
+  .menu-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: auto 0 0;
+    padding-top: 32px;
+    font-size: 14px;
+    color: var(--text-2);
+  }
+  .menu-meta__badge { padding: 4px 12px; border-radius: 999px; background: #e7f9ec; color: #16a34a; font-weight: 600; }
+}
+@keyframes menu-in { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .header.is-menu-open .header__right { animation: none; } .header__burger span { transition: none; } }
+
+@media (max-width: 640px) {
+  .header__right .lang-toggle {
+    width: auto;
+    min-width: 72px;
+    padding: 12px 24px;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: none;
+    color: var(--text);
+    font: inherit;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}
+
+/* Мобильные заголовки проектов на главной: текст шире и без принудительных переносов <br>,
+   строки делятся ровно (без «висящих» слов), чтобы описание проекта читалось как абзац */
+@media (max-width: 640px) {
+  .project-heading { padding: 0; }   /* боковые 20px уже даёт страница, поэтому текст на всю ширину колонки */
+  .project-heading:not(.project-heading--tight) { padding: 0 20px; }   /* первый блок (Trady) стоит вне колонки и сам держит отступы */
+  .project-heading__subtitle {
+    max-width: 100%;
+    font-size: 17px;
+    line-height: 1.45;
+    letter-spacing: 0;
+    text-wrap: pretty;   /* строки тянутся к краям колонки, а не жмутся к центру */
+  }
+  .project-heading__subtitle br { display: none; }
+  .project-heading__role { margin-top: 20px; }
+}
+
+
+/* ── Мобильная версия главной: постеры 2 в ряд, виджеты 2×2, без бейджа Metrics ── */
+@media (max-width: 640px) {
+  .metrics-badge { display: none; }
+
+  .posters__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .posters__hint { display: none; }
+
+  .stack-demo { padding: 48px 0; }
+  .stack { width: 100%; height: auto; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; cursor: default; }
+  .stack__card { position: relative; inset: auto; aspect-ratio: 1; transform: none !important; opacity: 1 !important; }
+}
+
+
+/* Мобильная: баннер FTLB показывает 2 телефона из 3, покрупнее (кадр обрезан по краям картинки) */
+@media (max-width: 640px) {
+  .card[href="ftlb.html"] .card__image img { width: 100%; height: auto; }   /* на телефоне — своя картинка: 2 телефона с узким зазором */
+  .stack-demo { flex-direction: column; align-items: stretch; }
+  .stack-demo .posters__title, .stack-demo .posters__text { text-align: center; }
+  .stack-demo .posters__text { max-width: 100%; text-wrap: pretty; }
+  .stack-demo .posters__text { margin-bottom: 8px; }
+}
+
+/* Мобильный просмотр: стрелки «назад / вперёд» стоят под картинкой по центру, а не поверх неё */
+@media (max-width: 640px) {
+  .poster-lightbox { --poster-h: min(calc(100dvh - 190px), 856px); padding-bottom: 88px; }
+  .poster-lightbox__frame { height: var(--poster-h); }
+  .poster-lightbox__nav {
+    top: auto; bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+    width: 48px; height: 48px; margin-top: 0;
+    background: rgba(255, 255, 255, 0.16); color: rgba(255, 255, 255, 0.9);
+  }
+  .poster-lightbox__nav--prev { left: calc(50% - 56px); right: auto; }
+  .poster-lightbox__nav--next { left: calc(50% + 8px); right: auto; }
+}
+
+/* Блок виджетов: заголовок и описание над стопкой (на любой ширине — колонкой) */
+.stack-demo { flex-direction: column; align-items: center; }
+.stack-demo .posters__text { padding: 0 var(--space-sm); }
+.stack-demo .stack { margin-top: var(--space-md); }
+@media (max-width: 640px) { .stack-demo .posters__text { padding: 0; } }
+
+/* Мобильный просмотр, уточнение: стрелки стоят ВПЛОТНУЮ под самим постером (а не у низа экрана).
+   Высота постера = ширина / 0.7066; заголовок над ним фиксирован (44px), поэтому место стрелок считается от центра экрана. */
+@media (max-width: 640px) {
+  .poster-lightbox { --fh: calc(var(--poster-w) / 0.7066); padding-bottom: var(--space-md); }
+  .poster-lightbox__title { height: 32px; line-height: 32px; margin-bottom: 12px; }
+  .poster-lightbox__nav { bottom: auto; top: calc(50% + (44px + var(--fh)) / 2 + 16px); }
+}
+
+/* Мобильный просмотр, финал: стрелки идут в потоке ПОД картинкой с одинаковым отступом 16px
+   (любая высота и пропорция картинки). Сетка: заголовок / картинка / [ ‹ ›] */
+@media (max-width: 640px) {
+  .poster-lightbox:not([hidden]) {
+    display: grid;
+    grid-template-columns: 1fr 48px 48px 1fr;
+    column-gap: 12px;
+    align-content: center;
+    justify-items: center;
+    padding: var(--space-md) var(--space-md) var(--space-lg);
+  }
+  .poster-lightbox__title { grid-column: 1 / -1; grid-row: 1; }
+  .poster-lightbox__frame { grid-column: 1 / -1; grid-row: 2; }
+  .poster-lightbox__nav {
+    position: static; top: auto; bottom: auto; left: auto; right: auto;
+    grid-row: 3; margin: 16px 0 0;
+  }
+  .poster-lightbox__nav--prev { grid-column: 2; left: auto; }
+  .poster-lightbox__nav--next { grid-column: 3; left: auto; }
+}
+
+/* Линия прогресса прокрутки под шапкой убрана на всех страницах (на любой ширине) */
+.header__progress { display: none !important; }

@@ -10,17 +10,38 @@
   if (!nav || !list) return;
 
   var mq = window.matchMedia ? window.matchMedia('(prefers-reduced-motion: reduce)') : null;
+  var mqMobile = window.matchMedia ? window.matchMedia('(max-width: 640px)') : null;
   var clones = [];
+  var nav2 = null;   /* второй ряд на телефоне: те же карточки, другой порядок, едет в обратную сторону */
+
+  function hideCopy(li) {
+    var c = li.cloneNode(true);
+    c.setAttribute('aria-hidden', 'true');
+    Array.prototype.forEach.call(c.querySelectorAll('a'), function (a) { a.setAttribute('tabindex', '-1'); });
+    return c;
+  }
+  function buildSecondRow(orig) {
+    nav2 = document.createElement('nav');
+    nav2.className = 'project-strip__nav project-strip__nav--rev is-marquee';
+    nav2.setAttribute('aria-hidden', 'true');
+    var list2 = document.createElement('ul');
+    list2.className = 'project-strip__list';
+    var shift = Math.floor(orig.length / 2);
+    var order = orig.slice(shift).concat(orig.slice(0, shift));
+    order.concat(order).forEach(function (li) { list2.appendChild(hideCopy(li)); });
+    nav2.appendChild(list2);
+    nav.parentNode.insertBefore(nav2, nav.nextSibling);
+  }
 
   function start() {
     if (nav.classList.contains('is-marquee')) return;
-    Array.prototype.slice.call(list.children).forEach(function (li) {
-      var c = li.cloneNode(true);
-      c.setAttribute('aria-hidden', 'true');
-      Array.prototype.forEach.call(c.querySelectorAll('a'), function (a) { a.setAttribute('tabindex', '-1'); });
+    var orig = Array.prototype.slice.call(list.children);
+    orig.forEach(function (li) {
+      var c = hideCopy(li);
       list.appendChild(c);
       clones.push(c);
     });
+    if (mqMobile && mqMobile.matches) buildSecondRow(orig);
     nav.scrollLeft = 0;
     nav.classList.add('is-marquee');
   }
@@ -28,6 +49,8 @@
     nav.classList.remove('is-marquee');
     clones.forEach(function (c) { if (c.parentNode) c.parentNode.removeChild(c); });
     clones = [];
+    if (nav2 && nav2.parentNode) nav2.parentNode.removeChild(nav2);
+    nav2 = null;
   }
   function sync() { if (mq && mq.matches) stop(); else start(); }
   sync();

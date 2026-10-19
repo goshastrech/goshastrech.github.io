@@ -69,6 +69,8 @@
       frame.replaceChildren(img);
     }
     frame.classList.toggle('is-scrollphone', scrollPhone);
+    frame.classList.toggle('is-clip', item.dataset.lbKind === 'clip'); // вертикальный ролик (Shiro)
+    frame.classList.toggle('is-banner', item.dataset.lbKind === 'banner'); // горизонтальный баннер (Shiro)
     frame.classList.toggle('is-phone', item.classList.contains('iphone')); // экран телефона открываем в корпусе iPhone
     frame.classList.toggle('iphone--notch', item.classList.contains('iphone--notch'));
     frame.classList.toggle('iphone--light', item.classList.contains('iphone--light'));
@@ -92,6 +94,11 @@
     setTimeout(() => { lb.hidden = true; frame.replaceChildren(); }, 250);
     group[current].focus();
   };
+
+  // элементы-кнопки (div с role=button) открываются и с клавиатуры
+  items.forEach((el) => {
+    if (el.getAttribute('role') === 'button') el.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); el.click(); } });
+  });
 
   items.forEach((item) => {
     item.addEventListener('click', () => {

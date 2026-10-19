@@ -8,6 +8,8 @@
   var cards = Array.prototype.slice.call(root.querySelectorAll('.poster'));
   var N = cards.length;
   if (!N) return;
+  // на телефоне веер не включаем: постеры остаются обычной сеткой по 2 в ряд (стили в styles.css)
+  if (window.matchMedia('(max-width: 640px)').matches) return;
 
   // ---- Подкрутка ----
   var CFG = {
