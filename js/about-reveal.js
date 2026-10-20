@@ -60,6 +60,7 @@
   var ticking = false;
   function check() {
     ticking = false;
+    if (!ready) return;
     var trigger = window.scrollY + window.innerHeight * 0.9;
     var queue = 0;
     lines.forEach(function (line) {
@@ -77,11 +78,16 @@
     });
   }
   function schedule() { if (!ticking) { ticking = true; requestAnimationFrame(check); } }
-  function init() { buildLines(); check(); }
+  // пока шрифты не загрузились, переносы строк «плавают»: проявлять рано нельзя —
+  // значки (Midjourney, Banana…) успевали проявиться на старой раскладке и оставались видны, когда текст уезжал вниз
+  var ready = !(document.fonts && document.fonts.ready);
+  function init() { buildLines(); if (ready) check(); }
+  function go() { ready = true; init(); }
 
   init();
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(init);
-  window.addEventListener('load', init);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { requestAnimationFrame(go); });
+  setTimeout(go, 1500);   // запасной вариант, если шрифты не отвечают
+  window.addEventListener('load', function () { if (ready) init(); });
   window.addEventListener('scroll', schedule, { passive: true });
   window.addEventListener('resize', function () { buildLines(); schedule(); });
   // перенос строк может «устояться» чуть позже (смена языка, шрифты): следим за высотой блока
