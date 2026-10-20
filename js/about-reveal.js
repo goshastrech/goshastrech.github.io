@@ -41,12 +41,24 @@
   if (linksRow) { linksRow.classList.add('w'); words.push(linksRow); }
 
   // 2. группировка видимых слов по строкам (скрытые display:none дают пустой rect — пропускаем)
+  // значки (img/svg) в разных браузерах садятся на строку по-разному (baseline, высота) — свою строку они бы получили
+  // и проявились раньше текста. Поэтому строку значка берём у ближайшего соседнего слова, а не у самого значка
+  function isIcon(w) { var t = w.tagName.toLowerCase(); return t === 'img' || t === 'svg'; }
+  function textNeighbor(idx) {
+    for (var d = 1; d < 4; d++) {
+      var a = words[idx - d], b = words[idx + d];
+      if (a && !isIcon(a) && a.getClientRects().length && a.getBoundingClientRect().height) return a;
+      if (b && !isIcon(b) && b.getClientRects().length && b.getBoundingClientRect().height) return b;
+    }
+    return null;
+  }
   var lines = [];
   function buildLines() {
     var rows = [];
-    words.forEach(function (w) {
+    words.forEach(function (w, idx) {
       if (!w.getClientRects().length) return; // display:none у неактивного языка (у svg нет offsetParent, поэтому проверяем rects)
-      var r = w.getBoundingClientRect();
+      var ref = isIcon(w) ? (textNeighbor(idx) || w) : w;
+      var r = ref.getBoundingClientRect();
       if (!r.height) return;
       var y = Math.round(r.top + r.height / 2 + window.scrollY);
       var last = rows[rows.length - 1];
