@@ -14,7 +14,7 @@
     'c3tch':      { img: 'img/posters-video/c3tch-home.webp', video: 'img/c3tch_home.mp4' },
     'ftlb':       { img: 'img/ftlb-banner-closer.webp' },
     'shiro':      { img: 'img/strip/shiro.webp' },   // просто логотип на красном фоне
-    'cryptorsy':  { img: 'img/Cryptorsy cover.jpg', video: 'img/cryptorsy_banner.mp4' }
+    'cryptorsy':  { img: 'img/Cryptorsy cover.webp', video: 'img/cryptorsy_banner.mp4' }
   };
 
   var box = document.createElement('div');

@@ -51,7 +51,8 @@
 .js-reveal-about .about-me .about-links:not(.w) { opacity: 0; }
 /* ссылки и значки стека существуют до запуска скрипта: делаем их прозрачными с первого кадра, как слова, которые скрипт создаёт уже скрытыми */
 .js-reveal-about .about-me__big a.about-link,
-.js-reveal-about .about-me__big svg.about-badge { opacity: 0; }
+.js-reveal-about .about-me__big svg.about-badge,
+.js-reveal-about .about-me__big img.about-badge { opacity: 0; }
 .js-reveal-about .about-me .w { opacity: 0; transition: opacity .55s ease; }
 .js-reveal-about .about-me .w.in { opacity: 1; }
 
